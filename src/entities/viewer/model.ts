@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { SessionStorage, userApi } from "shared/api";
+import { userApi } from "shared/api";
 
-export type UserDataType = {
+export type UserData = {
   _id: string;
   facebookId?: string;
   firstName: string;
@@ -12,12 +12,12 @@ export type UserDataType = {
   gender: string;
 };
 
-export const Model = () => {
-  const [viewer, setViewer] = useState<UserDataType | null>(null);
+export const model = () => {
+  const [viewer, setViewer] = useState<UserData | null>(null);
 
   useEffect(() => {
     if (!viewer) return;
-    userApi.getUserData(viewer._id).then((data: UserDataType) => {
+    userApi.getUserData(viewer._id).then((data: UserData) => {
       setViewer(data);
     });
   }, [viewer]);
