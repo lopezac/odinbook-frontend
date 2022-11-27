@@ -1,5 +1,5 @@
 import type { UserData } from "shared/api/user";
-import { Row } from "shared/ui/row";
+import { Row } from "shared/ui/formRow";
 
 export const UserRow = ({ data, size }: { data: UserData; size: string }) => {
   return (

@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import FeedPage from "./feed";
+import SignUpPage from "./auth/sign-up";
 
 export const Routing = () => {
   return (
@@ -16,7 +17,7 @@ export const Routing = () => {
           </Route>
         </Route>
         <Route path="settings" element="{<UserSettingsPage />}" />
-        <Route path="sign-up" element="{<SignUpPage />}" />
+        <Route path="sign-up" element={<SignUpPage />} />
         <Route path="sign-in" element="{<SignInPage />}" />
         <Route path="logout" element="{<LogoutPage />}" />
       </Route>
