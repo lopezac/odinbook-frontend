@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import FeedPage from "./feed";
-import SignUpPage from "./auth/sign-up";
+import { AuthSignUpPage, AuthSignInPage } from "./auth";
 
 export const Routing = () => {
   return (
@@ -17,8 +17,8 @@ export const Routing = () => {
           </Route>
         </Route>
         <Route path="settings" element="{<UserSettingsPage />}" />
-        <Route path="sign-up" element={<SignUpPage />} />
-        <Route path="sign-in" element="{<SignInPage />}" />
+        <Route path="sign-up" element={<AuthSignUpPage />} />
+        <Route path="sign-in" element="{<AuthSignInPage />}" />
         <Route path="logout" element="{<LogoutPage />}" />
       </Route>
     </Routes>

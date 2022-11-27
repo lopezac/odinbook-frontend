@@ -1,7 +1,5 @@
-import { AuthSignUp } from "features/auth";
+import { AuthSignUpForm } from "features/auth";
 
-const SignUpPage = () => {
-  return;
+export const AuthSignUpPage = () => {
+  return <AuthSignUpForm />;
 };
-
-export default SignUpPage;

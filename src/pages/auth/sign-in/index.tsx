@@ -1,5 +1,3 @@
-const AuthSignIn = () => {
+export const AuthSignInPage = () => {
   return;
 };
-
-export default AuthSignIn;
