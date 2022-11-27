@@ -1,1 +1,1 @@
-export { model as ViewerModel } from "./model";
+export { Model as ViewerModel } from "./model";

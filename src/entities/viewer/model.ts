@@ -1,30 +1,29 @@
-import { useEffect, useState } from "react";
-import { userApi } from "shared/api";
+import { useState } from "react";
+import { SessionStorage } from "shared/api/SessionStorage";
+import type { UserData, UserSignUp, UserSignIn } from "shared/api/user";
+import userApi from "shared/api/user";
 
-export type UserData = {
-  _id: string;
-  facebookId?: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  birthday: Date;
-  gender: string;
-};
-
-export const model = () => {
+export const Model = () => {
   const [viewer, setViewer] = useState<UserData | null>(null);
 
-  useEffect(() => {
-    if (!viewer) return;
-    userApi.getUserData(viewer._id).then((data: UserData) => {
-      setViewer(data);
-    });
-  }, [viewer]);
+  const useViewer = () => viewer;
 
-  const useViewer = () => {
-    return viewer;
+  const logoutViewer = () => {
+    setViewer(null);
+    return SessionStorage.remove("access-token");
   };
 
-  return { useViewer, setViewer };
+  const signInViewer = async (data: UserSignIn) => {
+    const user = await userApi.signInUser(data);
+    if (user) {
+      setViewer(user.data);
+      return SessionStorage.set("access-token", user.token);
+    }
+  };
+
+  const signUpViewer = async (data: UserSignUp) => {
+    return await userApi.signUpUser(data);
+  };
+
+  return { useViewer, signInViewer, signUpViewer, logoutViewer };
 };
