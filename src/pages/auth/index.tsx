@@ -1,2 +1,2 @@
-export { AuthSignUpPage } from "./sign-up";
-export { AuthSignInPage } from "./sign-in";
+export { SignUpPage as AuthSignUpPage } from "./sign-up";
+export { SignInPage as AuthSignInPage } from "./sign-in";

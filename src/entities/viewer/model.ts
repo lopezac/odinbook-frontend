@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
 import { SessionStorage } from "shared/api/SessionStorage";
 import type { UserData, UserSignUp, UserSignIn } from "shared/api/user";
 import userApi from "shared/api/user";
@@ -17,7 +17,8 @@ export const Model = () => {
     const user = await userApi.signInUser(data);
     if (user) {
       setViewer(user.data);
-      return SessionStorage.set("access-token", user.token);
+      SessionStorage.set("access-token", user.token);
+      return;
     }
   };
 
@@ -27,3 +28,5 @@ export const Model = () => {
 
   return { useViewer, signInViewer, signUpViewer, logoutViewer };
 };
+
+export const Context = createContext<typeof Model>({});

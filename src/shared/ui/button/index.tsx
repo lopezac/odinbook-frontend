@@ -1,3 +1,8 @@
-export const Button = () => {
-  return;
+import { ButtonHTMLAttributes, FC } from "react";
+import { StyledButton } from "./styles.module";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export const Button: FC<ButtonProps> = ({ children, ...rest }: ButtonProps) => {
+  return <StyledButton {...rest}>{children}</StyledButton>;
 };

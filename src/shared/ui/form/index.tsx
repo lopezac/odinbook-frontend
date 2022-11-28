@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
+import StyledForm from "./styles.module";
 
 export const Form = ({ children }: { children: ReactNode }) => {
-  return <form>{children}dou</form>;
+  return <StyledForm>{children}</StyledForm>;
 };
