@@ -1,6 +1,8 @@
-import { ReactNode } from "react";
+import { FormHTMLAttributes, FC, ReactNode } from "react";
 import StyledForm from "./styles.module";
 
-export const Form = ({ children }: { children: ReactNode }) => {
-  return <StyledForm>{children}</StyledForm>;
+interface FormProps extends FormHTMLAttributes<HTMLFormElement> { }
+
+export const Form: FC<FormProps> = ({ children, onSubmit }: FormProps) => {
+  return <StyledForm onSubmit={onSubmit}>{children}</StyledForm>;
 };

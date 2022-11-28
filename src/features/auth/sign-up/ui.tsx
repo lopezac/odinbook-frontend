@@ -6,12 +6,13 @@ import { Label } from "shared/ui/label";
 import { FormRow } from "shared/ui/formRow";
 import { SmallPara } from "shared/ui/para";
 import { AuthContext } from "entities/viewer";
+import { handleFormSubmit } from "./model";
 
 export const SignUp = () => {
   const ViewerModel = useContext(AuthContext);
 
   return (
-    <Form onSuccess={}>
+    <Form onSubmit={handleFormSubmit}>
       <FormRow>
         <Label htmlFor="firstName">First name</Label>
         <Input type="text" name="firstName" id="firstName" required />
@@ -58,7 +59,7 @@ export const SignUp = () => {
         <Input type="radio" name="gender" id="other" value="other" />
       </FormRow>
 
-      <Button>Sign Up</Button>
+      <Button type="submit">Sign Up</Button>
     </Form>
   );
 };
