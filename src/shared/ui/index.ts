@@ -7,3 +7,4 @@ export * from "./input";
 export * from "./para";
 export * from "./heading";
 export * from "./list";
+export * from "./layout";

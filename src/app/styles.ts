@@ -2,7 +2,11 @@ import "modern-normalize";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
+  #root {
+    height: 100vh;
+  }
+
   body {
-    color: blue
+
   }
 `;

@@ -18,7 +18,7 @@ export const Routing = () => {
         </Route>
         <Route path="settings" element="{<UserSettingsPage />}" />
         <Route path="sign-up" element={<AuthSignUpPage />} />
-        <Route path="sign-in" element="{<AuthSignInPage />}" />
+        <Route path="sign-in" element={<AuthSignInPage />} />
         <Route path="logout" element="{<LogoutPage />}" />
       </Route>
     </Routes>
