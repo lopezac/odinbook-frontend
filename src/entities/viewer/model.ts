@@ -24,8 +24,7 @@ export const Model = () => {
   };
 
   const signUpViewer = async (data: UserSignUp) => {
-    await userApi.signUpUser(data);
-    return;
+    return await userApi.signUpUser(data);
   };
 
   return { useViewer, signInViewer, signUpViewer, logoutViewer };
