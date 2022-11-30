@@ -1,14 +1,6 @@
 import { useContext, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Form,
-  Input,
-  Button,
-  Label,
-  FormRow,
-  SmallPara,
-  ErrorsList,
-} from "shared/ui";
+import { Form, Input, Button, Label, FormRow, SmallPara } from "shared/ui";
 import { getFormData } from "shared/lib/form-data";
 import { UserSignUp } from "shared/api";
 import { useErrors } from "shared/hooks";
@@ -21,19 +13,17 @@ export const SignUp = () => {
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = getFormData(e.target as HTMLFormElement) as UserSignUp;
+    const data: UserSignUp = getFormData(e.target as HTMLFormElement);
 
     const res = await viewerModel.signUpViewer(data);
     if (res.errors) return setErrors(res.errors);
 
-    setErrors(null);
+    setErrors({});
     navigate("/");
   };
 
   return (
     <>
-      {errors && <ErrorsList errors={errors} />}
-
       <Form onSubmit={handleFormSubmit}>
         <FormRow>
           <Label htmlFor="firstName">First name</Label>
@@ -44,7 +34,9 @@ export const SignUp = () => {
             minLength={2}
             maxLength={120}
             required
+            error={!!errors.firstName}
           />
+          {errors.firstName && <p>{errors.firstName}</p>}
 
           <Label htmlFor="lastName">Last name</Label>
           <Input
@@ -54,32 +46,57 @@ export const SignUp = () => {
             minLength={2}
             maxLength={120}
             required
+            error={!!errors.lastName}
           />
+          {errors.lastName && <p>{errors.lastName}</p>}
         </FormRow>
 
         <FormRow>
           <Label htmlFor="email">Email</Label>
-          <Input type="email" name="email" id="email" required />
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            error={!!errors.email}
+            required
+          />
+          {errors.email && <p>{errors.email}</p>}
         </FormRow>
 
         <FormRow>
           <Label htmlFor="password">Password</Label>
-          <Input type="password" name="password" id="password" required />
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            error={!!errors.password}
+            required
+          />
+          {errors.password && <p>{errors.password}</p>}
         </FormRow>
 
         <FormRow>
-          <Label htmlFor="confirmPassword">Confirm password</Label>
+          <Label htmlFor="passwordConfirm">Confirm password</Label>
           <Input
             type="password"
             name="passwordConfirm"
             id="passwordConfirm"
+            error={!!errors.passwordConfirm}
             required
           />
+          {errors.passwordConfirm && <p>{errors.passwordConfirm}</p>}
         </FormRow>
 
         <FormRow>
           <Label htmlFor="birthday">Birthday</Label>
-          <Input type="date" name="birthday" id="birthday" required />
+          <Input
+            type="date"
+            name="birthday"
+            id="birthday"
+            error={!!errors.birthday}
+            required
+          />
+          {errors.birthday && <p>{errors.birthday}</p>}
         </FormRow>
 
         <FormRow>

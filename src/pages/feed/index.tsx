@@ -1,5 +1,8 @@
+import { useRedirectUnauthorized } from "processes/hooks";
+
 const FeedPage = () => {
-  return <div>Feed Page</div>;
+  useRedirectUnauthorized();
+  return <div>Feed Pagoooe</div>;
 };
 
 export default FeedPage;

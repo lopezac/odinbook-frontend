@@ -1,26 +1,27 @@
 import { useState } from "react";
-import { SessionStorage } from "shared/api/SessionStorage";
+import { useSessionStorage } from "shared/hooks";
 import type { UserData, UserSignUp, UserSignIn } from "shared/api/user";
 import { userApi } from "shared/api/user";
 
 export const Model = () => {
   const [viewer, setViewer] = useState<UserData | null>(null);
+  const [accessToken, setAccessToken] = useSessionStorage("access-token");
 
   const useViewer = () => viewer;
 
   const logoutViewer = () => {
     setViewer(null);
-    SessionStorage.remove("access-token");
+    setAccessToken(null);
     return;
   };
 
   const signInViewer = async (data: UserSignIn) => {
     const user = await userApi.signInUser(data);
-    if (user) {
+    if ("token" in user) {
       setViewer(user.data);
-      SessionStorage.set("access-token", user.token);
-      return;
+      setAccessToken(user.token);
     }
+    return user;
   };
 
   const signUpViewer = async (data: UserSignUp) => {
