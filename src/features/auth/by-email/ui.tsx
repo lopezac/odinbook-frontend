@@ -16,8 +16,8 @@ export const ByEmail = () => {
     const data: UserSignIn = getFormData(e.target as HTMLFormElement);
 
     const res = await viewerModel.signInViewer(data);
+    console.log("res", res);
     if ("errors" in res) return setErrors(res.errors);
-
     setErrors({});
     navigate("/");
   };

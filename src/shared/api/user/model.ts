@@ -16,6 +16,7 @@ const signUpUser = async (userData: UserSignUp) => {
 
   const res = await fetch(url, options);
   const data: { message: string } | ErrorRes = await res.json();
+
   return data;
 };
 
@@ -30,9 +31,9 @@ const signInUser = async (userData: UserSignIn) => {
   };
 
   const res = await fetch(url, options);
-  console.log("resoooo,", res);
-  const data: SuccessRes | ErrorRes = await res.json();
-  console.log("data signInUSer");
+  if (["object", "never"].includes(typeof res)) return res;
+  const data = await res.json();
+
   return data;
 };
 
