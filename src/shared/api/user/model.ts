@@ -1,16 +1,5 @@
 import { REST_API_URL } from "shared/config";
-import { ErrorsType } from "shared/hooks";
-import { UserSignIn, UserSignUp, UserData } from "./types";
-
-type ErrorResponse = {
-  message: string;
-  errors: ErrorsType;
-};
-
-type SuccessResponse = {
-  token: string;
-  data: UserData;
-};
+import { UserSignIn, UserSignUp, SuccessRes, ErrorRes } from "./types";
 
 const headers: HeadersInit = {
   Accept: "application/json",
@@ -26,7 +15,8 @@ const signUpUser = async (userData: UserSignUp) => {
   };
 
   const res = await fetch(url, options);
-  return await res.json();
+  const data: { message: string } | ErrorRes = await res.json();
+  return data;
 };
 
 const signInUser = async (userData: UserSignIn) => {
@@ -40,7 +30,9 @@ const signInUser = async (userData: UserSignIn) => {
   };
 
   const res = await fetch(url, options);
-  const data: SuccessResponse | ErrorResponse = await res.json();
+  console.log("resoooo,", res);
+  const data: SuccessRes | ErrorRes = await res.json();
+  console.log("data signInUSer");
   return data;
 };
 

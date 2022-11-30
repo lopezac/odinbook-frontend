@@ -1,16 +1,39 @@
-import { useContext } from "react";
+import { useContext, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, FormRow, Label, Input, Button } from "shared/ui";
-import { AuthContext } from "entities/viewer";
-import { handleSubmitForm } from "./model";
+import { UserSignIn } from "shared/api";
+import { getFormData } from "shared/lib/form-data";
+import { useErrors } from "shared/hooks";
+import { AuthContext, ViewerModelType } from "entities/viewer";
 
 export const ByEmail = () => {
-  const viewerModel = useContext(AuthContext);
+  const navigate = useNavigate();
+  const viewerModel = useContext(AuthContext) as ViewerModelType;
+  const [errors, setErrors] = useErrors();
+
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data: UserSignIn = getFormData(e.target as HTMLFormElement);
+
+    const res = await viewerModel.signInViewer(data);
+    if ("errors" in res) return setErrors(res.errors);
+
+    setErrors({});
+    navigate("/");
+  };
 
   return (
-    <Form onSubmit={handleSubmitForm.bind(this, viewerModel)}>
+    <Form onSubmit={handleFormSubmit}>
       <FormRow>
         <Label htmlFor="email">Email</Label>
-        <Input type="email" name="email" id="email" required />
+        <Input
+          type="email"
+          name="email"
+          id="email"
+          required
+          error={!!errors.email}
+        />
+        {errors.email && <p>{errors.email}</p>}
       </FormRow>
 
       <FormRow>
@@ -21,7 +44,9 @@ export const ByEmail = () => {
           id="password"
           minLength={7}
           required
+          error={!!errors.password}
         />
+        {errors.password && <p>{errors.password}</p>}
       </FormRow>
 
       <Button type="submit">Sign In</Button>

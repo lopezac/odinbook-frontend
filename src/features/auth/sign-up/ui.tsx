@@ -4,19 +4,19 @@ import { Form, Input, Button, Label, FormRow, SmallPara } from "shared/ui";
 import { getFormData } from "shared/lib/form-data";
 import { UserSignUp } from "shared/api";
 import { useErrors } from "shared/hooks";
-import { AuthContext } from "entities/viewer";
+import { AuthContext, ViewerModelType } from "entities/viewer";
 
 export const SignUp = () => {
-  const viewerModel = useContext(AuthContext);
-  const [errors, setErrors] = useErrors();
   const navigate = useNavigate();
+  const viewerModel = useContext(AuthContext) as ViewerModelType;
+  const [errors, setErrors] = useErrors();
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data: UserSignUp = getFormData(e.target as HTMLFormElement);
 
     const res = await viewerModel.signUpViewer(data);
-    if (res.errors) return setErrors(res.errors);
+    if ("errors" in res) return setErrors(res.errors);
 
     setErrors({});
     navigate("/");

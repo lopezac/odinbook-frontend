@@ -1,16 +1,4 @@
 import { createContext } from "react";
-import { UserData, UserSignIn, UserSignUp } from "shared/api/user";
+import { ViewerModelType } from "./types";
 
-type ContextType = {
-  useViewer: () => UserData | null;
-  signInViewer: (data: UserSignIn) => void;
-  signUpViewer: (data: UserSignUp) => Promise<any>;
-  logoutViewer: () => void;
-};
-
-export const Context = createContext<ContextType>({
-  useViewer: () => null,
-  signInViewer: () => {},
-  signUpViewer: async () => {},
-  logoutViewer: () => {},
-});
+export const Context = createContext<ViewerModelType | null>(null);
