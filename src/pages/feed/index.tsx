@@ -5,6 +5,7 @@ import { Footer } from "widgets/footer";
 
 const FeedPage = () => {
   useRedirect("unauthorized");
+
   return (
     <Layout.Main>
       <AuthHeader />

@@ -1,18 +1,18 @@
 import { useState } from "react";
 
-export const useSessionStorage = <T>(
+export const useMemoryStore = <T>(
   key: string,
   initialValue: T | null = null
 ): [T, (value: T) => void] => {
   const [storedValue, setStoredValue] = useState(() => {
-    const item = sessionStorage.getItem(key);
+    const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : initialValue;
   });
 
   const setValue = (value: T) => {
     const stringValue = JSON.stringify(value);
     setStoredValue(stringValue);
-    sessionStorage.setItem(key, stringValue);
+    localStorage.setItem(key, stringValue);
   };
 
   return [storedValue, setValue];

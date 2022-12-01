@@ -1,12 +1,13 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ViewerModel } from "entities/viewer";
+import { AuthContext, ViewerModelType } from "entities/viewer";
 
 export const Logout = () => {
   const navigate = useNavigate();
-  const viewerModel = ViewerModel();
+  const viewerModel = useContext(AuthContext) as ViewerModelType;
 
-  return async () => {
-    await viewerModel.logoutViewer();
+  return () => {
+    viewerModel.logoutViewer();
     navigate("/sign-in");
   };
 };

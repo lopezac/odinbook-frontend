@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useSessionStorage } from "shared/hooks";
+import { useMemoryStore } from "shared/hooks";
 import type { UserData, UserSignUp, UserSignIn } from "shared/api/user";
 import { userApi } from "shared/api/user";
 
 export const Model = () => {
-  const [viewer, setViewer] = useState<UserData | null>(null);
-  const [accessToken, setAccessToken] = useSessionStorage("access-token");
+  const [viewer, setViewer] = useMemoryStore<UserData | null>("user");
+  const [accessToken, setAccessToken] = useMemoryStore<string | null>(
+    "access-token"
+  );
 
   const useViewer = () => viewer;
 
@@ -31,9 +33,13 @@ export const Model = () => {
 
   const updateViewer = async (data: UserSignUp) => {
     const _id = viewer?._id;
-    const user = await userApi.updateUser(_id as string, data);
-    // setViewer(user);
-    console.log("user", user);
+    const user = await userApi.updateUser(
+      _id as string,
+      data,
+      accessToken as string
+    );
+    console.log("updatedUser", user);
+    setViewer(user);
     return user;
   };
 

@@ -1,2 +1,2 @@
 export * from "./use-errors";
-export { useSessionStorage } from "./use-session-storage";
+export { useMemoryStore } from "./use-memory-store";

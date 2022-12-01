@@ -1,9 +1,12 @@
 import { Button, H1, H2, Layout } from "shared/ui";
+import { UpdateUser } from "features/user";
 import { AuthHeader } from "widgets/header";
 import { Footer } from "widgets/footer";
-import { UpdateUser } from "features/user";
+import { useRedirect } from "processes/hooks";
 
 export const SettingsPage = () => {
+  useRedirect("unauthorized");
+
   return (
     <Layout.Main>
       <AuthHeader />

@@ -1,5 +1,5 @@
 import { useContext, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { Form, FormRow, Label, Input, Button } from "shared/ui";
 import { UserSignIn } from "shared/api";
 import { getFormData } from "shared/lib/form-data";
@@ -7,7 +7,6 @@ import { useErrors } from "shared/hooks";
 import { AuthContext, ViewerModelType } from "entities/viewer";
 
 export const ByEmail = () => {
-  const navigate = useNavigate();
   const viewerModel = useContext(AuthContext) as ViewerModelType;
   const [errors, setErrors] = useErrors();
 
@@ -19,7 +18,7 @@ export const ByEmail = () => {
     if ("status" in res && res.status === 401)
       return setErrors({ error: "Wrong email or password" });
     setErrors({});
-    navigate("/");
+    window.location.reload();
   };
 
   return (

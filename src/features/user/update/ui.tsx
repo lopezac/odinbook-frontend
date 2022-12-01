@@ -1,6 +1,7 @@
 import { useContext, FormEvent } from "react";
 import { Form, Input, Button, Label, FormRow, SmallPara } from "shared/ui";
 import { getFormData } from "shared/lib/form-data";
+import { formatDate } from "shared/lib/date";
 import { useErrors } from "shared/hooks";
 import { UserData, UserSignUp } from "shared/api";
 import { AuthContext, ViewerModelType } from "entities/viewer";
@@ -21,6 +22,7 @@ export const UpdateUser = () => {
     setErrors({});
   };
 
+  if (!viewer) return <div>Loading</div>;
   return (
     <Form onSubmit={handleFormSubmit}>
       <FormRow>
@@ -71,7 +73,6 @@ export const UpdateUser = () => {
           name="password"
           id="password"
           error={!!errors.password}
-          defaultValue={viewer && viewer.password}
           required
         />
         {errors.password && <p>{errors.password}</p>}
@@ -84,7 +85,7 @@ export const UpdateUser = () => {
           name="birthday"
           id="birthday"
           error={!!errors.birthday}
-          defaultValue={viewer && viewer.birthday.toLocaleDateString("en-us")}
+          defaultValue={viewer && formatDate(viewer.birthday)}
           required
         />
         {errors.birthday && <p>{errors.birthday}</p>}

@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSessionStorage } from "shared/hooks";
+import { useMemoryStore } from "shared/hooks";
 
 export const useRedirect = (state: "authorized" | "unauthorized") => {
   const navigate = useNavigate();
-  const [accessToken, setAccessToken] = useSessionStorage("access-token");
+  const [accessToken, setAccessToken] = useMemoryStore("access-token");
 
   useEffect(() => {
     if (state === "unauthorized" && !accessToken) {
       navigate("/sign-in");
-    } else if (accessToken) {
+    } else if (state === "authorized" && accessToken) {
       navigate("/");
     }
   }, [accessToken, navigate, state]);

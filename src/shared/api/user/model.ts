@@ -1,4 +1,3 @@
-import { rmSync } from "fs";
 import { REST_API_URL } from "shared/config";
 import { UserSignIn, UserSignUp, ErrorRes } from "./types";
 
@@ -38,18 +37,22 @@ const signInUser = async (userData: UserSignIn) => {
   return resObject;
 };
 
-const updateUser = async (userId: string, userData: UserSignUp) => {
-  const url = `${REST_API_URL}/${userId}`;
+const updateUser = async (
+  userId: string,
+  userData: UserSignUp,
+  token: string
+) => {
+  const url = `${REST_API_URL}/users/${userId}`;
   const options: RequestInit = {
-    body: JSON.stringify({ ...userData, _id: userId }),
+    body: JSON.stringify({ ...userData }),
     method: "PUT",
-    headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
   };
 
   const res = await fetch(url, options);
   const data = await res.json();
 
-  return data;
+  return data.user;
 };
 
 export { signInUser, signUpUser, updateUser };
