@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useSessionStorage = <T>(
+export const useSessionStorage = <T>(
   key: string,
   initialValue: T | null = null
 ): [T, (value: T) => void] => {
@@ -17,5 +17,3 @@ const useSessionStorage = <T>(
 
   return [storedValue, setValue];
 };
-
-export { useSessionStorage };

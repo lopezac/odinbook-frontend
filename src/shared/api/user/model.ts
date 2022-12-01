@@ -1,5 +1,6 @@
+import { rmSync } from "fs";
 import { REST_API_URL } from "shared/config";
-import { UserSignIn, UserSignUp, SuccessRes, ErrorRes } from "./types";
+import { UserSignIn, UserSignUp, ErrorRes } from "./types";
 
 const headers: HeadersInit = {
   Accept: "application/json",
@@ -31,10 +32,24 @@ const signInUser = async (userData: UserSignIn) => {
   };
 
   const res = await fetch(url, options);
-  if (["object", "never"].includes(typeof res)) return res;
+  const resObject = await res.json();
+  resObject.data.birthday = new Date(resObject.data.birthday);
+
+  return resObject;
+};
+
+const updateUser = async (userId: string, userData: UserSignUp) => {
+  const url = `${REST_API_URL}/${userId}`;
+  const options: RequestInit = {
+    body: JSON.stringify({ ...userData, _id: userId }),
+    method: "PUT",
+    headers,
+  };
+
+  const res = await fetch(url, options);
   const data = await res.json();
 
   return data;
 };
 
-export { signInUser, signUpUser };
+export { signInUser, signUpUser, updateUser };

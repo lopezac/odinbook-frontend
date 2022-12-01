@@ -1,1 +1,1 @@
-export { useRedirectUnauthorized } from "./use-redirect-unauthorized";
+export { useRedirect } from "./use-redirect";

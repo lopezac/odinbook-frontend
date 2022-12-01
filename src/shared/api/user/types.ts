@@ -17,7 +17,7 @@ export type UserSignUp = {
   lastName: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
   birthday: Date;
   gender: string;
 };

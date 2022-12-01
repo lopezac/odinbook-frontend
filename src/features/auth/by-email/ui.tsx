@@ -15,9 +15,9 @@ export const ByEmail = () => {
     e.preventDefault();
     const data: UserSignIn = getFormData(e.target as HTMLFormElement);
 
-    const res = await viewerModel.signInViewer(data);
-    console.log("res", res);
-    if ("errors" in res) return setErrors(res.errors);
+    const res: any = await viewerModel.signInViewer(data);
+    if ("status" in res && res.status === 401)
+      return setErrors({ error: "Wrong email or password" });
     setErrors({});
     navigate("/");
   };
@@ -26,14 +26,7 @@ export const ByEmail = () => {
     <Form onSubmit={handleFormSubmit}>
       <FormRow>
         <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          required
-          error={!!errors.email}
-        />
-        {errors.email && <p>{errors.email}</p>}
+        <Input type="email" name="email" id="email" required />
       </FormRow>
 
       <FormRow>
@@ -44,10 +37,9 @@ export const ByEmail = () => {
           id="password"
           minLength={7}
           required
-          error={!!errors.password}
         />
-        {errors.password && <p>{errors.password}</p>}
       </FormRow>
+      {!!errors.error && <p>{errors.error}</p>}
 
       <Button type="submit">Sign In</Button>
     </Form>
