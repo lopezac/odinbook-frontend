@@ -1,1 +1,2 @@
-export { ViewerProfilePage } from "./profile";
+export * from "./profile";
+export * from "./settings";

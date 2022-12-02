@@ -34,15 +34,15 @@ export const Model = () => {
   const updateViewer = async (data: UserSignUp) => {
     const _id = viewer?._id;
 
-    const user = await userApi.updateUser(
+    const res = await userApi.updateUser(
       _id as string,
       data,
       accessToken as string
     );
-    console.log("updated viewer user", user);
-    setViewer(user);
+    if ("errors" in res) return res;
+    setViewer(res.user);
 
-    return user;
+    return res.user;
   };
 
   useEffect(() => {

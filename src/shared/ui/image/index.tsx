@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
-export const AvatarImg = styled.img.attrs<{ photoUrl: string }>((props) => ({
+type AvatarProps = { photoUrl: string; size: string };
+
+export const AvatarImg = styled.img.attrs<AvatarProps>((props) => ({
   src: props.photoUrl,
-}))<{ size: string; photoUrl: string }>`
+})) <AvatarProps>`
   ${(props) => `
-    width: ${props.size === "large" ? "300px" : "100px"};
-    height: ${props.size === "large" ? "300px" : "100px"};
+    width: ${props.size === "large" ? "150px" : "75px"};
+    height: ${props.size === "large" ? "150px" : "75px"};
   `}
 `;

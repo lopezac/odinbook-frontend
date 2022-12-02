@@ -8,6 +8,7 @@ export const Header = () => {
   const viewerModel = useContext(AuthContext) as ViewerModelType;
   const viewer = viewerModel.useViewer();
 
+  if (!viewer) return <p>Loading</p>;
   return (
     <Layout.Header>
       <Link to="/">

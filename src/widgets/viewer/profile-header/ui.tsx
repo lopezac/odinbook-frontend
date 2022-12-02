@@ -1,3 +1,4 @@
+import { ChangeAvatar } from "features/viewer";
 import { ViewerAvatar } from "entities/viewer";
 
 export const ProfileHeader = () => {
@@ -6,7 +7,7 @@ export const ProfileHeader = () => {
       <div>
         <div>
           <ViewerAvatar size="large" />
-          <p>button change img</p>
+          <ChangeAvatar />
         </div>
         <div>
           <p>Edit profile</p>

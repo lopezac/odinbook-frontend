@@ -56,7 +56,7 @@ const updateUser = async (
   const res = await fetch(url, options);
   const data = await res.json();
 
-  return data.user;
+  return data;
 };
 
 const deleteUser = async (userId: string, token: string) => {

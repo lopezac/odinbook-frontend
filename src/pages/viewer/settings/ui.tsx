@@ -1,5 +1,5 @@
 import { H1, H2, Layout } from "shared/ui";
-import { UpdateUser, DeleteUser } from "features/user";
+import { UpdateUser, DeleteUser } from "features/viewer";
 import { AuthHeader } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { useRedirect } from "processes/hooks";

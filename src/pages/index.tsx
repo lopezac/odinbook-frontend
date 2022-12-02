@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import FeedPage from "./feed";
 import { AuthSignUpPage, AuthSignInPage } from "./auth";
-import { UserSettingsPage } from "./user/settings";
+import { ViewerSettingsPage } from "./viewer/settings";
 import { ViewerProfilePage } from "./viewer/profile";
 
 export const Routing = () => {
@@ -18,7 +18,7 @@ export const Routing = () => {
             <Route path="friends" element="{<UserFriendsPage />}" />
           </Route>
         </Route>
-        <Route path="settings" element={<UserSettingsPage />} />
+        <Route path="settings" element={<ViewerSettingsPage />} />
         <Route path="sign-up" element={<AuthSignUpPage />} />
         <Route path="sign-in" element={<AuthSignInPage />} />
       </Route>

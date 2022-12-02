@@ -5,8 +5,12 @@ export const useMemoryStore = <T>(
   initialValue: T | null = null
 ): [T, (value: T) => void] => {
   const [storedValue, setStoredValue] = useState(() => {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : initialValue;
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (err) {
+      return initialValue;
+    }
   });
 
   const setValue = (value: T) => {
