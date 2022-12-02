@@ -18,8 +18,11 @@ export const SignUp = () => {
     const res = await viewerModel.signUpViewer(data);
     if ("errors" in res) return setErrors(res.errors);
 
-    setErrors({});
-    navigate("/");
+    await viewerModel.signInViewer({
+      email: data.email,
+      password: data.password,
+    });
+    window.location.reload();
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useMemoryStore } from "shared/hooks";
 import type { UserData, UserSignUp, UserSignIn } from "shared/api/user";
 import { userApi } from "shared/api/user";
@@ -33,18 +33,20 @@ export const Model = () => {
 
   const updateViewer = async (data: UserSignUp) => {
     const _id = viewer?._id;
+
     const user = await userApi.updateUser(
       _id as string,
       data,
       accessToken as string
     );
-    console.log("updatedUser", user);
+    console.log("updated viewer user", user);
     setViewer(user);
+
     return user;
   };
 
   useEffect(() => {
-    console.log("viewer", viewer);
+    console.log("viewer at entitiy model", viewer);
   }, [viewer]);
 
   return { useViewer, signInViewer, signUpViewer, logoutViewer, updateViewer };

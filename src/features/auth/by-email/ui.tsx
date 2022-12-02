@@ -18,6 +18,7 @@ export const ByEmail = () => {
     if ("status" in res && res.status === 401)
       return setErrors({ error: "Wrong email or password" });
     setErrors({});
+
     window.location.reload();
   };
 

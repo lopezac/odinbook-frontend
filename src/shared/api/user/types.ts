@@ -9,7 +9,7 @@ export type UserData = {
   password: string;
   birthday: Date;
   gender: string;
-  photo: string;
+  picture: string;
 };
 
 export type UserSignUp = {

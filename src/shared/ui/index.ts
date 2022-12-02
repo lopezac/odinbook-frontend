@@ -8,3 +8,4 @@ export * from "./para";
 export * from "./heading";
 export * from "./layout";
 export * from "./link";
+export * from "./image";

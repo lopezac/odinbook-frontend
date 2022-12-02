@@ -1,0 +1,1 @@
+export { ViewerProfilePage } from "./profile";

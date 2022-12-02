@@ -16,10 +16,10 @@ export const UpdateUser = () => {
     const data: UserSignUp = getFormData(e.target as HTMLFormElement);
 
     const res = await viewerModel.updateViewer(data);
-    console.log("res", res);
     if ("errors" in res) return setErrors(res.errors);
-
     setErrors({});
+
+    window.location.reload();
   };
 
   if (!viewer) return <div>Loading</div>;

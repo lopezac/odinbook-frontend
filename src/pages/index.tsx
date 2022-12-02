@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import FeedPage from "./feed";
 import { AuthSignUpPage, AuthSignInPage } from "./auth";
 import { UserSettingsPage } from "./user/settings";
+import { ViewerProfilePage } from "./viewer/profile";
 
 export const Routing = () => {
   return (
@@ -11,7 +12,7 @@ export const Routing = () => {
         <Route path="users">
           <Route index element="{<UsersListPage />}" />
           <Route path=":userId">
-            <Route index element="{<UserProfilePage />}" />
+            <Route index element={<ViewerProfilePage />} />
             <Route path="photos" element="{<UserPhotosPage />}" />
             <Route path="videos" element="{<UserVideosPage />}" />
             <Route path="friends" element="{<UserFriendsPage />}" />

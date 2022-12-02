@@ -31,10 +31,14 @@ const signInUser = async (userData: UserSignIn) => {
   };
 
   const res = await fetch(url, options);
-  const resObject = await res.json();
-  resObject.data.birthday = new Date(resObject.data.birthday);
+  try {
+    const resObject = await res.json();
+    resObject.data.birthday = new Date(resObject.data.birthday);
 
-  return resObject;
+    return resObject;
+  } catch (err) {
+    return res;
+  }
 };
 
 const updateUser = async (
@@ -55,4 +59,16 @@ const updateUser = async (
   return data.user;
 };
 
-export { signInUser, signUpUser, updateUser };
+const deleteUser = async (userId: string, token: string) => {
+  const url = `${REST_API_URL}/users/${userId}`;
+  const options: RequestInit = {
+    method: "DELETE",
+    headers: { ...headers, Authorization: `Bearer ${token}` },
+  };
+
+  const res = await fetch(url, options);
+
+  return await res.json();
+};
+
+export { signInUser, signUpUser, updateUser, deleteUser };
