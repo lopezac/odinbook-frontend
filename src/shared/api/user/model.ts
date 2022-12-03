@@ -71,4 +71,37 @@ const deleteUser = async (userId: string, token: string) => {
   return await res.json();
 };
 
-export { signInUser, signUpUser, updateUser, deleteUser };
+const getUserPhotos = async (userId: string) => {
+  const url = `${REST_API_URL}/users/${userId}/photos`;
+  const options: RequestInit = {
+    method: "GET",
+    headers: { ...headers },
+  };
+
+  const res = await fetch(url, options);
+  const data = await res.json();
+
+  return data;
+};
+
+const getUserFriends = async (userId: string) => {
+  const url = `${REST_API_URL}/users/${userId}/friends`;
+  const options: RequestInit = {
+    method: "GET",
+    headers: { ...headers },
+  };
+
+  const res = await fetch(url, options);
+  const data = await res.json();
+
+  return data;
+};
+
+export {
+  signInUser,
+  signUpUser,
+  updateUser,
+  deleteUser,
+  getUserPhotos,
+  getUserFriends
+};

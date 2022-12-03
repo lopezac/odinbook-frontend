@@ -1,25 +1,27 @@
-import { useContext, useEffect, useState } from "react";
-import { postApi } from "shared/api";
-import { AuthContext, ViewerModelType } from "entities/viewer";
+import { useEffect, useState } from "react";
+import { userApi } from "shared/api";
 
-export const PhotosList = ({ limit }: { limit: number }) => {
-  const viewerModel = useContext(AuthContext) as ViewerModelType;
-  const viewer = viewerModel.useViewer();
+
+export const PhotosList = ({ userId }: { userId: string }) => {
   const [photos, setPhotos] = useState<null | string[]>(null);
 
   useEffect(() => {
     async function getPhotos() {
-      const foundPhotos = await postApi.getPhotos(viewer!._id);
+      const foundPhotos = await userApi.getUserPhotos(userId);
       setPhotos(foundPhotos);
     }
     getPhotos();
   });
 
-  if (!photos) return <p>There are no photos</p>;
+  if (!photos || !photos.length) return <p>There are no photos</p>;
   return (
     <ul>
       {photos.map((photo) => {
-        return <li>photo</li>;
+        return (
+          <li>
+            <img src={photo} />
+          </li>
+        )
       })}
     </ul>
   );
