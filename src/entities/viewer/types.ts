@@ -4,6 +4,7 @@ import {
   UserSignUp,
   SuccessRes,
   ErrorRes,
+  UserUpdate,
 } from "shared/api/user";
 
 export type ViewerModelType = {
@@ -13,5 +14,5 @@ export type ViewerModelType = {
   ) => Promise<SuccessRes | { [key: string]: any }>;
   signUpViewer: (data: UserSignUp) => Promise<{ message: string } | ErrorRes>;
   logoutViewer: () => void;
-  updateViewer: (data: UserSignUp) => Promise<any>;
+  updateViewer: (data: UserUpdate) => Promise<any>;
 };

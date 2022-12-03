@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { useMemoryStore } from "shared/hooks";
-import type { UserData, UserSignUp, UserSignIn } from "shared/api/user";
+import type {
+  UserData,
+  UserSignUp,
+  UserSignIn,
+  UserUpdate,
+} from "shared/api/user";
 import { userApi } from "shared/api/user";
 
 export const Model = () => {
@@ -31,7 +36,7 @@ export const Model = () => {
     return await userApi.signUpUser(data);
   };
 
-  const updateViewer = async (data: UserSignUp) => {
+  const updateViewer = async (data: UserUpdate) => {
     const _id = viewer?._id;
 
     const res = await userApi.updateUser(

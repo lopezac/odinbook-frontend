@@ -3,7 +3,7 @@ import { Form, Input, Button, Label, FormRow, SmallPara } from "shared/ui";
 import { getFormData } from "shared/lib/form-data";
 import { formatDate } from "shared/lib/date";
 import { useErrors } from "shared/hooks";
-import { UserData, UserSignUp } from "shared/api";
+import { UserData, UserUpdate } from "shared/api";
 import { AuthContext, ViewerModelType } from "entities/viewer";
 
 export const UpdateUser = () => {
@@ -13,7 +13,7 @@ export const UpdateUser = () => {
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data: UserSignUp = getFormData(e.target as HTMLFormElement);
+    const data: UserUpdate = getFormData(e.target as HTMLFormElement);
 
     const res = await viewerModel.updateViewer(data);
     if ("errors" in res) return setErrors(res.errors);

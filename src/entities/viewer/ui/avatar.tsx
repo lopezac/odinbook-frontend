@@ -10,5 +10,6 @@ export const Avatar = ({ size }: AvatarProps) => {
   const viewerModel = useContext(AuthContext) as ViewerModelType;
   const viewer = viewerModel.useViewer();
 
-  return <AvatarImg photoUrl={viewer!.picture} size={size} />;
+  if (!viewer) return <>o</>;
+  return <AvatarImg photoUrl={viewer.picture} size={size} />;
 };

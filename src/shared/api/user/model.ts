@@ -1,5 +1,5 @@
 import { REST_API_URL } from "shared/config";
-import { UserSignIn, UserSignUp, ErrorRes } from "./types";
+import { UserSignIn, UserSignUp, ErrorRes, UserUpdate } from "./types";
 
 const headers: HeadersInit = {
   Accept: "application/json",
@@ -43,7 +43,7 @@ const signInUser = async (userData: UserSignIn) => {
 
 const updateUser = async (
   userId: string,
-  userData: UserSignUp,
+  userData: UserUpdate,
   token: string
 ) => {
   const url = `${REST_API_URL}/users/${userId}`;
