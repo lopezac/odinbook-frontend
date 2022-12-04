@@ -1,14 +1,12 @@
-import { useContext, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { FormEvent } from "react";
 import { Form, Input, Button, Label, FormRow, SmallPara } from "shared/ui";
 import { getFormData } from "shared/lib/form-data";
 import { UserSignUp } from "shared/api";
 import { useErrors } from "shared/hooks";
-import { AuthContext, ViewerModelType } from "entities/viewer";
+import { useViewerModel } from "entities/viewer";
 
 export const SignUp = () => {
-  const navigate = useNavigate();
-  const viewerModel = useContext(AuthContext) as ViewerModelType;
+  const viewerModel = useViewerModel();
   const [errors, setErrors] = useErrors();
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -22,6 +20,7 @@ export const SignUp = () => {
       email: data.email,
       password: data.password,
     });
+
     window.location.reload();
   };
 

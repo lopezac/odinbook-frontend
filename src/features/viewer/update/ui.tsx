@@ -1,13 +1,13 @@
-import { useContext, FormEvent } from "react";
+import { FormEvent } from "react";
 import { Form, Input, Button, Label, FormRow, SmallPara } from "shared/ui";
 import { getFormData } from "shared/lib/form-data";
 import { formatDate } from "shared/lib/date";
 import { useErrors } from "shared/hooks";
 import { UserData, UserUpdate } from "shared/api";
-import { AuthContext, ViewerModelType } from "entities/viewer";
+import { useViewerModel } from "entities/viewer";
 
 export const UpdateUser = () => {
-  const viewerModel = useContext(AuthContext) as ViewerModelType;
+  const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer() as UserData;
   const [errors, setErrors] = useErrors();
 

@@ -9,3 +9,4 @@ export * from "./heading";
 export * from "./layout";
 export * from "./link";
 export * from "./image";
+export * from "./textarea";

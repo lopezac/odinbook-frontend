@@ -1,13 +1,13 @@
-import { MouseEvent, useContext } from "react";
+import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { userApi, UserData } from "shared/api";
 import { Button } from "shared/ui";
 import { useMemoryStore } from "shared/hooks";
-import { AuthContext, ViewerModelType } from "entities/viewer";
+import { useViewerModel } from "entities/viewer";
 
 export const DeleteUser = () => {
   const [accessToken, setAccessToken] = useMemoryStore("access-token");
-  const viewerModel = useContext(AuthContext) as ViewerModelType;
+  const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer() as UserData;
   const navigate = useNavigate();
 

@@ -1,19 +1,18 @@
-import { ChangeEvent, useContext } from "react";
-import { AuthContext, ViewerModelType } from "entities/viewer";
+import { ChangeEvent } from "react";
+import { useViewerModel } from "entities/viewer";
 import { IconDiv } from "./styles.module";
 
 export const ChangeAvatar = () => {
-  const viewerModel = useContext(AuthContext) as ViewerModelType;
+  const viewerModel = useViewerModel();
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.currentTarget.files![0];
+    const files = e.currentTarget.files;
+    if (!files) return null;
+
     const reader = new FileReader();
-
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(files[0]);
     reader.addEventListener("load", async (e) => {
-      const data = e.target?.result as string;
-
-      const res = await viewerModel.updateViewer({ picture: data });
+      await viewerModel.updateViewer({ picture: e.target!.result as string });
       window.location.reload();
     });
   };
@@ -21,7 +20,11 @@ export const ChangeAvatar = () => {
   return (
     <IconDiv>
       <button>change</button>
-      <input type="file" onChange={handleChange} />
+      <input
+        type="file"
+        onChange={handleChange}
+        accept="image/png, image/jpeg"
+      />
     </IconDiv>
   );
 };

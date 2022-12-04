@@ -38,3 +38,18 @@ const theme = {
 export const withTheme = (component: () => ReactNode) => () => {
   return <ThemeProvider theme={theme}>{component()}</ThemeProvider>;
 };
+
+export type ThemeType = {
+  color: {
+    [key: string]: string;
+  };
+  font: {
+    size: {
+      [key: string]: string;
+    };
+    family: string;
+  };
+  breakpoint: {
+    [key: string]: string;
+  };
+};

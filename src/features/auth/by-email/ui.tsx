@@ -1,13 +1,12 @@
-import { useContext, FormEvent } from "react";
-import { redirect } from "react-router-dom";
+import { FormEvent } from "react";
 import { Form, FormRow, Label, Input, Button } from "shared/ui";
 import { UserSignIn } from "shared/api";
 import { getFormData } from "shared/lib/form-data";
 import { useErrors } from "shared/hooks";
-import { AuthContext, ViewerModelType } from "entities/viewer";
+import { useViewerModel } from "entities/viewer";
 
 export const ByEmail = () => {
-  const viewerModel = useContext(AuthContext) as ViewerModelType;
+  const viewerModel = useViewerModel();
   const [errors, setErrors] = useErrors();
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {

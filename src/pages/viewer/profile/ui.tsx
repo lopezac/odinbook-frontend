@@ -1,15 +1,17 @@
 import { useRedirect } from "processes/hooks";
-import { Layout } from "shared/ui";
+import { H2, Layout } from "shared/ui";
+import { useViewerModel } from "entities/viewer";
+import { WritePost } from "features/post";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
-import {
-  ViewerProfileHeader,
-  ViewerProfileSidebar,
-  ViewerProfileMain,
-} from "widgets/viewer";
+import { ViewerProfileHeader } from "widgets/viewer";
+import { PostList } from "widgets/post-list";
 import { ContentDiv } from "./styles.module";
 
 export const ViewerProfile = () => {
+  const viewerModel = useViewerModel();
+  const viewer = viewerModel.useViewer();
+
   useRedirect("unauthorized");
   return (
     <Layout.Main>
@@ -17,8 +19,12 @@ export const ViewerProfile = () => {
       <Layout.Content>
         <ViewerProfileHeader />
         <ContentDiv>
-          <ViewerProfileSidebar />
-          <ViewerProfileMain />
+          <div>ViewerProfileSidebar</div>
+          <div>
+            <WritePost />
+            <H2>Posts</H2>
+            <PostList user={viewer!._id} />
+          </div>
         </ContentDiv>
       </Layout.Content>
       <Footer />

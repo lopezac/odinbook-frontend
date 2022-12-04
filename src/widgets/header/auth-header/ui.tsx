@@ -1,11 +1,10 @@
-import { AuthContext, ViewerModelType } from "entities/viewer";
-import { AuthLogout } from "features/auth/logout";
-import { useContext } from "react";
 import { Layout, Button, Link } from "shared/ui";
+import { useViewerModel } from "entities/viewer";
+import { AuthLogout } from "features/auth/logout";
 
 export const Header = () => {
   const logout = AuthLogout();
-  const viewerModel = useContext(AuthContext) as ViewerModelType;
+  const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer();
 
   if (!viewer) return <p>Loading</p>;
