@@ -1,11 +1,8 @@
 export const formDataToObject = (formData: FormData) => {
   const finalObject: any = {};
 
-  console.log(formData);
   for (const key of formData.keys()) {
     const value = formData.get(key) as string;
-
-    // if (key === "birthday") finalObject[key] = new Date(value);
     finalObject[key] = value;
   }
 

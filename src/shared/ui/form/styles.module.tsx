@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
-const StyledForm = styled.form``;
+export const StyledForm = styled.form``;
 
-export default StyledForm;
+export const StyledFormRow = styled.div`
+  background-color: coral;
+`;

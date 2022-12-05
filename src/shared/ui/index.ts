@@ -1,7 +1,6 @@
 export * from "./button";
 export * from "./card";
 export * from "./form";
-export * from "./formRow";
 export * from "./label";
 export * from "./input";
 export * from "./para";
@@ -10,3 +9,4 @@ export * from "./layout";
 export * from "./link";
 export * from "./image";
 export * from "./textarea";
+export * from "./menu";

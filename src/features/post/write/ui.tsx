@@ -35,7 +35,12 @@ export const WritePost = () => {
       <div>
         <Form onSubmit={handleSubmit}>
           <FormRow>
-            <TextArea id="text" name="text" required></TextArea>
+            <TextArea
+              id="text"
+              name="text"
+              placeholder="What's on your mind?"
+              required
+            ></TextArea>
           </FormRow>
           <div>
             <Button type="button">Photo</Button>

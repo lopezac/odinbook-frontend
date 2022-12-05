@@ -1,12 +1,20 @@
 import { REST_API_URL } from "shared/config";
-import { UserSignIn, UserSignUp, ErrorRes, UserUpdate } from "./types";
+import {
+  UserSignIn,
+  UserSignUp,
+  ErrorRes,
+  UserUpdate,
+  UserData,
+} from "./types";
 
 const headers: HeadersInit = {
   Accept: "application/json",
   "Content-Type": "application/json;charset=UTF-8",
 };
 
-const signUpUser = async (userData: UserSignUp) => {
+type ErrorResType = { message: string; err: unknown };
+
+export const signUpUser = async (userData: UserSignUp) => {
   const url = `${REST_API_URL}/sign-up`;
   const options: RequestInit = {
     body: JSON.stringify(userData),
@@ -20,9 +28,7 @@ const signUpUser = async (userData: UserSignUp) => {
   return data;
 };
 
-const signInUser = async (userData: UserSignIn) => {
-  // const token = SessionStorage.get("access-token");
-  // if (token) headers["Authorization"] = token;
+export const signInUser = async (userData: UserSignIn) => {
   const url = `${REST_API_URL}/sign-in`;
   const options: RequestInit = {
     body: JSON.stringify(userData),
@@ -31,6 +37,7 @@ const signInUser = async (userData: UserSignIn) => {
   };
 
   const res = await fetch(url, options);
+
   try {
     const resObject = await res.json();
     resObject.data.birthday = new Date(resObject.data.birthday);
@@ -41,7 +48,7 @@ const signInUser = async (userData: UserSignIn) => {
   }
 };
 
-const updateUser = async (
+export const updateUser = async (
   userId: string,
   userData: UserUpdate,
   token: string
@@ -59,7 +66,7 @@ const updateUser = async (
   return data;
 };
 
-const deleteUser = async (userId: string, token: string) => {
+export const deleteUser = async (userId: string, token: string) => {
   const url = `${REST_API_URL}/users/${userId}`;
   const options: RequestInit = {
     method: "DELETE",
@@ -71,12 +78,19 @@ const deleteUser = async (userId: string, token: string) => {
   return await res.json();
 };
 
-const getUserPhotos = async (userId: string) => {
+export const getUser = async (userId: string) => {
+  const url = `${REST_API_URL}/users/${userId}`;
+  const options: RequestInit = { method: "GET", headers };
+
+  const res = await fetch(url, options);
+  const data: { user: UserData } | ErrorResType = await res.json();
+
+  return data;
+};
+
+export const getUserPhotos = async (userId: string) => {
   const url = `${REST_API_URL}/users/${userId}/photos`;
-  const options: RequestInit = {
-    method: "GET",
-    headers: { ...headers },
-  };
+  const options: RequestInit = { method: "GET", headers };
 
   const res = await fetch(url, options);
   const data = await res.json();
@@ -84,24 +98,12 @@ const getUserPhotos = async (userId: string) => {
   return data;
 };
 
-const getUserFriends = async (userId: string) => {
+export const getUserFriends = async (userId: string) => {
   const url = `${REST_API_URL}/users/${userId}/friends`;
-  const options: RequestInit = {
-    method: "GET",
-    headers: { ...headers },
-  };
+  const options: RequestInit = { method: "GET", headers };
 
   const res = await fetch(url, options);
   const data = await res.json();
 
   return data;
-};
-
-export {
-  signInUser,
-  signUpUser,
-  updateUser,
-  deleteUser,
-  getUserPhotos,
-  getUserFriends
 };

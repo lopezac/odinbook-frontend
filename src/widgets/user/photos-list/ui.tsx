@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 import { userApi } from "shared/api";
 
-
 export const PhotosList = ({ userId }: { userId: string }) => {
   const [photos, setPhotos] = useState<null | string[]>(null);
 
   useEffect(() => {
-    async function getPhotos() {
-      const foundPhotos = await userApi.getUserPhotos(userId);
-      setPhotos(foundPhotos);
-    }
-    getPhotos();
-  });
+    userApi.getUserPhotos(userId).then((data) => setPhotos(data));
+  }, [userId]);
 
   if (!photos || !photos.length) return <p>There are no photos</p>;
   return (
@@ -19,9 +14,9 @@ export const PhotosList = ({ userId }: { userId: string }) => {
       {photos.map((photo) => {
         return (
           <li>
-            <img src={photo} />
+            <img src={photo} alt="photo" />
           </li>
-        )
+        );
       })}
     </ul>
   );

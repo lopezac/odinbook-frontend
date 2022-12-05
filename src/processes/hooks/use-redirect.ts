@@ -10,8 +10,8 @@ export const useRedirect = (state: "authorized" | "unauthorized") => {
   useEffect(() => {
     if (state === "unauthorized" && (!accessToken || !user)) {
       navigate("/sign-in");
-    } else if (state === "authorized" && (accessToken && user)) {
+    } else if (state === "authorized" && accessToken && user) {
       navigate("/");
     }
-  }, [accessToken, navigate, state]);
+  }, [accessToken, state, user]);
 };
