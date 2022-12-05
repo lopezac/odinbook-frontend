@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { postApi, PostType, userApi, UserData } from "shared/api";
 import { PostCard } from "entities/post";
-import { DeletePost } from "features/post";
+import { DeletePost, UpdatePost } from "features/post";
 
 export const PostList = ({ userId }: { userId: string }) => {
   const [posts, setPosts] = useState<PostType[] | null>(null);
@@ -37,7 +37,9 @@ export const PostList = ({ userId }: { userId: string }) => {
             key={post._id}
             post={post}
             user={user}
-            actions={[<DeletePost postId={post._id} />]}
+            actions={[
+              <DeletePost postId={post._id} />, <UpdatePost postId={post._id} />
+            ]}
           />
         );
       })}

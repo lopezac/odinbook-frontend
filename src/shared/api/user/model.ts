@@ -55,7 +55,7 @@ export const updateUser = async (
 ) => {
   const url = `${REST_API_URL}/users/${userId}`;
   const options: RequestInit = {
-    body: JSON.stringify({ ...userData }),
+    body: JSON.stringify({ ...userData }), // is ... necessary??
     method: "PUT",
     headers: { ...headers, Authorization: `Bearer ${token}` },
   };

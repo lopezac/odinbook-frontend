@@ -40,6 +40,25 @@ export const getUserPosts = async (userId: string) => {
   }
 };
 
+export const updatePost = async (postId: string, postData: PostUpdate, token: string) => {
+  try {
+    const url = `${REST_API_URL}/posts/${postId}`;
+    const options: RequestInit = {
+      body: JSON.stringify({ postData }),
+      method: "PUT",
+      headers: { ...headers, Authorization: `Bearer ${token}` },
+    };
+
+    const res = await fetch(url, options);
+    const data = await res.json();
+    console.log("data at updatePost", data);
+
+    return data;
+  } catch (err) {
+    throw Error(`Error updating post ${postId}, in shared/api/post, ${err}`);
+  }
+}
+
 export const deletePost = async (postId: string, token: string) => {
   try {
     const url = `${REST_API_URL}/posts/${postId}`;
@@ -50,7 +69,6 @@ export const deletePost = async (postId: string, token: string) => {
 
     const res = await fetch(url, options);
     const data: { success: boolean } | ErrorResType = await res.json();
-    console.log("data", data);
 
     return data;
   } catch (err) {

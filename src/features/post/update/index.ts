@@ -1,0 +1,1 @@
+export { UpdatePost } from "./ui";

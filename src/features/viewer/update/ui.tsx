@@ -16,9 +16,9 @@ export const UpdateUser = () => {
     const data: UserUpdate = getFormData(e.target as HTMLFormElement);
 
     const res = await viewerModel.updateViewer(data);
+
     if ("errors" in res) return setErrors(res.errors);
     setErrors({});
-
     window.location.reload();
   };
 

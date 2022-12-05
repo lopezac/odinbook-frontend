@@ -50,6 +50,6 @@
   "devDependencies": {
     "@types/compose-function": "^0.0.30",
     "@types/styled-components": "^5.1.26",
-    "prettier": "2.8.0"
+    "prettier": "^2.8.0"
   }
 }

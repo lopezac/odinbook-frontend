@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useMemoryStore } from "shared/hooks";
 import type {
   UserData,
@@ -6,7 +5,7 @@ import type {
   UserSignIn,
   UserUpdate,
 } from "shared/api/user";
-import { userApi } from "shared/api/user";
+import { userApi } from "shared/api";
 
 export const Model = () => {
   const [viewer, setViewer] = useMemoryStore<UserData | null>("user");
@@ -49,10 +48,6 @@ export const Model = () => {
 
     return res.user;
   };
-
-  useEffect(() => {
-    console.log("viewer at entitiy model", viewer);
-  }, [viewer]);
 
   return { useViewer, signInViewer, signUpViewer, logoutViewer, updateViewer };
 };
