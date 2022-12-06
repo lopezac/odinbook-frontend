@@ -31,6 +31,7 @@ export const UpdatePost = ({ postId }: { postId: string }) => {
   };
 
   if (!post) return <p>Loading</p>;
+  console.log("post", post);
   return (
     <Form onSubmit={handleSubmit}>
       <FormRow>

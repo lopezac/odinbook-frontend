@@ -10,3 +10,4 @@ export * from "./link";
 export * from "./image";
 export * from "./textarea";
 export * from "./menu";
+export * from "./error";

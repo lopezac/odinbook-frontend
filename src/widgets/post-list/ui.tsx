@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { PostType, UserData } from "shared/api";
+import { Button, Link } from "shared/ui";
 import { PostModel, PostCard } from "entities/post";
 import { UserModel } from "entities/user";
-import { DeletePost, UpdatePost } from "features/post";
-import { Button, Link } from "shared/ui";
+import { DeletePost } from "features/post";
 
 export const PostList = ({ userId }: { userId: string }) => {
   const postModel = PostModel();
@@ -41,7 +41,7 @@ export const PostList = ({ userId }: { userId: string }) => {
               <Link to={`/posts/${post._id}/update`}>
                 <Button>Update</Button>
               </Link>,
-              <UpdatePost postId={post._id} />,
+              <DeletePost postId={post._id} />
             ]}
           />
         );
