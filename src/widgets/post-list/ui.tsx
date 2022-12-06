@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react";
-import { postApi, PostType, userApi, UserData } from "shared/api";
-import { PostCard } from "entities/post";
+import { PostType, UserData } from "shared/api";
+import { PostModel, PostCard } from "entities/post";
+import { UserModel } from "entities/user";
 import { DeletePost, UpdatePost } from "features/post";
+import { Button, Link } from "shared/ui";
 
 export const PostList = ({ userId }: { userId: string }) => {
+  const postModel = PostModel();
+  const userModel = UserModel();
   const [posts, setPosts] = useState<PostType[] | null>(null);
   const [user, setUser] = useState<UserData | null>(null);
 
   useEffect(() => {
-    let active = true;
-
     const fetchPostsData = async () => {
-      const postsData = await postApi.getUserPosts(userId);
-      if ("posts" in postsData && active) setPosts(postsData.posts);
+      const postsData = await postModel.getUserPosts(userId);
+      setPosts(postsData);
     };
-
-    const fetchUserData = async () => {
-      const userData = await userApi.getUser(userId);
-      if ("user" in userData && active) setUser(userData.user);
-    };
-
     fetchPostsData();
-    fetchUserData();
-    return () => {
-      active = false;
+  }, [userId]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userData = await userModel.getUser(userId);
+      setUser(userData);
     };
+    fetchUserData();
   }, [userId]);
 
   if (!user) return <div>Loading</div>;
@@ -38,7 +38,10 @@ export const PostList = ({ userId }: { userId: string }) => {
             post={post}
             user={user}
             actions={[
-              <DeletePost postId={post._id} />, <UpdatePost postId={post._id} />
+              <Link to={`/posts/${post._id}/update`}>
+                <Button>Update</Button>
+              </Link>,
+              <UpdatePost postId={post._id} />,
             ]}
           />
         );

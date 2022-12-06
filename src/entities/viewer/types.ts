@@ -15,4 +15,5 @@ export type ViewerModelType = {
   signUpViewer: (data: UserSignUp) => Promise<{ message: string } | ErrorRes>;
   logoutViewer: () => void;
   updateViewer: (data: UserUpdate) => Promise<any>;
+  deleteViewer: () => Promise<any>;
 };

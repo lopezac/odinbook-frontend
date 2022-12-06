@@ -6,7 +6,7 @@ import { AvatarImg, BurgerMenu, LargeImg, ListMenu } from "shared/ui";
 type CardProps = {
   post: PostType;
   user: UserData;
-  actions?: ReactElement<any, any>[];
+  actions?: ReactElement[];
 };
 
 export const Card = ({ post, user, actions }: CardProps) => {
@@ -22,11 +22,15 @@ export const Card = ({ post, user, actions }: CardProps) => {
           </p>
           <p>{formatDate(post.created_at)}</p>
           <BurgerMenu open={open} setOpen={setOpen} />
-          <ListMenu open={open}>{actions?.map((action) => action)}</ListMenu>
+          <ListMenu open={open}>
+            {actions?.map((action, idx) => (
+              <li key={idx}>{action}</li>
+            ))}
+          </ListMenu>
         </div>
       </div>
       <p>{post.text}</p>
-      <LargeImg photoUrl={post.photos[0]} />
+      {post.photos.length ? <LargeImg photoUrl={post.photos[0]} /> : null}
     </div>
   );
 };

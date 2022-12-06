@@ -7,12 +7,14 @@ export const ChangeAvatar = () => {
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.currentTarget.files;
-    if (!files) return null;
-
+    if (!files) return;
     const reader = new FileReader();
+
     reader.readAsDataURL(files[0]);
-    reader.addEventListener("load", async (e) => {
-      await viewerModel.updateViewer({ picture: e.target!.result as string });
+    reader.addEventListener("load", async () => {
+      const image = reader.result as string;
+
+      await viewerModel.updateViewer({ picture: image });
       window.location.reload();
     });
   };

@@ -13,6 +13,7 @@ export const ViewerProfile = () => {
   const viewer = viewerModel.useViewer();
 
   useRedirect("unauthorized");
+  if (!viewer) return <p>Loading</p>;
   return (
     <Layout.Main>
       <AuthHeader />
@@ -23,7 +24,7 @@ export const ViewerProfile = () => {
           <div>
             <WritePost />
             <H2>Posts</H2>
-            <PostList userId={viewer!._id} />
+            <PostList userId={viewer._id} />
           </div>
         </ContentDiv>
       </Layout.Content>

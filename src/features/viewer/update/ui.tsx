@@ -3,12 +3,12 @@ import { Form, Input, Button, Label, FormRow, SmallPara } from "shared/ui";
 import { getFormData } from "shared/lib/form-data";
 import { formatDate } from "shared/lib/date";
 import { useErrors } from "shared/hooks";
-import { UserData, UserUpdate } from "shared/api";
+import { UserUpdate } from "shared/api";
 import { useViewerModel } from "entities/viewer";
 
 export const UpdateUser = () => {
   const viewerModel = useViewerModel();
-  const viewer = viewerModel.useViewer() as UserData;
+  const viewer = viewerModel.useViewer();
   const [errors, setErrors] = useErrors();
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -22,7 +22,7 @@ export const UpdateUser = () => {
     window.location.reload();
   };
 
-  if (!viewer) return <div>Loading</div>;
+  if (!viewer) return <p>Loading</p>;
   return (
     <Form onSubmit={handleFormSubmit}>
       <FormRow>
@@ -33,7 +33,7 @@ export const UpdateUser = () => {
           id="firstName"
           minLength={2}
           maxLength={120}
-          defaultValue={viewer && viewer.firstName}
+          defaultValue={viewer.firstName}
           required
           error={!!errors.firstName}
         />
@@ -46,7 +46,7 @@ export const UpdateUser = () => {
           id="lastName"
           minLength={2}
           maxLength={120}
-          defaultValue={viewer && viewer.lastName}
+          defaultValue={viewer.lastName}
           required
           error={!!errors.lastName}
         />
@@ -59,9 +59,9 @@ export const UpdateUser = () => {
           type="email"
           name="email"
           id="email"
-          error={!!errors.email}
-          defaultValue={viewer && viewer.email}
+          defaultValue={viewer.email}
           required
+          error={!!errors.email}
         />
         {errors.email && <p>{errors.email}</p>}
       </FormRow>
@@ -72,8 +72,8 @@ export const UpdateUser = () => {
           type="password"
           name="password"
           id="password"
-          error={!!errors.password}
           required
+          error={!!errors.password}
         />
         {errors.password && <p>{errors.password}</p>}
       </FormRow>
@@ -84,9 +84,9 @@ export const UpdateUser = () => {
           type="date"
           name="birthday"
           id="birthday"
-          error={!!errors.birthday}
-          defaultValue={viewer && formatDate(viewer.birthday)}
+          defaultValue={formatDate(viewer.birthday)}
           required
+          error={!!errors.birthday}
         />
         {errors.birthday && <p>{errors.birthday}</p>}
       </FormRow>
@@ -100,7 +100,7 @@ export const UpdateUser = () => {
           name="gender"
           id="male"
           value="male"
-          defaultChecked={viewer && viewer.gender === "male"}
+          defaultChecked={viewer.gender === "male"}
         />
 
         <Label htmlFor="female">Female</Label>
@@ -109,7 +109,7 @@ export const UpdateUser = () => {
           name="gender"
           id="female"
           value="female"
-          defaultChecked={viewer && viewer.gender === "female"}
+          defaultChecked={viewer.gender === "female"}
         />
 
         <Label htmlFor="other">Other</Label>
@@ -118,7 +118,7 @@ export const UpdateUser = () => {
           name="gender"
           id="other"
           value="other"
-          defaultChecked={viewer && viewer.gender === "other"}
+          defaultChecked={viewer.gender === "other"}
         />
       </FormRow>
 

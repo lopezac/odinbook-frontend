@@ -3,6 +3,7 @@ import FeedPage from "./feed";
 import { AuthSignUpPage, AuthSignInPage } from "./auth";
 import { ViewerSettingsPage } from "./viewer/settings";
 import { ViewerProfilePage } from "./viewer/profile";
+import { UpdatePostPage } from "./post";
 
 export const Routing = () => {
   return (
@@ -16,6 +17,11 @@ export const Routing = () => {
             <Route path="photos" element="{<UserPhotosPage />}" />
             <Route path="videos" element="{<UserVideosPage />}" />
             <Route path="friends" element="{<UserFriendsPage />}" />
+          </Route>
+        </Route>
+        <Route path="posts">
+          <Route path=":postId">
+            <Route path="update" element={<UpdatePostPage />} />
           </Route>
         </Route>
         <Route path="settings" element={<ViewerSettingsPage />} />

@@ -1,17 +1,13 @@
 import { MouseEvent } from "react";
-import { postApi } from "shared/api";
-import { useMemoryStore } from "shared/hooks";
 import { Button } from "shared/ui";
+import { PostModel } from "entities/post";
 
 export const DeletePost = ({ postId }: { postId: string }) => {
-  const [accessToken, setAccessToken] = useMemoryStore<string>("access-token");
+  const postModel = PostModel();
 
   const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
-    const res = await postApi.deletePost(postId, accessToken);
-    console.log("button clicked", res);
-    if ("success" in res) {
-      window.location.reload();
-    }
+    await postModel.deletePost(postId);
+    window.location.reload();
   };
 
   return (

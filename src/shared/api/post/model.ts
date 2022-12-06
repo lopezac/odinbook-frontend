@@ -1,5 +1,5 @@
 import { REST_API_URL } from "shared/config";
-import type { CreatePostType, PostType } from "./types";
+import type { CreatePost, UpdatePostType, PostType } from "./types";
 
 const headers: HeadersInit = {
   Accept: "application/json",
@@ -8,7 +8,7 @@ const headers: HeadersInit = {
 
 type ErrorResType = { message: string; err: unknown };
 
-export const createPost = async (postData: CreatePostType, token: string) => {
+export const createPost = async (postData: CreatePost, token: string) => {
   try {
     const url = `${REST_API_URL}/posts`;
     const options: RequestInit = {
@@ -40,7 +40,25 @@ export const getUserPosts = async (userId: string) => {
   }
 };
 
-export const updatePost = async (postId: string, postData: PostUpdate, token: string) => {
+export const getPost = async (postId: string) => {
+  try {
+    const url = `${REST_API_URL}/posts/${postId}`;
+    const options: RequestInit = { method: "GET", headers };
+
+    const res = await fetch(url, options);
+    const data: { post: PostType } | ErrorResType = await res.json();
+
+    return data;
+  } catch (err) {
+    throw Error(`Error getting post ${postId}, in shared/api, ${err}`);
+  }
+};
+
+export const updatePost = async (
+  postId: string,
+  postData: UpdatePostType,
+  token: string
+) => {
   try {
     const url = `${REST_API_URL}/posts/${postId}`;
     const options: RequestInit = {
@@ -57,7 +75,7 @@ export const updatePost = async (postId: string, postData: PostUpdate, token: st
   } catch (err) {
     throw Error(`Error updating post ${postId}, in shared/api/post, ${err}`);
   }
-}
+};
 
 export const deletePost = async (postId: string, token: string) => {
   try {

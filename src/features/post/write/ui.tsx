@@ -1,28 +1,33 @@
-import { FormEvent } from "react";
-import { postApi } from "shared/api";
+import { FormEvent, useEffect } from "react";
 import { getFormData } from "shared/lib/form-data";
 import { Button, Form, FormRow, Input, TextArea } from "shared/ui";
-import { useMemoryStore } from "shared/hooks";
 import { useViewerModel, ViewerAvatar } from "entities/viewer";
+import { PostModel } from "entities/post";
 
 export const WritePost = () => {
-  const [accessToken, setAccessToken] = useMemoryStore<string>("access-token");
+  const postModel = PostModel();
   const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = getFormData(e.target as HTMLFormElement);
-    const file: File = data.image;
-
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.addEventListener("load", async (e) => {
-      const image = e.target!.result as string;
 
-      const postData = { ...data, photos: [image], user: viewer!._id };
-      await postApi.createPost(postData, accessToken);
+    if (!data.image.size) {
+      await postModel.createPost({ ...data, user: viewer!._id });
+      window.location.reload();
+    }
 
+    reader.readAsDataURL(data.image);
+    reader.addEventListener("load", async () => {
+      const image = reader.result as string;
+
+      await postModel.createPost({
+        ...data,
+        photos: [image],
+        user: viewer!._id,
+      });
       window.location.reload();
     });
   };

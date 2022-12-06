@@ -13,7 +13,7 @@ export const Model = () => {
     "access-token"
   );
 
-  const useViewer = () => viewer;
+  const useViewer = () => viewer as UserData;
 
   const logoutViewer = () => {
     setViewer(null);
@@ -49,5 +49,16 @@ export const Model = () => {
     return res.user;
   };
 
-  return { useViewer, signInViewer, signUpViewer, logoutViewer, updateViewer };
+  const deleteViewer = async () => {
+    return await userApi.deleteUser(viewer!._id, accessToken as string);
+  };
+
+  return {
+    useViewer,
+    signInViewer,
+    signUpViewer,
+    logoutViewer,
+    updateViewer,
+    deleteViewer,
+  };
 };
