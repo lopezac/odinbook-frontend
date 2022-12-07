@@ -29,7 +29,7 @@ export const Model = () => {
   };
 
   const deletePost = async (id: string) => {
-    await postApi.deletePost(id, accessToken);
+    return await postApi.deletePost(id, accessToken);
   };
 
   return { createPost, getPost, getUserPosts, updatePost, deletePost };

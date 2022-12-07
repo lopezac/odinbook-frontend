@@ -6,8 +6,8 @@ export const DeletePost = ({ postId }: { postId: string }) => {
   const postModel = PostModel();
 
   const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
-    await postModel.deletePost(postId);
-    window.location.reload();
+    const res = await postModel.deletePost(postId);
+    if ("postId" in res) window.location.reload();
   };
 
   return (

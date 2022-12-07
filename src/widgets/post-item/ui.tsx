@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { Button, Link } from "shared/ui";
+import { Button, Link, AvatarImg } from "shared/ui";
 import type { PostType, CommentType, UserData } from "shared/api";
 import { CommentCard, CommentModel } from "entities/comment";
 import { PostCard } from "entities/post";
-import { WriteComment } from "features/comment";
+import { useViewerModel } from "entities/viewer";
+import { WriteComment, DeleteComment } from "features/comment";
 import { DeletePost } from "features/post";
 
 type PostItemProps = { post: PostType; user: UserData };
 
 export const PostItem = ({ post, user }: PostItemProps) => {
   const commentModel = CommentModel();
+  const viewerModel = useViewerModel();
+  const viewer = viewerModel.useViewer();
   const [comments, setComments] = useState<null | CommentType[]>(null);
 
   useEffect(() => {
@@ -31,13 +34,20 @@ export const PostItem = ({ post, user }: PostItemProps) => {
       />
       <div>
         <div>
-          <p>Viewer avatar</p>
+          <AvatarImg photoUrl={viewer!.picture} size="medium" />
           <WriteComment userId={user._id} postId={post._id} />
         </div>
         {comments &&
           comments.map((comment) => {
             return (
-              <CommentCard key={comment._id} comment={comment} user={user} />
+              <CommentCard
+                key={comment._id}
+                comment={comment}
+                user={user}
+                actions={[
+                  <DeleteComment commentId={comment._id} />
+                ]}
+              />
             );
           })}
       </div>

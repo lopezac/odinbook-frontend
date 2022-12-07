@@ -23,7 +23,7 @@ export const Card = ({ post, user, actions }: CardProps) => {
           <p>{formatDate(post.created_at)}</p>
           <BurgerMenu open={open} setOpen={setOpen} />
           <ListMenu open={open}>
-            {actions?.map((action, idx) => (
+            {actions && actions.map((action, idx) => (
               <li key={idx}>{action}</li>
             ))}
           </ListMenu>

@@ -8,14 +8,16 @@ export const Model = () => {
     const res = await commentApi.createComment(data, accessToken);
     if ("comment" in res) return res.comment;
     if ("errors" in res) return res;
-    return null;
   };
 
   const getPostComments = async (postId: string) => {
     const res = await commentApi.getPostComments(postId);
     if ("comments" in res) return res.comments;
-    return null;
   };
 
-  return { createComment, getPostComments };
+  const deleteComment = async (commentId: string) => {
+    return await commentApi.deleteComment(commentId, accessToken);
+  };
+
+  return { createComment, getPostComments, deleteComment };
 };

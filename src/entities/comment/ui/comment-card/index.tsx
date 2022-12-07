@@ -1,10 +1,15 @@
+import { ReactElement } from "react";
 import { CommentType, UserData } from "shared/api";
 import { formatDate } from "shared/lib/date";
 import { AvatarImg } from "shared/ui";
 
-type CommentCardProps = { comment: CommentType; user: UserData };
+type CommentCardProps = {
+  comment: CommentType;
+  user: UserData;
+  actions?: ReactElement[]
+};
 
-export const CommentCard = ({ comment, user }: CommentCardProps) => {
+export const CommentCard = ({ comment, user, actions }: CommentCardProps) => {
   return (
     <div>
       <div>
@@ -16,7 +21,11 @@ export const CommentCard = ({ comment, user }: CommentCardProps) => {
         </p>
         <p>{comment.text}</p>
         <div>
-          <p>actions</p>
+          <div>
+            {actions && actions.map((action, idx) => {
+              return <li key={idx}>{action}</li>
+            })}
+          </div>
           <p>{formatDate(comment.created_at)}</p>
           <p>comment likes</p>
         </div>

@@ -40,3 +40,20 @@ export const getPostComments = async (postId: string) => {
     throw Error(`Error getting post comments, shared/api/comment ${err}`);
   }
 };
+
+export const deleteComment = async (commentId: string, token: string) => {
+  try {
+    const url = `${REST_API_URL}/comments/${commentId}`;
+    const options: RequestInit = {
+      method: "DELETE",
+      headers: { ...headers, Authorization: `Bearer ${token}` }
+    };
+
+    const res = await fetch(url, options);
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw Error(`Error deleting comment, shared/api/comment ${err}`);
+  }
+};
