@@ -22,8 +22,9 @@ export const UpdatePost = ({ postId }: { postId: string }) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = getFormData(e.target as HTMLFormElement);
-    const postData = { ...data, photos: [data.image] };
+    const postData = { ...data };
     const res = await postModel.updatePost(postId, postData);
+    console.log("res at handleSubmit post/update/ui", res);
 
     if ("errors" in res) return setErrors(res.errors);
     setErrors({});
@@ -31,7 +32,6 @@ export const UpdatePost = ({ postId }: { postId: string }) => {
   };
 
   if (!post) return <p>Loading</p>;
-  console.log("post", post);
   return (
     <Form onSubmit={handleSubmit}>
       <FormRow>
@@ -58,7 +58,6 @@ export const UpdatePost = ({ postId }: { postId: string }) => {
           type="file"
           name="image"
           id="image"
-          defaultValue={post.photos[0]}
           accept="image/png, image/jpeg"
         />
       </div>

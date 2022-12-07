@@ -62,14 +62,13 @@ export const updatePost = async (
   try {
     const url = `${REST_API_URL}/posts/${postId}`;
     const options: RequestInit = {
-      body: JSON.stringify({ postData }),
+      body: JSON.stringify({ ...postData }),
       method: "PUT",
       headers: { ...headers, Authorization: `Bearer ${token}` },
     };
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log("data at updatePost", data);
 
     return data;
   } catch (err) {

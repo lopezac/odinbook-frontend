@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { PostType, UserData } from "shared/api";
-import { Button, Link } from "shared/ui";
-import { PostModel, PostCard } from "entities/post";
+import { PostModel } from "entities/post";
 import { UserModel } from "entities/user";
-import { DeletePost } from "features/post";
+import { PostItem } from "widgets/post-item";
 
 export const PostList = ({ userId }: { userId: string }) => {
   const postModel = PostModel();
@@ -12,19 +11,11 @@ export const PostList = ({ userId }: { userId: string }) => {
   const [user, setUser] = useState<UserData | null>(null);
 
   useEffect(() => {
-    const fetchPostsData = async () => {
-      const postsData = await postModel.getUserPosts(userId);
-      setPosts(postsData);
-    };
-    fetchPostsData();
+    postModel.getUserPosts(userId).then((data) => setPosts(data));
   }, [userId]);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userData = await userModel.getUser(userId);
-      setUser(userData);
-    };
-    fetchUserData();
+    userModel.getUser(userId).then((data) => setUser(data));
   }, [userId]);
 
   if (!user) return <div>Loading</div>;
@@ -32,19 +23,7 @@ export const PostList = ({ userId }: { userId: string }) => {
   return (
     <div>
       {posts.map((post) => {
-        return (
-          <PostCard
-            key={post._id}
-            post={post}
-            user={user}
-            actions={[
-              <Link to={`/posts/${post._id}/update`}>
-                <Button>Update</Button>
-              </Link>,
-              <DeletePost postId={post._id} />
-            ]}
-          />
-        );
+        return <PostItem key={post._id} post={post} user={user} />;
       })}
     </div>
   );

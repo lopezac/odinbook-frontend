@@ -22,8 +22,8 @@ export const Model = () => {
 
   const updatePost = async (id: string, postData: UpdatePostType) => {
     const data = await postApi.updatePost(id, postData, accessToken);
-    console.log("data at model updatePOst", data)
-    if ("postId" in data) return data.post;
+    console.log("data at model updatePOst", data);
+    if ("post" in data) return data.post;
     if ("errors" in data) return data;
     return null;
   };

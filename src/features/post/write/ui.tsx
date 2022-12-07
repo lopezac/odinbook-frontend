@@ -1,4 +1,4 @@
-import { FormEvent, useEffect } from "react";
+import { FormEvent } from "react";
 import { getFormData } from "shared/lib/form-data";
 import { Button, Form, FormRow, Input, TextArea } from "shared/ui";
 import { useViewerModel, ViewerAvatar } from "entities/viewer";
@@ -12,24 +12,20 @@ export const WritePost = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = getFormData(e.target as HTMLFormElement);
+    const postData = { ...data, user: viewer!._id };
     const reader = new FileReader();
 
-    if (!data.image.size) {
-      await postModel.createPost({ ...data, user: viewer!._id });
-      window.location.reload();
+    if (data.image.size) {
+      reader.readAsDataURL(data.image);
+      reader.addEventListener("load", async () => {
+        postData.photos = [reader.result as string];
+        await postModel.createPost(postData);
+      });
+    } else {
+      await postModel.createPost(postData);
     }
 
-    reader.readAsDataURL(data.image);
-    reader.addEventListener("load", async () => {
-      const image = reader.result as string;
-
-      await postModel.createPost({
-        ...data,
-        photos: [image],
-        user: viewer!._id,
-      });
-      window.location.reload();
-    });
+    window.location.reload();
   };
 
   return (

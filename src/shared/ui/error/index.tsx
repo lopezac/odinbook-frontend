@@ -1,6 +1,6 @@
 import { StyledAlert } from "./styled";
 
-export const ErrorFallback = ({ error }: { error: DOMException }) => {
+export const ErrorFallback = ({ error }: { error: any }) => {
   return (
     <StyledAlert>
       <p>Something went wrong!</p>
