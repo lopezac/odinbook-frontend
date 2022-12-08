@@ -1,19 +1,29 @@
-import { useRedirect } from "processes/hooks";
+import { useState, useEffect } from "react";
 import { H2, Layout } from "shared/ui";
+import { PostType } from "shared/api";
 import { useViewerModel } from "entities/viewer";
+import { PostModel } from "entities/post";
 import { WritePost } from "features/post";
+import { PostItem } from "widgets/post";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 import { ViewerProfileHeader } from "widgets/viewer";
-import { PostList } from "widgets/post-list";
+import { useRedirect } from "processes/hooks";
 import { ContentDiv } from "./styles.module";
 
 export const ViewerProfile = () => {
+  const [posts, setPosts] = useState<PostType[] | null>(null);
+  const postModel = PostModel();
   const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer();
 
+  useEffect(() => {
+    postModel.getUserPosts(viewer!._id).then((data) => {
+      setPosts(data);
+    });
+  }, [viewer]);
+
   useRedirect("unauthorized");
-  if (!viewer) return <p>Loading</p>;
   return (
     <Layout.Main>
       <AuthHeader />
@@ -24,7 +34,12 @@ export const ViewerProfile = () => {
           <div>
             <WritePost />
             <H2>Posts</H2>
-            <PostList userId={viewer._id} />
+            <div>
+              {posts &&
+                posts.map((post) => {
+                  return <PostItem key={post._id} post={post} user={viewer!} />;
+                })}
+            </div>
           </div>
         </ContentDiv>
       </Layout.Content>

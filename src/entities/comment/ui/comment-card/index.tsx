@@ -1,20 +1,27 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { CommentType, UserData } from "shared/api";
 import { formatDate } from "shared/lib/date";
-import { AvatarImg } from "shared/ui";
+import { AvatarImg, BurgerMenu, ListMenu } from "shared/ui";
 
 type CommentCardProps = {
   comment: CommentType;
   user: UserData;
-  actions?: ReactElement[]
+  actions?: ReactElement[];
+  after?: ReactElement[];
 };
 
-export const CommentCard = ({ comment, user, actions }: CommentCardProps) => {
+export const CommentCard = ({
+  comment,
+  user,
+  actions,
+  after,
+}: CommentCardProps) => {
+  const [open, setOpen] = useState(false);
+
   return (
     <div>
-      <div>
-        <AvatarImg photoUrl={user.picture} size="medium" />
-      </div>
+      <AvatarImg photoUrl={user.picture} size="medium" />
+
       <div>
         <p>
           {user.firstName} {user.lastName}
@@ -22,13 +29,18 @@ export const CommentCard = ({ comment, user, actions }: CommentCardProps) => {
         <p>{comment.text}</p>
         <div>
           <div>
-            {actions && actions.map((action, idx) => {
-              return <li key={idx}>{action}</li>
-            })}
+            {after && after.map((action, idx) => <li key={idx}>{action}</li>)}
           </div>
           <p>{formatDate(comment.created_at)}</p>
           <p>comment likes</p>
         </div>
+      </div>
+
+      <div>
+        <BurgerMenu open={open} setOpen={setOpen} />
+        <ListMenu open={open}>
+          {actions && actions.map((action, idx) => <li key={idx}>{action}</li>)}
+        </ListMenu>
       </div>
     </div>
   );

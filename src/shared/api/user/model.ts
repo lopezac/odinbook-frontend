@@ -88,6 +88,16 @@ export const getUser = async (userId: string) => {
   return data;
 };
 
+export const getUsers = async () => {
+  const url = `${REST_API_URL}/users`;
+  const options: RequestInit = { method: "GET", headers };
+
+  const res = await fetch(url, options);
+  const data = await res.json();
+
+  return data;
+};
+
 export const getUserPhotos = async (userId: string) => {
   const url = `${REST_API_URL}/users/${userId}/photos`;
   const options: RequestInit = { method: "GET", headers };

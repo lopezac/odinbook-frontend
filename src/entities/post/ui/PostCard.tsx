@@ -7,9 +7,10 @@ type CardProps = {
   post: PostType;
   user: UserData;
   actions?: ReactElement[];
+  after?: ReactElement[];
 };
 
-export const Card = ({ post, user, actions }: CardProps) => {
+export const Card = ({ post, user, actions, after }: CardProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -21,16 +22,23 @@ export const Card = ({ post, user, actions }: CardProps) => {
             {user.firstName} {user.lastName}
           </p>
           <p>{formatDate(post.created_at)}</p>
+        </div>
+        <div>
           <BurgerMenu open={open} setOpen={setOpen} />
           <ListMenu open={open}>
-            {actions && actions.map((action, idx) => (
-              <li key={idx}>{action}</li>
-            ))}
+            {actions &&
+              actions.map((action, idx) => <li key={idx}>{action}</li>)}
           </ListMenu>
         </div>
       </div>
+
       <p>{post.text}</p>
+
       {post.photos.length ? <LargeImg photoUrl={post.photos[0]} /> : null}
+
+      <div>
+        {after && after.map((action, idx) => <li key={idx}>{action}</li>)}
+      </div>
     </div>
   );
 };

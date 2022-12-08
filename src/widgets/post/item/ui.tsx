@@ -6,6 +6,7 @@ import { PostCard } from "entities/post";
 import { useViewerModel } from "entities/viewer";
 import { WriteComment, DeleteComment } from "features/comment";
 import { DeletePost } from "features/post";
+import { LikeContent } from "features/like-content";
 
 type PostItemProps = { post: PostType; user: UserData };
 
@@ -14,6 +15,7 @@ export const PostItem = ({ post, user }: PostItemProps) => {
   const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer();
   const [comments, setComments] = useState<null | CommentType[]>(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     commentModel.getPostComments(post._id).then((data) => setComments(data));
@@ -25,6 +27,10 @@ export const PostItem = ({ post, user }: PostItemProps) => {
         key={post._id}
         post={post}
         user={user}
+        after={[
+          <LikeContent receiver={post._id} />,
+          <Button onClick={() => setOpen(!open)}>Comment</Button>,
+        ]}
         actions={[
           <Link to={`/posts/${post._id}/update`}>
             <Button>Update</Button>
@@ -37,16 +43,16 @@ export const PostItem = ({ post, user }: PostItemProps) => {
           <AvatarImg photoUrl={viewer!.picture} size="medium" />
           <WriteComment userId={user._id} postId={post._id} />
         </div>
-        {comments &&
+        {open &&
+          comments &&
           comments.map((comment) => {
             return (
               <CommentCard
                 key={comment._id}
                 comment={comment}
                 user={user}
-                actions={[
-                  <DeleteComment commentId={comment._id} />
-                ]}
+                after={[<LikeContent receiver={comment._id} />]}
+                actions={[<DeleteComment commentId={comment._id} />]}
               />
             );
           })}

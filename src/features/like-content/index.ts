@@ -1,0 +1,1 @@
+export { LikeContent } from "./ui";

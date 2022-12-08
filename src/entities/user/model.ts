@@ -7,5 +7,11 @@ export const Model = () => {
     return null;
   };
 
-  return { getUser };
+  const getUsers = async () => {
+    const data = await userApi.getUsers();
+    if ("users" in data) return data.users;
+    return null;
+  };
+
+  return { getUser, getUsers };
 };

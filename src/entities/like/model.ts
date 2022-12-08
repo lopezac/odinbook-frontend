@@ -1,16 +1,21 @@
 import { useMemoryStore } from "shared/hooks";
-import { commentApi } from "shared/api";
+import { likeApi, type CreateLike } from "shared/api";
 
 export const Model = () => {
   const [accessToken, setAccessToken] = useMemoryStore<string>("access-token");
 
   const createLike = async (likeData: CreateLike) => {
-    return await commentApi.createLike(likeData, accessToken);
+    return await likeApi.createLike(likeData, accessToken);
   };
 
-  const deleteLike = async () => {
-    return;
+  const deleteLike = async (receiverId: string, userId: string) => {
+    return await likeApi.deleteLike(receiverId, userId, accessToken);
   };
 
-  return { createLike };
+  const likedByUser = async (userId: string, receiverId: string) => {
+    const res = await likeApi.getLike(userId, receiverId);
+    return !!res.likes.length;
+  };
+
+  return { likedByUser, createLike, deleteLike };
 };
