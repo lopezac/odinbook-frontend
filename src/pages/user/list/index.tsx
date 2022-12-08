@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UserData } from "shared/api";
 import { H1, Layout, Para } from "shared/ui";
-import { UserModel } from "entities/user";
+import { UserModel, UserRow } from "entities/user";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 
@@ -19,7 +19,10 @@ export const UserListPage = () => {
       <Layout.Content>
         <H1>Users List</H1>
         <Para>Find some new friends!</Para>
-        <ul></ul>
+        <ul>
+          {users && users.map((user) =>
+            <UserRow data={user} />)}
+        </ul>
       </Layout.Content>
       <Footer />
     </Layout.Main>

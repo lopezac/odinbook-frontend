@@ -4,6 +4,7 @@ import type { PostType, CommentType, UserData } from "shared/api";
 import { CommentCard, CommentModel } from "entities/comment";
 import { PostCard } from "entities/post";
 import { useViewerModel } from "entities/viewer";
+import { LikeQuantityCard } from "entities/like";
 import { WriteComment, DeleteComment } from "features/comment";
 import { DeletePost } from "features/post";
 import { LikeContent } from "features/like-content";
@@ -27,6 +28,7 @@ export const PostItem = ({ post, user }: PostItemProps) => {
         key={post._id}
         post={post}
         user={user}
+        before={[<LikeQuantityCard receiverId={post._id} />]}
         after={[
           <LikeContent receiver={post._id} />,
           <Button onClick={() => setOpen(!open)}>Comment</Button>,
@@ -51,7 +53,10 @@ export const PostItem = ({ post, user }: PostItemProps) => {
                 key={comment._id}
                 comment={comment}
                 user={user}
-                after={[<LikeContent receiver={comment._id} />]}
+                after={[
+                  <LikeContent receiver={comment._id} />,
+                  <LikeQuantityCard receiverId={comment._id} />
+                ]}
                 actions={[<DeleteComment commentId={comment._id} />]}
               />
             );

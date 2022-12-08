@@ -8,14 +8,20 @@ export const Model = () => {
     return await likeApi.createLike(likeData, accessToken);
   };
 
-  const deleteLike = async (receiverId: string, userId: string) => {
-    return await likeApi.deleteLike(receiverId, userId, accessToken);
-  };
-
   const likedByUser = async (userId: string, receiverId: string) => {
     const res = await likeApi.getLike(userId, receiverId);
     return !!res.likes.length;
   };
 
-  return { likedByUser, createLike, deleteLike };
+  const getReceiverLikes = async (receiverId: string) => {
+    const res = await likeApi.getReceiverLikes(receiverId);
+    if ("likes" in res) return res.likes;
+    return null;
+  };
+
+  const deleteLike = async (receiverId: string, userId: string) => {
+    return await likeApi.deleteLike(receiverId, userId, accessToken);
+  };
+
+  return { createLike, getReceiverLikes, likedByUser, deleteLike };
 };

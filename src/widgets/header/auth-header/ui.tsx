@@ -20,7 +20,7 @@ export const Header = () => {
       <Link to="/settings">
         <Button>Settings</Button>
       </Link>
-      <Link to={`/users/${viewer!._id}`}>
+      <Link to={`/me`}>
         <Button>Profile</Button>
       </Link>
     </Layout.Header>

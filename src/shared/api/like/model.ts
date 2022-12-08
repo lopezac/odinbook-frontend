@@ -41,6 +41,23 @@ export const getLike = async (userId: string, receiverId: string) => {
   }
 };
 
+export const getReceiverLikes = async (receiverId: string) => {
+  try {
+    const url = `${REST_API_URL}/likes/count?&receiver=${receiverId}`;
+    const options: RequestInit = {
+      method: "GET",
+      headers,
+    };
+
+    const res = await fetch(url, options);
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw Error(`Error getting receiver likes, query, in shared/api, ${err}`);
+  }
+};
+
 export const deleteLike = async (
   receiverId: string,
   userId: string,

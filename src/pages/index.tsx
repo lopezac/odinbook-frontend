@@ -4,6 +4,7 @@ import { AuthSignUpPage, AuthSignInPage } from "./auth";
 import { ViewerSettingsPage } from "./viewer/settings";
 import { ViewerProfilePage } from "./viewer/profile";
 import { UserListPage } from "./user/list";
+import { UserProfilePage } from "./user/profile";
 import { UpdatePostPage } from "./post";
 
 export const Routing = () => {
@@ -14,12 +15,13 @@ export const Routing = () => {
         <Route path="users">
           <Route index element={<UserListPage />} />
           <Route path=":userId">
-            <Route index element={<ViewerProfilePage />} />
+            <Route index element={<UserProfilePage />} />
             <Route path="photos" element="{<UserPhotosPage />}" />
             <Route path="videos" element="{<UserVideosPage />}" />
             <Route path="friends" element="{<UserFriendsPage />}" />
           </Route>
         </Route>
+        <Route path="me" element={<ViewerProfilePage />} />
         <Route path="posts">
           <Route path=":postId">
             <Route path="update" element={<UpdatePostPage />} />

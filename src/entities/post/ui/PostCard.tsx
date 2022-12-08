@@ -7,10 +7,11 @@ type CardProps = {
   post: PostType;
   user: UserData;
   actions?: ReactElement[];
+  before?: ReactElement[];
   after?: ReactElement[];
 };
 
-export const Card = ({ post, user, actions, after }: CardProps) => {
+export const Card = ({ post, user, actions, after, before }: CardProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,6 +36,11 @@ export const Card = ({ post, user, actions, after }: CardProps) => {
       <p>{post.text}</p>
 
       {post.photos.length ? <LargeImg photoUrl={post.photos[0]} /> : null}
+
+      <div>
+        {before &&
+          before.map((action, idx) => <li key={idx}>{action}</li>)}
+      </div>
 
       <div>
         {after && after.map((action, idx) => <li key={idx}>{action}</li>)}
