@@ -3,7 +3,7 @@ import { useViewerModel, ViewerAvatar } from "entities/viewer";
 import { ChangeAvatar } from "features/viewer";
 import { FlexRowDiv, FlexRowUl } from "./styles.module";
 
-export const ProfileHeader = () => {
+export const ViewerProfileHeader = () => {
   const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer();
 

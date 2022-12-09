@@ -1,10 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import FeedPage from "./feed";
+import { FeedPage } from "./feed";
 import { AuthSignUpPage, AuthSignInPage } from "./auth";
-import { ViewerSettingsPage } from "./viewer/settings";
-import { ViewerProfilePage } from "./viewer/profile";
-import { UserListPage } from "./user/list";
-import { UserProfilePage } from "./user/profile";
+import { ViewerSettingsPage, ViewerProfilePage } from "./viewer";
+import { UserListPage, UserProfilePage } from "./user";
 import { UpdatePostPage } from "./post";
 
 export const Routing = () => {

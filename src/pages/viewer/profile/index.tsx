@@ -4,14 +4,14 @@ import { PostType } from "shared/api";
 import { useViewerModel } from "entities/viewer";
 import { PostModel } from "entities/post";
 import { WritePost } from "features/post";
-import { PostItem } from "widgets/post";
+import { PostItem } from "widgets/post-item";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 import { ViewerProfileHeader } from "widgets/viewer";
-import { useRedirect } from "processes/hooks";
+import { useRedirect } from "entities/viewer/hooks";
 import { ContentDiv } from "./styles.module";
 
-export const ViewerProfile = () => {
+export const ViewerProfilePage = () => {
   const [posts, setPosts] = useState<PostType[] | null>(null);
   const postModel = PostModel();
   const viewerModel = useViewerModel();

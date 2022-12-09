@@ -1,5 +1,5 @@
 import { AuthByEmail } from "features/auth";
-import { useRedirect } from "processes/hooks";
+import { useRedirect } from "entities/viewer/hooks";
 import { Layout, H1 } from "shared/ui";
 import { Footer } from "widgets/footer";
 import { NoAuthHeader } from "widgets/header";

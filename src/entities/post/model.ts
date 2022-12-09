@@ -14,6 +14,12 @@ export const Model = () => {
     return null;
   };
 
+  const getPosts = async () => {
+    const data = await postApi.getPosts();
+    if ("posts" in data) return data.posts;
+    return null;
+  };
+
   const getUserPosts = async (id: string) => {
     const data = await postApi.getUserPosts(id);
     if ("posts" in data) return data.posts;
@@ -32,5 +38,12 @@ export const Model = () => {
     return await postApi.deletePost(id, accessToken);
   };
 
-  return { createPost, getPost, getUserPosts, updatePost, deletePost };
+  return {
+    createPost,
+    getPost,
+    getPosts,
+    getUserPosts,
+    updatePost,
+    deletePost,
+  };
 };

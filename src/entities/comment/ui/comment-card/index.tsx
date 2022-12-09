@@ -37,10 +37,13 @@ export const CommentCard = ({
       </div>
 
       <div>
-        <BurgerMenu open={open} setOpen={setOpen} />
-        <ListMenu open={open}>
-          {actions && actions.map((action, idx) => <li key={idx}>{action}</li>)}
-        </ListMenu>
+        {actions && <BurgerMenu open={open} setOpen={setOpen} />}
+        {actions && (
+          <ListMenu open={open}>
+            {actions &&
+              actions.map((action, idx) => <li key={idx}>{action}</li>)}
+          </ListMenu>
+        )}
       </div>
     </div>
   );

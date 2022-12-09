@@ -25,11 +25,13 @@ export const Card = ({ post, user, actions, after, before }: CardProps) => {
           <p>{formatDate(post.created_at)}</p>
         </div>
         <div>
-          <BurgerMenu open={open} setOpen={setOpen} />
-          <ListMenu open={open}>
-            {actions &&
-              actions.map((action, idx) => <li key={idx}>{action}</li>)}
-          </ListMenu>
+          {actions && <BurgerMenu open={open} setOpen={setOpen} />}
+          {actions && (
+            <ListMenu open={open}>
+              {actions &&
+                actions.map((action, idx) => <li key={idx}>{action}</li>)}
+            </ListMenu>
+          )}
         </div>
       </div>
 
@@ -38,8 +40,7 @@ export const Card = ({ post, user, actions, after, before }: CardProps) => {
       {post.photos.length ? <LargeImg photoUrl={post.photos[0]} /> : null}
 
       <div>
-        {before &&
-          before.map((action, idx) => <li key={idx}>{action}</li>)}
+        {before && before.map((action, idx) => <li key={idx}>{action}</li>)}
       </div>
 
       <div>

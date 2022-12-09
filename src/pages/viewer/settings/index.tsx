@@ -2,9 +2,9 @@ import { H1, H2, Layout } from "shared/ui";
 import { UpdateUser, DeleteUser } from "features/viewer";
 import { AuthHeader } from "widgets/header";
 import { Footer } from "widgets/footer";
-import { useRedirect } from "processes/hooks";
+import { useRedirect } from "entities/viewer/hooks";
 
-export const SettingsPage = () => {
+export const ViewerSettingsPage = () => {
   useRedirect("unauthorized");
 
   return (

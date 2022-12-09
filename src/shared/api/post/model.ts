@@ -26,20 +26,6 @@ export const createPost = async (postData: CreatePost, token: string) => {
   }
 };
 
-export const getUserPosts = async (userId: string) => {
-  try {
-    const url = `${REST_API_URL}/users/${userId}/posts`;
-    const options: RequestInit = { method: "GET", headers };
-
-    const res = await fetch(url, options);
-    const data: { posts: PostType[] } | ErrorResType = await res.json();
-
-    return data;
-  } catch (err) {
-    throw Error(`Error getting user posts ${userId}, in shared/api, ${err}`);
-  }
-};
-
 export const getPost = async (postId: string) => {
   try {
     const url = `${REST_API_URL}/posts/${postId}`;
@@ -51,6 +37,34 @@ export const getPost = async (postId: string) => {
     return data;
   } catch (err) {
     throw Error(`Error getting post ${postId}, in shared/api, ${err}`);
+  }
+};
+
+export const getPosts = async () => {
+  try {
+    const url = `${REST_API_URL}/posts`;
+    const options: RequestInit = { method: "GET", headers };
+
+    const res = await fetch(url, options);
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw Error(`Error getting posts, in shared/api, ${err}`);
+  }
+};
+
+export const getUserPosts = async (userId: string) => {
+  try {
+    const url = `${REST_API_URL}/users/${userId}/posts`;
+    const options: RequestInit = { method: "GET", headers };
+
+    const res = await fetch(url, options);
+    const data: { posts: PostType[] } | ErrorResType = await res.json();
+
+    return data;
+  } catch (err) {
+    throw Error(`Error getting user posts ${userId}, in shared/api, ${err}`);
   }
 };
 
