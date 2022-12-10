@@ -17,11 +17,14 @@ export const Header = () => {
         <Button>Users</Button>
       </Link>
       <Button onClick={logout}>Logout</Button>
-      <Link to="/settings">
-        <Button>Settings</Button>
+      <Link to={`/notifications`}>
+        <Button>Notifications</Button>
       </Link>
       <Link to={`/me`}>
         <Button>Profile</Button>
+      </Link>
+      <Link to="/settings">
+        <Button>Settings</Button>
       </Link>
     </Layout.Header>
   );

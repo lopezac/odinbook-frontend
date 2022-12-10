@@ -1,7 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import { FeedPage } from "./feed";
 import { AuthSignUpPage, AuthSignInPage } from "./auth";
-import { ViewerSettingsPage, ViewerProfilePage } from "./viewer";
+import {
+  ViewerSettingsPage,
+  ViewerProfilePage,
+  ViewerNotificationsPage,
+} from "./viewer";
 import { UserListPage, UserProfilePage } from "./user";
 import { UpdatePostPage } from "./post";
 
@@ -26,6 +30,7 @@ export const Routing = () => {
           </Route>
         </Route>
         <Route path="settings" element={<ViewerSettingsPage />} />
+        <Route path="notifications" element={<ViewerNotificationsPage />} />
         <Route path="sign-up" element={<AuthSignUpPage />} />
         <Route path="sign-in" element={<AuthSignInPage />} />
       </Route>
