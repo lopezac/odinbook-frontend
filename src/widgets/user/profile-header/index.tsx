@@ -1,5 +1,6 @@
 import { UserData } from "shared/api";
 import { AvatarImg, Button, H1, Link } from "shared/ui";
+import { SendFriendRequest } from "features/friend-request";
 import { FlexRowDiv, FlexRowUl } from "./styles.module";
 
 type ProfileHeaderProps = { user: UserData };
@@ -17,7 +18,7 @@ export const UserProfileHeader = ({ user }: ProfileHeaderProps) => {
           </H1>
         </FlexRowDiv>
         <div>
-          <Button>Add Friend</Button>
+          <SendFriendRequest user={user} />
           <Button>Message</Button>
         </div>
       </FlexRowDiv>

@@ -16,6 +16,8 @@ export const Model = () => {
 
   const getFriendReq = async ({ emitter, receiver }: getFriendReqProps) => {
     const res = await friendReqApi.getFriendReq(emitter, receiver);
+    if ("friendRequests" in res) return res.friendRequests;
+    return null;
   };
 
   const deleteFriendReq = async (id: string) => {

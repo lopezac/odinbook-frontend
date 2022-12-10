@@ -6,7 +6,7 @@ import { useViewerModel } from "entities/viewer";
 
 type SendFriendReqProps = { user: UserData };
 
-export const SendFriendReq = ({ user }: SendFriendReqProps) => {
+export const SendFriendRequest = ({ user }: SendFriendReqProps) => {
   const friendReqModel = FriendReqModel();
   const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer();
@@ -18,17 +18,18 @@ export const SendFriendReq = ({ user }: SendFriendReqProps) => {
         emitter: viewer!._id,
         receiver: user._id,
       });
-      setSent(!!friendRequests[0]);
+      console.log("friendrequests at checkifsent", friendRequests);
+      setSent(!!friendRequests.length);
     };
     checkIfSent();
   }, []);
 
   const handleCancel = async (e: MouseEvent<HTMLButtonElement>) => {
-    return;
+    setSent(false);
   };
 
   const handleAdd = async (e: MouseEvent<HTMLButtonElement>) => {
-    return;
+    setSent(true);
   };
 
   return (

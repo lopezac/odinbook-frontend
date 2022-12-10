@@ -2,15 +2,21 @@ import { useEffect, useState } from "react";
 import { UserData } from "shared/api";
 import { H1, Layout, Para } from "shared/ui";
 import { UserModel, UserRow } from "entities/user";
+import { useRedirect } from "entities/viewer";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 
 export const UserListPage = () => {
+  useRedirect("unauthorized");
   const userModel = UserModel();
   const [users, setUsers] = useState<UserData[] | null>(null);
 
   useEffect(() => {
-    userModel.getUsers().then((data) => setUsers(data));
+    const fetchUsers = async () => {
+      const usersData = await userModel.getUsers();
+      setUsers(usersData);
+    };
+    fetchUsers();
   }, []);
 
   return (

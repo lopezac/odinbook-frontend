@@ -15,17 +15,21 @@ const headers: HeadersInit = {
 type ErrorResType = { message: string; err: unknown };
 
 export const signUpUser = async (userData: UserSignUp) => {
-  const url = `${REST_API_URL}/sign-up`;
-  const options: RequestInit = {
-    body: JSON.stringify(userData),
-    method: "POST",
-    headers,
-  };
+  try {
+    const url = `${REST_API_URL}/sign-up`;
+    const options: RequestInit = {
+      body: JSON.stringify(userData),
+      method: "POST",
+      headers,
+    };
 
-  const res = await fetch(url, options);
-  const data: { message: string } | ErrorRes = await res.json();
+    const res = await fetch(url, options);
+    const data: { message: string } | ErrorRes = await res.json();
 
-  return data;
+    return data;
+  } catch (err) {
+    throw Error(`Error signing up the user, shared/api/user, ${err}`);
+  }
 };
 
 export const signInUser = async (userData: UserSignIn) => {
@@ -53,67 +57,93 @@ export const updateUser = async (
   userData: UserUpdate,
   token: string
 ) => {
-  const url = `${REST_API_URL}/users/${userId}`;
-  const options: RequestInit = {
-    body: JSON.stringify({ ...userData }), // is ... necessary??
-    method: "PUT",
-    headers: { ...headers, Authorization: `Bearer ${token}` },
-  };
+  try {
+    const url = `${REST_API_URL}/users/${userId}`;
+    const options: RequestInit = {
+      body: JSON.stringify({ ...userData }), // is ... necessary??
+      method: "PUT",
+      headers: { ...headers, Authorization: `Bearer ${token}` },
+    };
 
-  const res = await fetch(url, options);
-  const data = await res.json();
+    const res = await fetch(url, options);
+    const data = await res.json();
 
-  return data;
+    return data;
+  } catch (err) {
+    throw Error(`Error updating user, shared/api/user, ${err}`);
+  }
 };
 
 export const deleteUser = async (userId: string, token: string) => {
-  const url = `${REST_API_URL}/users/${userId}`;
-  const options: RequestInit = {
-    method: "DELETE",
-    headers: { ...headers, Authorization: `Bearer ${token}` },
-  };
+  try {
+    const url = `${REST_API_URL}/users/${userId}`;
+    const options: RequestInit = {
+      method: "DELETE",
+      headers: { ...headers, Authorization: `Bearer ${token}` },
+    };
 
-  const res = await fetch(url, options);
+    const res = await fetch(url, options);
 
-  return await res.json();
+    return await res.json();
+  } catch (err) {
+    throw Error(`Error deleting user, shared/api/user, ${err}`);
+  }
 };
 
 export const getUser = async (userId: string) => {
-  const url = `${REST_API_URL}/users/${userId}`;
-  const options: RequestInit = { method: "GET", headers };
+  try {
+    const url = `${REST_API_URL}/users/${userId}`;
+    const options: RequestInit = { method: "GET", headers };
 
-  const res = await fetch(url, options);
-  const data: { user: UserData } | ErrorResType = await res.json();
+    const res = await fetch(url, options);
+    const data: { user: UserData } | ErrorResType = await res.json();
 
-  return data;
+    return data;
+  } catch (err) {
+    throw Error(`Error getting user, shared/api/user, ${err}`);
+  }
 };
 
 export const getUsers = async () => {
-  const url = `${REST_API_URL}/users`;
-  const options: RequestInit = { method: "GET", headers };
+  try {
+    const url = `${REST_API_URL}/users`;
+    const options: RequestInit = { method: "GET", headers };
 
-  const res = await fetch(url, options);
-  const data = await res.json();
+    console.log("before res");
+    const res = await fetch(url, options);
+    console.log("res", res);
+    const data = await res.json();
 
-  return data;
+    return data;
+  } catch (err) {
+    throw Error(`Error getting users, shared/api/user, ${err}`);
+  }
 };
 
 export const getUserPhotos = async (userId: string) => {
-  const url = `${REST_API_URL}/users/${userId}/photos`;
-  const options: RequestInit = { method: "GET", headers };
+  try {
+    const url = `${REST_API_URL}/users/${userId}/photos`;
+    const options: RequestInit = { method: "GET", headers };
 
-  const res = await fetch(url, options);
-  const data = await res.json();
+    const res = await fetch(url, options);
+    const data = await res.json();
 
-  return data;
+    return data;
+  } catch (err) {
+    throw Error(`Error getting user photos, shared/api/user, ${err}`);
+  }
 };
 
 export const getUserFriends = async (userId: string) => {
-  const url = `${REST_API_URL}/users/${userId}/friends`;
-  const options: RequestInit = { method: "GET", headers };
+  try {
+    const url = `${REST_API_URL}/users/${userId}/friends`;
+    const options: RequestInit = { method: "GET", headers };
 
-  const res = await fetch(url, options);
-  const data = await res.json();
+    const res = await fetch(url, options);
+    const data = await res.json();
 
-  return data;
+    return data;
+  } catch (err) {
+    throw Error(`Error getting user friends, shared/api/user, ${err}`);
+  }
 };
