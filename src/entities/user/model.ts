@@ -13,5 +13,12 @@ export const Model = () => {
     return null;
   };
 
-  return { getUser, getUsers };
+  const getUserFriends = async (userId: string) => {
+    const res = await userApi.getUserFriends(userId);
+    console.log("res", res);
+    if ("friends" in res) return res.friends;
+    return null;
+  };
+
+  return { getUser, getUsers, getUserFriends };
 };

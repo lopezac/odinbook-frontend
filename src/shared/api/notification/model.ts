@@ -29,6 +29,7 @@ export const createNoti = async (
   try {
     const url = `${REST_API_URL}/notifications`;
     const options: RequestInit = {
+      body: JSON.stringify(notiData),
       method: "POST",
       headers: { ...headers, Authorization: `Bearer ${token}` },
     };

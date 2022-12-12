@@ -3,6 +3,7 @@ export type CreateNotification = {
   emitter: string;
   picture: string;
   text: string;
+  type: string;
 };
 
 export type Notification = {
@@ -10,6 +11,7 @@ export type Notification = {
   emitter: string;
   picture: string;
   text: string;
+  type: string;
   created_at: Date;
   _id: string;
 };

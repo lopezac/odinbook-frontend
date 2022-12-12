@@ -26,8 +26,7 @@ export const UserListPage = () => {
         <H1>Users List</H1>
         <Para>Find some new friends!</Para>
         <ul>
-          {users && users.map((user) =>
-            <UserRow data={user} />)}
+          {users && users.map((user) => <UserRow key={user._id} data={user} />)}
         </ul>
       </Layout.Content>
       <Footer />

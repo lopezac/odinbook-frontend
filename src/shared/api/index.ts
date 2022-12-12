@@ -4,3 +4,4 @@ export * from "./comment";
 export * from "./like";
 export * from "./friend-request";
 export * from "./notification";
+export * from "./friendship";

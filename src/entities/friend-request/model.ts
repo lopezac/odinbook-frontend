@@ -6,12 +6,13 @@ type getFriendReqProps = { emitter?: string; receiver?: string };
 export const Model = () => {
   const [accessToken, setAccessToken] = useMemoryStore<string>("access-token");
 
-  const createFriendReq = async () => {
-    return;
-  };
-
-  const acceptFriendReq = async () => {
-    return;
+  const createFriendReq = async (emitter: string, receiver: string) => {
+    const res = await friendReqApi.createFriendReq(
+      { emitter, receiver },
+      accessToken
+    );
+    if ("friendRequest" in res) return res.friendRequest;
+    return null;
   };
 
   const getFriendReq = async ({ emitter, receiver }: getFriendReqProps) => {
@@ -20,9 +21,15 @@ export const Model = () => {
     return null;
   };
 
-  const deleteFriendReq = async (id: string) => {
-    return;
+  const deleteFriendReq = async (emitter: string, receiver: string) => {
+    const res = await friendReqApi.deleteFriendReq(
+      { emitter, receiver },
+      accessToken
+    );
+    console.log("res at deleteFriendReq", res);
+    if ("success" in res) return res.success;
+    return null;
   };
 
-  return { createFriendReq, acceptFriendReq, getFriendReq, deleteFriendReq };
+  return { createFriendReq, getFriendReq, deleteFriendReq };
 };

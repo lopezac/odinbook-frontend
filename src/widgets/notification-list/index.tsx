@@ -1,6 +1,8 @@
 import { NotificationModel } from "entities/notification";
 import { NotificationRow } from "entities/notification/ui";
 import { useViewerModel } from "entities/viewer";
+import { AcceptFriendReq } from "features/friend-request/accept";
+import { DeclineFriendReq } from "features/friend-request/decline";
 import { useEffect, useState } from "react";
 import { Notification } from "shared/api";
 
@@ -20,13 +22,34 @@ export const NotificationList = () => {
     fetchNotifications();
   }, [viewer]);
 
+  useEffect(() => {
+    console.log("notifications", notifications);
+  }, [notifications]);
+
   if (!notifications || !notifications.length) {
     return <p>There are no notifications yet!</p>;
   }
   return (
     <div>
       {notifications.map((notification) => {
-        return <NotificationRow data={notification} />;
+        return (
+          notification.type === "friend-request" && (
+            <NotificationRow
+              key={notification._id}
+              data={notification}
+              actions={[
+                <AcceptFriendReq
+                  emitter={notification.emitter}
+                  receiver={notification.receiver}
+                />,
+                <DeclineFriendReq
+                  emitter={notification.emitter}
+                  receiver={notification.receiver}
+                />,
+              ]}
+            />
+          )
+        );
       })}
     </div>
   );

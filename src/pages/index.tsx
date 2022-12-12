@@ -6,7 +6,7 @@ import {
   ViewerProfilePage,
   ViewerNotificationsPage,
 } from "./viewer";
-import { UserListPage, UserProfilePage } from "./user";
+import { UserFriendsPage, UserListPage, UserProfilePage } from "./user";
 import { UpdatePostPage } from "./post";
 
 export const Routing = () => {
@@ -20,7 +20,7 @@ export const Routing = () => {
             <Route index element={<UserProfilePage />} />
             <Route path="photos" element="{<UserPhotosPage />}" />
             <Route path="videos" element="{<UserVideosPage />}" />
-            <Route path="friends" element="{<UserFriendsPage />}" />
+            <Route path="friends" element={<UserFriendsPage />} />
           </Route>
         </Route>
         <Route path="me" element={<ViewerProfilePage />} />

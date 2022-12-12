@@ -109,9 +109,7 @@ export const getUsers = async () => {
     const url = `${REST_API_URL}/users`;
     const options: RequestInit = { method: "GET", headers };
 
-    console.log("before res");
     const res = await fetch(url, options);
-    console.log("res", res);
     const data = await res.json();
 
     return data;
