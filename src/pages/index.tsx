@@ -5,8 +5,17 @@ import {
   ViewerSettingsPage,
   ViewerProfilePage,
   ViewerNotificationsPage,
+  ViewerAboutPage,
+  ViewerFriendsPage,
+  ViewerPhotosPage,
 } from "./viewer";
-import { UserFriendsPage, UserListPage, UserProfilePage } from "./user";
+import {
+  UserFriendsPage,
+  UserListPage,
+  UserProfilePage,
+  UserPhotosPage,
+  UserAboutPage,
+} from "./user";
 import { UpdatePostPage } from "./post";
 
 export const Routing = () => {
@@ -18,12 +27,17 @@ export const Routing = () => {
           <Route index element={<UserListPage />} />
           <Route path=":userId">
             <Route index element={<UserProfilePage />} />
-            <Route path="photos" element="{<UserPhotosPage />}" />
-            <Route path="videos" element="{<UserVideosPage />}" />
+            <Route path="photos" element={<UserPhotosPage />} />
             <Route path="friends" element={<UserFriendsPage />} />
+            <Route path="about" element={<UserAboutPage />} />
           </Route>
         </Route>
-        <Route path="me" element={<ViewerProfilePage />} />
+        <Route path="me">
+          <Route index element={<ViewerProfilePage />} />
+          <Route path="photos" element={<ViewerPhotosPage />} />
+          <Route path="friends" element={<ViewerFriendsPage />} />
+          <Route path="about" element={<ViewerAboutPage />} />
+        </Route>
         <Route path="posts">
           <Route path=":postId">
             <Route path="update" element={<UpdatePostPage />} />

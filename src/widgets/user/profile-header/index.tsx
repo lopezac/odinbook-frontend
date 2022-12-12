@@ -37,9 +37,6 @@ export const UserProfileHeader = ({ user }: ProfileHeaderProps) => {
           <li>
             <Link to={`/users/${user._id}/photos`}>Photos</Link>
           </li>
-          <li>
-            <Link to={`/users/${user._id}/videos`}>Videos</Link>
-          </li>
         </FlexRowUl>
       </div>
     </div>

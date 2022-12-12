@@ -10,5 +10,6 @@ export const Avatar = ({ size }: AvatarProps) => {
   const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer();
 
-  return <AvatarImg photoUrl={viewer!.picture} size={size} />;
+  if (!viewer) return <></>;
+  return <AvatarImg photoUrl={viewer.picture} size={size} />;
 };

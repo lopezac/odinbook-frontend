@@ -30,19 +30,16 @@ export const ViewerProfileHeader = () => {
       <div>
         <FlexRowUl>
           <li>
-            <Link to={`/users/${viewer._id}`}>Posts</Link>
+            <Link to={`/me`}>Posts</Link>
           </li>
           <li>
-            <Link to={`/users/${viewer._id}/about`}>About</Link>
+            <Link to={`/me/about`}>About</Link>
           </li>
           <li>
-            <Link to={`/users/${viewer._id}/friends`}>Friends</Link>
+            <Link to={`/me/friends`}>Friends</Link>
           </li>
           <li>
-            <Link to={`/users/${viewer._id}/photos`}>Photos</Link>
-          </li>
-          <li>
-            <Link to={`/users/${viewer._id}/videos`}>Videos</Link>
+            <Link to={`/me/photos`}>Photos</Link>
           </li>
         </FlexRowUl>
       </div>

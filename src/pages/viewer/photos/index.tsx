@@ -1,45 +1,35 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { H2, LargeImg, Layout } from "shared/ui";
-import { UserData, PostType } from "shared/api";
-import { useRedirect, useRedirectViewer } from "entities/viewer";
+import { PostType } from "shared/api";
+import { useRedirect, useViewerModel } from "entities/viewer";
 import { UserModel } from "entities/user";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
-import { UserProfileHeader } from "widgets/user";
+import { ViewerProfileHeader } from "widgets/viewer";
 
-export const UserPhotosPage = () => {
+export const ViewerPhotosPage = () => {
   useRedirect("unauthorized");
-  useRedirectViewer();
 
-  const { userId } = useParams();
-  const [user, setUser] = useState<UserData | null>(null);
-  const [posts, setPosts] = useState<PostType[] | null>(null);
+  const viewerModel = useViewerModel();
   const userModel = UserModel();
+  const viewer = viewerModel.useViewer();
+  const [posts, setPosts] = useState<PostType[] | null>(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userData = await userModel.getUser(userId as string);
-      setUser(userData);
-    };
-    fetchUserData();
-  }, [userId]);
-
-  useEffect(() => {
-    if (!user) return;
+    if (!viewer) return;
     const fetchPostPhotos = async () => {
-      const postsData = await userModel.getUserPhotos(userId!);
+      const postsData = await userModel.getUserPhotos(viewer._id);
       setPosts(postsData);
     };
     fetchPostPhotos();
-  }, [user]);
+  }, [viewer]);
 
-  if (!user) return <p>User is loading</p>;
+  if (!viewer) return <p>User is loading</p>;
   return (
     <Layout.Main>
       <AuthHeader />
       <Layout.Content>
-        <UserProfileHeader user={user} />
+        <ViewerProfileHeader />
         <div style={{ display: "flex" }}>
           <div>
             <H2>Photos</H2>

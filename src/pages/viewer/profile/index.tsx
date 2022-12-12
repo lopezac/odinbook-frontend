@@ -12,6 +12,8 @@ import { useRedirect } from "entities/viewer/hooks";
 import { ContentDiv } from "./styles.module";
 
 export const ViewerProfilePage = () => {
+  useRedirect("unauthorized");
+
   const [posts, setPosts] = useState<PostType[] | null>(null);
   const postModel = PostModel();
   const viewerModel = useViewerModel();
@@ -23,7 +25,6 @@ export const ViewerProfilePage = () => {
     });
   }, [viewer]);
 
-  useRedirect("unauthorized");
   return (
     <Layout.Main>
       <AuthHeader />

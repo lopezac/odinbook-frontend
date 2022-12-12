@@ -18,7 +18,7 @@ export const ByEmail = () => {
       return setErrors({ error: "Wrong email or password" });
     setErrors({});
 
-    // window.location.reload();
+    window.location.reload();
   };
 
   return (

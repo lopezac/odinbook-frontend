@@ -15,10 +15,15 @@ export const Model = () => {
 
   const getUserFriends = async (userId: string) => {
     const res = await userApi.getUserFriends(userId);
-    console.log("res", res);
     if ("friends" in res) return res.friends;
     return null;
   };
 
-  return { getUser, getUsers, getUserFriends };
+  const getUserPhotos = async (userId: string) => {
+    const res = await userApi.getUserPhotos(userId);
+    if ("posts" in res) return res.posts;
+    return null;
+  };
+
+  return { getUser, getUsers, getUserFriends, getUserPhotos };
 };

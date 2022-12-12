@@ -1,46 +1,36 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { H2, Layout } from "shared/ui";
 import { UserData } from "shared/api";
-import { useRedirect, useRedirectViewer } from "entities/viewer";
-import { UserModel, UserRow } from "entities/user";
+import { useRedirect, useViewerModel } from "entities/viewer";
+import { UserRow, UserModel } from "entities/user";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
-import { UserProfileHeader } from "widgets/user";
+import { ViewerProfileHeader } from "widgets/viewer";
 import { ContentDiv } from "./styles.module";
 
-export const UserFriendsPage = () => {
+export const ViewerFriendsPage = () => {
   useRedirect("unauthorized");
-  useRedirectViewer();
 
-  const { userId } = useParams();
-  const [user, setUser] = useState<UserData | null>(null);
-  const [friends, setFriends] = useState<UserData[] | null>(null);
+  const viewerModel = useViewerModel();
   const userModel = UserModel();
+  const viewer = viewerModel.useViewer();
+  const [friends, setFriends] = useState<UserData[] | null>(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userData = await userModel.getUser(userId as string);
-      setUser(userData);
-    };
-    fetchUserData();
-  }, [userId]);
-
-  useEffect(() => {
-    if (!user) return;
+    if (!viewer) return;
     const fetchFriends = async () => {
-      const friendsData = await userModel.getUserFriends(userId!);
+      const friendsData = await userModel.getUserFriends(viewer._id);
       setFriends(friendsData);
     };
     fetchFriends();
-  }, [user]);
+  }, [viewer]);
 
-  if (!user) return <p>User is loading</p>;
+  if (!viewer) return <p>User is loading</p>;
   return (
     <Layout.Main>
       <AuthHeader />
       <Layout.Content>
-        <UserProfileHeader user={user} />
+        <ViewerProfileHeader />
         <ContentDiv>
           <div>
             <H2>Friends</H2>
