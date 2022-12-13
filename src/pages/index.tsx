@@ -17,6 +17,7 @@ import {
   UserAboutPage,
 } from "./user";
 import { UpdatePostPage } from "./post";
+import { ChatsHomePage, ChatPage } from "./chats";
 
 export const Routing = () => {
   return (
@@ -42,6 +43,10 @@ export const Routing = () => {
           <Route path=":postId">
             <Route path="update" element={<UpdatePostPage />} />
           </Route>
+        </Route>
+        <Route path="chats">
+          <Route index element={<ChatsHomePage />} />
+          <Route path=":chatId" element={<ChatPage />} />
         </Route>
         <Route path="settings" element={<ViewerSettingsPage />} />
         <Route path="notifications" element={<ViewerNotificationsPage />} />

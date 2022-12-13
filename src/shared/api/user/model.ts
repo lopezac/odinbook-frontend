@@ -145,3 +145,17 @@ export const getUserFriends = async (userId: string) => {
     throw Error(`Error getting user friends, shared/api/user, ${err}`);
   }
 };
+
+export const getUserChats = async (userId: string) => {
+  try {
+    const url = `${REST_API_URL}/users/${userId}/chats`;
+    const options: RequestInit = { method: "GET", headers };
+
+    const res = await fetch(url, options);
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw Error(`Error getting user chats, shared/api/user, ${err}`);
+  }
+};

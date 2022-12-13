@@ -25,5 +25,11 @@ export const Model = () => {
     return null;
   };
 
-  return { getUser, getUsers, getUserFriends, getUserPhotos };
+  const getUserChats = async (userId: string) => {
+    const res = await userApi.getUserChats(userId);
+    if ("chats" in res) return res.chats;
+    return null;
+  };
+
+  return { getUser, getUsers, getUserFriends, getUserPhotos, getUserChats };
 };

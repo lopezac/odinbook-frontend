@@ -20,6 +20,9 @@ export const Header = () => {
       <Link to={`/notifications`}>
         <Button>Notifications</Button>
       </Link>
+      <Link to={`/chats`}>
+        <Button>Chats</Button>
+      </Link>
       <Link to={`/me`}>
         <Button>Profile</Button>
       </Link>
