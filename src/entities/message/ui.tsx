@@ -1,12 +1,13 @@
-import type { MessageType } from "shared/api";
-import { Para } from "shared/ui";
-import { formatDate } from "shared/lib/date";
+import type { MessageType, UserData } from "shared/api";
+import { Para, AvatarImg } from "shared/ui";
 
-export const MessageRow = ({ data }: { data: MessageType }) => {
+type MessageRowProps = { data: MessageType, user: UserData };
+
+export const MessageRow = ({ data, user }: MessageRowProps) => {
   return (
-    <div>
+    <div style={{ display: "flex" }}>
+      <AvatarImg size="medium" photoUrl={user.picture} />
       <Para>{data.text}</Para>
-      <Para>{formatDate(data.created_at)}</Para>
     </div>
   );
 };

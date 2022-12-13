@@ -35,7 +35,7 @@ export const WriteMessage = ({ receiver }: { receiver: string }) => {
           required
         />
       </FormRow>
-      <Button>Send</Button>
+      <Button type="submit">Send</Button>
     </Form>
   );
 };

@@ -50,3 +50,17 @@ export const getChatMessages = async (chatId: string) => {
     throw Error(`Error getting chat messages, shared/api/chat ${err}`);
   }
 };
+
+export const getChatUsers = async (chatId: string) => {
+  try {
+    const url = `${REST_API_URL}/chats/${chatId}/users`;
+    const options: RequestInit = { method: "GET", headers };
+
+    const res = await fetch(url, options);
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw Error(`Error getting chat users, shared/api/chat ${err}`);
+  }
+};
