@@ -17,6 +17,7 @@ export const AvatarImg = styled.img.attrs<AvatarProps>((props) => ({
     height: ${sizes[props.size]};
     border-radius: 25px;
     border: 1px solid ${props.theme.color.darkGray};
+    cursor: pointer;
   `}
 `;
 

@@ -5,6 +5,8 @@ import type { ThemeType } from "./providers";
 export const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
   #root {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   body {
@@ -21,6 +23,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
 
   a {
     color: black;
+    text-decoration: none;
   }
 
   svg {

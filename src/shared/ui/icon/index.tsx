@@ -26,7 +26,7 @@ export const CircleIcon = styled(IconDiv)`
 `;
 
 export const BigRectangleIcon = styled(IconDiv)`
-  padding: 5px 40px;
+  padding: 10px 30px;
   border-radius: 5px;
 
   :hover,

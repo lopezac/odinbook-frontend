@@ -1,14 +1,24 @@
 import styled from "styled-components";
 
-const Header = styled.div`
+export const SmallHeader = styled.div`
   display: flex;
   align-items: center;
-`;
-
-export const SmallHeader = styled(Header)`
   gap: 5px;
 `;
 
-// svg: focus line 22, 23, svg:hover line 21, when apply small notification
+export const MenuIconRow = styled(SmallHeader)`
+  cursor: pointer;
+  width: 100%;
+  padding: 0 10px;
+  border-radius: 5px;
+  
+  :hover, 
+  :focus {
+    background-color: ${props => props.theme.color.darkerWhite};
+  }
 
-export const MainHeader = styled(Header)``;
+  > svg,
+  a > svg {
+    margin-left: auto;
+  }
+`;

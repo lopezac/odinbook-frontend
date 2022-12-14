@@ -15,7 +15,7 @@ import {
 } from "shared/ui";
 import { useViewerModel } from "entities/viewer";
 import { AuthLogout } from "features/auth/logout";
-import { SmallHeader, MainHeader } from "./styled";
+import { SmallHeader, MenuIconRow } from "./styled";
 
 export const Header = () => {
   const logout = AuthLogout();
@@ -30,7 +30,7 @@ export const Header = () => {
         <SmallImg photoUrl={require("assets/facebook.png")} />
       </Link>
 
-      <MainHeader style={{ gap: "5px" }}>
+      <SmallHeader>
         <Link to="/">
           <BigRectangleIcon>
             <AiFillHome />
@@ -41,7 +41,7 @@ export const Header = () => {
             <FaUsers />
           </BigRectangleIcon>
         </Link>
-      </MainHeader>
+      </SmallHeader>
 
       <SmallHeader>
         <Link to={`/chats`}>
@@ -62,33 +62,32 @@ export const Header = () => {
           />
           {showMenu && (
             <DropdownMenu>
-              <div style={{ display: "flex", gap: "5px" }}>
-                <AvatarImg photoUrl={viewer.picture} size="small" />
-                <Para>
-                  {viewer.firstName} {viewer.lastName}
-                </Para>
-              </div>
+              <Link to="me">
+                <MenuIconRow>
+                  <AvatarImg photoUrl={viewer.picture} size="small" />
+                  <Para>
+                    {viewer.firstName} {viewer.lastName}
+                  </Para>
+                </MenuIconRow>
+              </Link>
 
-              <SmallHeader>
+              <MenuIconRow onClick={logout}>
                 <CircleIcon>
-                  <BsFillDoorOpenFill
-                    style={{ cursor: "pointer" }}
-                    onClick={logout}
-                  />
+                  <BsFillDoorOpenFill />
                 </CircleIcon>
                 <Para>Log Out</Para>
                 <AiOutlineRight />
-              </SmallHeader>
+              </MenuIconRow>
 
-              <SmallHeader>
-                <Link to="/settings">
+              <Link to="/settings">
+                <MenuIconRow>
                   <CircleIcon>
                     <IoSettingsSharp />
                   </CircleIcon>
-                </Link>
-                <Para>Settings</Para>
-                <AiOutlineRight />
-              </SmallHeader>
+                  <Para>Settings</Para>
+                  <AiOutlineRight />
+                </MenuIconRow>
+              </Link>
             </DropdownMenu>
           )}
         </div>
