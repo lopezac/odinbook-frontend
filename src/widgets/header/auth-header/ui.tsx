@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsMessenger, BsBellFill, BsFillDoorOpenFill } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome, AiOutlineRight } from "react-icons/ai";
 import { IoSettingsSharp } from "react-icons/io5";
 import {
   Layout,
@@ -10,6 +10,8 @@ import {
   SmallImg,
   Para,
   DropdownMenu,
+  CircleIcon,
+  BigRectangleIcon,
 } from "shared/ui";
 import { useViewerModel } from "entities/viewer";
 import { AuthLogout } from "features/auth/logout";
@@ -28,21 +30,29 @@ export const Header = () => {
         <SmallImg photoUrl={require("assets/facebook.png")} />
       </Link>
 
-      <MainHeader>
+      <MainHeader style={{ gap: "5px" }}>
         <Link to="/">
-          <AiFillHome />
+          <BigRectangleIcon>
+            <AiFillHome />
+          </BigRectangleIcon>
         </Link>
         <Link to="/users">
-          <FaUsers />
+          <BigRectangleIcon>
+            <FaUsers />
+          </BigRectangleIcon>
         </Link>
       </MainHeader>
 
       <SmallHeader>
         <Link to={`/chats`}>
-          <BsMessenger />
+          <CircleIcon>
+            <BsMessenger />
+          </CircleIcon>
         </Link>
         <Link to={`/notifications`}>
-          <BsBellFill />
+          <CircleIcon>
+            <BsBellFill />
+          </CircleIcon>
         </Link>
         <div style={{ position: "relative" }}>
           <AvatarImg
@@ -58,18 +68,26 @@ export const Header = () => {
                   {viewer.firstName} {viewer.lastName}
                 </Para>
               </div>
+
               <SmallHeader>
-                <BsFillDoorOpenFill
-                  style={{ cursor: "pointer" }}
-                  onClick={logout}
-                />
+                <CircleIcon>
+                  <BsFillDoorOpenFill
+                    style={{ cursor: "pointer" }}
+                    onClick={logout}
+                  />
+                </CircleIcon>
                 <Para>Log Out</Para>
+                <AiOutlineRight />
               </SmallHeader>
+
               <SmallHeader>
                 <Link to="/settings">
-                  <IoSettingsSharp />
+                  <CircleIcon>
+                    <IoSettingsSharp />
+                  </CircleIcon>
                 </Link>
                 <Para>Settings</Para>
+                <AiOutlineRight />
               </SmallHeader>
             </DropdownMenu>
           )}
