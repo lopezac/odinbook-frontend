@@ -1,20 +1,35 @@
 import styled from "styled-components";
 
 type AvatarProps = { photoUrl: string; size: string };
-type LargeImgProps = { photoUrl: string };
+type ImgProps = { photoUrl: string };
+
+const sizes: { [key: string]: string } = {
+  large: "150px",
+  medium: "75px",
+  small: "40px",
+};
 
 export const AvatarImg = styled.img.attrs<AvatarProps>((props) => ({
   src: props.photoUrl,
 }))<AvatarProps>`
   ${(props) => `
-    width: ${props.size === "large" ? "150px" : "75px"};
-    height: ${props.size === "large" ? "150px" : "75px"};
+    width: ${sizes[props.size]};
+    height: ${sizes[props.size]};
+    border-radius: 25px;
+    border: 1px solid ${props.theme.color.darkGray};
   `}
 `;
 
-export const LargeImg = styled.img.attrs<LargeImgProps>((props) => ({
+export const LargeImg = styled.img.attrs<ImgProps>((props) => ({
   src: props.photoUrl,
-}))<LargeImgProps>`
+}))<ImgProps>`
   width: 300px;
   height: 300px;
+`;
+
+export const SmallImg = styled.img.attrs<ImgProps>((props) => ({
+  src: props.photoUrl,
+}))<ImgProps>`
+  width: 40px;
+  height: 40px;
 `;

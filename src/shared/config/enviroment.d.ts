@@ -1,5 +1,3 @@
-export {};
-
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -7,3 +5,8 @@ declare global {
     }
   }
 }
+
+declare module "*.png";
+declare module "*.svg";
+declare module "*.jpg";
+declare module "*.jpeg";

@@ -3,8 +3,8 @@ import {
   StyledMain,
   StyledHeader,
   StyledContent,
-  StyledFooter
-} from "./styles.module";
+  StyledFooter,
+} from "./styles";
 
 export const Main = ({ children }: { children: ReactNode }) => {
   return <StyledMain>{children}</StyledMain>;
@@ -26,6 +26,5 @@ export const Layout = {
   Main,
   Content,
   Header,
-  Footer
+  Footer,
 };
-

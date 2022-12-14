@@ -13,13 +13,15 @@ export const WriteMessage = ({ receiver }: { receiver: string }) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = getFormData(e.target as HTMLFormElement);
+    const data = getFormData(e.currentTarget as HTMLFormElement);
+    const input = e.currentTarget[0] as HTMLInputElement;
     await messageModel.createMessage({
       ...data,
       emitter: viewer!._id,
       receiver,
       chat: chatId,
     });
+    input.value = "";
   };
 
   return (

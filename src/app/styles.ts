@@ -18,4 +18,12 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
   li {
     list-style-type: none;
   }
+
+  a {
+    color: black;
+  }
+
+  svg {
+    font-size: 1.5rem;
+  }
 `;

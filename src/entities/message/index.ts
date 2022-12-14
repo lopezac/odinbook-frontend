@@ -1,2 +1,2 @@
 export * from "./ui";
-export * from "./model";
+export { MessageModel } from "./model";
