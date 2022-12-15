@@ -5,6 +5,7 @@ import { useViewerModel } from "entities/viewer";
 import { UserModel } from "entities/user";
 import { PostSection } from "./post-section";
 import { CommentSection } from "./comment-section";
+import { StyledPostItem } from "./styles";
 
 type PostItemProps = { post: PostType; user?: UserData };
 
@@ -36,7 +37,7 @@ export const PostItem = ({ post, user }: PostItemProps) => {
 
   if (!userData || !viewer) return <p>User is loading</p>;
   return (
-    <>
+    <StyledPostItem>
       <PostSection
         user={userData}
         post={post}
@@ -53,6 +54,6 @@ export const PostItem = ({ post, user }: PostItemProps) => {
           isViewerComment={viewer._id === userData._id}
         />
       )}
-    </>
+    </StyledPostItem>
   );
 };

@@ -4,6 +4,7 @@ import {
   StyledHeader,
   StyledContent,
   StyledFooter,
+  ContentWrapper,
 } from "./styles";
 
 export const Main = ({ children }: { children: ReactNode }) => {
@@ -15,7 +16,11 @@ export const Header = ({ children }: { children: ReactNode }) => {
 };
 
 export const Content = ({ children }: { children: ReactNode }) => {
-  return <StyledContent>{children}</StyledContent>;
+  return (
+    <ContentWrapper>
+      <StyledContent>{children}</StyledContent>
+    </ContentWrapper>
+  );
 };
 
 export const Footer = ({ children }: { children: ReactNode }) => {

@@ -1,1 +1,1 @@
-export { Card } from "./PostCard";
+export * from "./post-card";

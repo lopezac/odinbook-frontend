@@ -2,13 +2,16 @@ import styled from "styled-components";
 
 export const StyledMain = styled.div`
   background-color: ${(props) => props.theme.color.darkWhite};
-  // height: 100%;
   display: flex;
   flex-direction: column;
   flex: 1;
 `;
 
 export const StyledHeader = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: ${(props) => props.theme.color.white};
   display: flex;
   align-items: center;
@@ -18,12 +21,17 @@ export const StyledHeader = styled.div`
 `;
 
 export const StyledContent = styled.div`
-  background-color: ${(props) => props.theme.color.white};
+  // background-color: ${(props) => props.theme.color.white};
   max-width: 500px;
   flex: 1;
-  margin: 0 auto;
+`;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex: 1;
 `;
 
 export const StyledFooter = styled.div`
-  background-color: #b9b1b0;
+  background-color: ${(props) => props.theme.color.darkWhite};
 `;

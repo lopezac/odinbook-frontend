@@ -43,3 +43,17 @@ export const BigRectangleIcon = styled(IconDiv)`
     font-size: 1.6rem;
   }
 `;
+
+export const IconAction = styled(IconDiv)`
+  cursor: pointer;
+  display: flex;
+  gap: 5px;
+  flex: 1;
+  width: 100%;
+  color: ${(props) => props.theme.color.darkGray};
+  font-weight: bold;
+
+  :hover {
+    background-color: ${(props) => props.theme.color.darkWhite};
+  }
+`;

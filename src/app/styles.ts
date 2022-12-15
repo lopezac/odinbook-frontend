@@ -28,5 +28,6 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
 
   svg {
     font-size: 1.5rem;
+    cursor: pointer;
   }
 `;

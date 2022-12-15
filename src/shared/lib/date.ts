@@ -5,5 +5,5 @@ export const formatDate = (date: string | Date) => {
   if (typeof date === "string") {
     date = new Date(date);
   }
-  return format(date, "yyyy-MM-dd");
+  return format(date, "Pp");
 };

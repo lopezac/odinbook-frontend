@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const StyledPara = styled.p`
-  font-size: 1rem;
+  font-size: 0.92rem;
+  line-height: 22px;
 `;
 
 export const StyledLargePara = styled.p`

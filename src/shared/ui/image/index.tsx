@@ -18,13 +18,17 @@ export const AvatarImg = styled.img.attrs<AvatarProps>((props) => ({
     border-radius: 25px;
     border: 1px solid ${props.theme.color.darkGray};
     cursor: pointer;
+
+    :hover {
+      filter: brightness(0.9);
+    }
   `}
 `;
 
 export const LargeImg = styled.img.attrs<ImgProps>((props) => ({
   src: props.photoUrl,
 }))<ImgProps>`
-  width: 300px;
+  width: 100%;
   height: 300px;
 `;
 

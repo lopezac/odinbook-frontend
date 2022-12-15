@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
+import { BiComment } from "react-icons/bi";
 import { PostType, UserData } from "shared/api";
-import { Button, Link } from "shared/ui";
+import { Button, IconAction, Link, Para } from "shared/ui";
 import { PostCard } from "entities/post";
 import { LikeQuantityCard } from "entities/like";
 import { LikeContent } from "features/like-content";
@@ -28,7 +29,10 @@ export const PostSection = ({
       before={[<LikeQuantityCard receiverId={post._id} />]}
       after={[
         <LikeContent receiver={post._id} />,
-        <Button onClick={() => setOpen(!open)}>Comment</Button>,
+        <IconAction onClick={() => setOpen(!open)}>
+          <BiComment />
+          <Para>Comment</Para>
+        </IconAction>,
       ]}
       actions={
         isViewerPost

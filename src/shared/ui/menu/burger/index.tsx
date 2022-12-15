@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Button } from "shared/ui/button";
+import { BsThreeDots } from "react-icons/bs";
 import { StyledBurger } from "./styled";
 
 export const Burger = ({
@@ -14,10 +14,8 @@ export const Burger = ({
   };
 
   return (
-    <>
-      <StyledBurger open={open} onClick={handleClick}>
-        <Button>burger</Button>
-      </StyledBurger>
-    </>
+    <StyledBurger open={open} onClick={handleClick}>
+      <BsThreeDots />
+    </StyledBurger>
   );
 };

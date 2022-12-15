@@ -4,6 +4,7 @@ import { CommentCard } from "entities/comment";
 import { LikeQuantityCard } from "entities/like";
 import { LikeContent } from "features/like-content";
 import { WriteComment, DeleteComment } from "features/comment";
+import { StyledCommentSection } from "./styles";
 
 type CommentSectionProps = {
   user: UserData;
@@ -22,7 +23,7 @@ export const CommentSection = ({
 }: CommentSectionProps) => {
   if (!open) return <></>;
   return (
-    <div>
+    <StyledCommentSection>
       <div>
         <AvatarImg photoUrl={user.picture} size="medium" />
         <WriteComment userId={user._id} postId={post._id} />
@@ -45,6 +46,6 @@ export const CommentSection = ({
           />
         );
       })}
-    </div>
+    </StyledCommentSection>
   );
 };
