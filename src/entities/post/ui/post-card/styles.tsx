@@ -32,8 +32,8 @@ export const PostImage = styled.div`
 
   img {
     flex: 1;
-    width: calc(100% + (10px * 2));
-    margin: -10px;
+    width: calc(100% + (20px * 2));
+    margin: 0 -20px;
   }
 `;
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DropdownRow } from "shared/ui";
 
 export const SmallHeader = styled.div`
   display: flex;
@@ -6,17 +7,7 @@ export const SmallHeader = styled.div`
   gap: 5px;
 `;
 
-export const MenuIconRow = styled(SmallHeader)`
-  cursor: pointer;
-  width: 100%;
-  padding: 0 10px;
-  border-radius: 5px;
-  
-  :hover, 
-  :focus {
-    background-color: ${props => props.theme.color.darkerWhite};
-  }
-
+export const MenuIconRow = styled(DropdownRow)`
   > svg,
   a > svg {
     margin-left: auto;

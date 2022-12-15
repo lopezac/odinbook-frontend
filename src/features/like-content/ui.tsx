@@ -14,29 +14,23 @@ export const LikeContent = ({ receiver }: { receiver: string }) => {
     likeModel.likedByUser(viewer!._id, receiver).then((data) => setLiked(data));
   }, []);
 
-  const createLike = async (e: MouseEvent<HTMLDivElement>) => {
+  const createLike = async () => {
     const res = await likeModel.createLike({ user: viewer!._id, receiver });
     if ("like" in res) setLiked(true);
   };
 
-  const removeLike = async (e: MouseEvent<HTMLDivElement>) => {
+  const removeLike = async () => {
     const res = await likeModel.deleteLike(receiver, viewer!._id);
     if ("success" in res) setLiked(false);
   };
 
-  return (
-    <>
-      {liked ? (
-        <IconAction onClick={removeLike}>
-          <BiDislike />
-          <Para>Dislike</Para>
-        </IconAction>
-      ) : (
-        <IconAction onClick={createLike}>
-          <BiLike />
-          <Para>Like</Para>
-        </IconAction>
-      )}
-    </>
+  return liked ? (
+    <span onClick={removeLike}>
+      <BiDislike /> Dislike
+    </span>
+  ) : (
+    <span onClick={createLike}>
+      <BiLike /> Like
+    </span>
   );
 };

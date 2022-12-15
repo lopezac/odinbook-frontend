@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
-export const StyledForm = styled.form``;
+export const StyledForm = styled.form`
+  flex: 1;
+`;
 
 export const StyledFormRow = styled.div`
-  background-color: coral;
+  display: flex;
 `;

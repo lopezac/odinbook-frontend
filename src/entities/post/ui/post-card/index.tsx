@@ -1,7 +1,8 @@
 import { ReactElement, useState } from "react";
+import { BsThreeDots } from "react-icons/bs";
 import type { PostType, UserData } from "shared/api";
 import { formatDate } from "shared/lib/date";
-import { AvatarImg, BurgerMenu, LargeImg, ListMenu, Para } from "shared/ui";
+import { AvatarImg, LargeImg, Para, DropdownMenu } from "shared/ui";
 import {
   RowActions,
   PostHeader,
@@ -36,12 +37,12 @@ export const PostCard = ({ post, user, actions, after, before }: CardProps) => {
           </div>
         </AvatarHeader>
         <div style={{ position: "relative" }}>
-          {actions && <BurgerMenu open={open} setOpen={setOpen} />}
-          {actions && (
-            <ListMenu open={open}>
+          {actions && <BsThreeDots onClick={() => setOpen(!open)} />}
+          {actions && open && (
+            <DropdownMenu>
               {actions &&
                 actions.map((action, idx) => <li key={idx}>{action}</li>)}
-            </ListMenu>
+            </DropdownMenu>
           )}
         </div>
       </PostHeader>

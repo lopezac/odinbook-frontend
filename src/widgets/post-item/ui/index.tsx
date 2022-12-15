@@ -45,12 +45,11 @@ export const PostItem = ({ post, user }: PostItemProps) => {
         setOpen={setOpen}
         isViewerPost={viewer._id === userData._id}
       />
-      {comments && (
+      {comments && open && (
         <CommentSection
           user={userData}
           post={post}
           comments={comments}
-          open={open}
           isViewerComment={viewer._id === userData._id}
         />
       )}

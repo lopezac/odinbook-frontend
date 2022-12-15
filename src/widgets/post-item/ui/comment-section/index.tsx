@@ -4,13 +4,12 @@ import { CommentCard } from "entities/comment";
 import { LikeQuantityCard } from "entities/like";
 import { LikeContent } from "features/like-content";
 import { WriteComment, DeleteComment } from "features/comment";
-import { StyledCommentSection } from "./styles";
+import { StyledCommentSection, WriteCommentRow } from "./styles";
 
 type CommentSectionProps = {
   user: UserData;
   post: PostType;
   comments: CommentType[];
-  open: boolean;
   isViewerComment: boolean;
 };
 
@@ -18,16 +17,15 @@ export const CommentSection = ({
   user,
   post,
   comments,
-  open,
   isViewerComment,
 }: CommentSectionProps) => {
-  if (!open) return <></>;
   return (
     <StyledCommentSection>
-      <div>
-        <AvatarImg photoUrl={user.picture} size="medium" />
+      <WriteCommentRow>
+        <AvatarImg photoUrl={user.picture} size="small" />
         <WriteComment userId={user._id} postId={post._id} />
-      </div>
+      </WriteCommentRow>
+
       {comments.map((comment) => {
         return (
           <CommentCard

@@ -31,11 +31,12 @@ export const WriteComment = ({ userId, postId }: WriteCommentProps) => {
           required
           minLength={1}
           maxLength={1000}
+          placeholder="Write a comment..."
         />
         {errors.text && <p>{errors.text}</p>}
       </FormRow>
 
-      <Button type="submit">Write</Button>
+      <Button type="submit" style={{ display: "none" }}>Write</Button>
     </Form>
   );
 };
