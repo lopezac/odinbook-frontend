@@ -1,43 +1,73 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { CommentType, UserData } from "shared/api";
 import { formatDate } from "shared/lib/date";
-import { AvatarImg, DropdownMenu } from "shared/ui";
+import {
+  AvatarImg,
+  BoldPara,
+  DropdownMenu,
+  Link,
+  Para,
+  SmallGrayPara,
+} from "shared/ui";
+import { UserModel } from "entities/user";
+import { CardDiv, ActionsRow, GrayCard, MainCard } from "./styled";
 
 type CommentCardProps = {
   comment: CommentType;
-  user: UserData;
+  userId: string;
   actions?: ReactElement[];
+  before?: ReactElement[];
   after?: ReactElement[];
 };
 
 export const CommentCard = ({
   comment,
-  user,
+  userId,
   actions,
+  before,
   after,
 }: CommentCardProps) => {
+  const userModel = UserModel();
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<UserData | null>(null);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await userModel.getUser(userId);
+      setUser(userData);
+    };
+    fetchUser();
+  }, [userId]);
+
+  if (!user) return <Para>Loading</Para>;
   return (
-    <div>
-      <AvatarImg photoUrl={user.picture} size="small" />
+    <CardDiv>
+      <Link to={`/users/${user._id}`}>
+        <AvatarImg photoUrl={user.picture} size="small" />
+      </Link>
 
-      <div>
-        <div>
-          <p>
-            {user.firstName} {user.lastName}
-          </p>
-          <p>{comment.text}</p>
-        </div>
-        <div>
+      <MainCard>
+        <GrayCard>
+          <Link to={`/users/${user._id}`}>
+            <BoldPara>
+              {user.firstName} {user.lastName}
+            </BoldPara>
+          </Link>
+          <Para>{comment.text}</Para>
+        </GrayCard>
+        <ActionsRow>
+          <div>
+            {before && before.map((action, idx) => <li key={idx}>{action}</li>)}
+          </div>
+          <SmallGrayPara>
+            {formatDate(comment.created_at, "short")}
+          </SmallGrayPara>
           <div>
             {after && after.map((action, idx) => <li key={idx}>{action}</li>)}
           </div>
-          <p>{formatDate(comment.created_at)}</p>
-          <p>comment likes</p>
-        </div>
-      </div>
+        </ActionsRow>
+      </MainCard>
 
       <div style={{ position: "relative" }}>
         {actions && <BsThreeDots onClick={() => setOpen(!open)} />}
@@ -48,6 +78,6 @@ export const CommentCard = ({
           </DropdownMenu>
         )}
       </div>
-    </div>
+    </CardDiv>
   );
 };

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Layout, H1 } from "shared/ui";
+import { Layout } from "shared/ui";
 import { PostType } from "shared/api";
 import { useRedirect } from "entities/viewer";
 import { PostModel } from "entities/post";
 import { AuthHeader } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { PostItem } from "widgets/post-item";
+import { PostListDiv } from "./styles";
 
 export const FeedPage = () => {
   useRedirect("unauthorized");
@@ -24,13 +25,12 @@ export const FeedPage = () => {
     <Layout.Main>
       <AuthHeader />
       <Layout.Content>
-        <H1>Feed page</H1>
-        <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+        <PostListDiv>
           {posts &&
             posts.map((post) => {
               return <PostItem post={post} key={post._id} />;
             })}
-        </div>
+        </PostListDiv>
       </Layout.Content>
       <Footer />
     </Layout.Main>

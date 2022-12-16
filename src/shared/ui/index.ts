@@ -12,3 +12,4 @@ export * from "./textarea";
 export * from "./menu";
 export * from "./error";
 export * from "./icon";
+export * from "./span";

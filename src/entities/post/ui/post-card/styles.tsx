@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Para, SmallPara } from "shared/ui";
 
 const FlexDiv = styled.div`
   display: flex;
@@ -13,7 +12,7 @@ export const RowActions = styled(FlexDiv)`
 `;
 
 export const RowInfo = styled(FlexDiv)`
-  margin-top: 5px;
+  margin: 5px 0;
 `;
 
 export const AvatarHeader = styled(FlexDiv)`
@@ -35,14 +34,4 @@ export const PostImage = styled.div`
     width: calc(100% + (20px * 2));
     margin: 0 -20px;
   }
-`;
-
-export const BoldPara = styled(Para)`
-  font-weight: bold;
-  margin: 6px 0;
-`;
-
-export const SmallGrayPara = styled(SmallPara)`
-  color: ${(props) => props.theme.color.darkGray};
-  margin: 6px 0;
 `;

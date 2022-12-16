@@ -4,12 +4,13 @@ export const IconDiv = styled.div`
   position: relative;
 
   button {
-    
   }
 
   input {
     position: absolute;
-    width: 70px; // only temporary setting width
+    width: 38px; // only temporary setting width
+    z-index: 5;
+    top: 8px;
     left: 0;
     opacity: 0;
   }

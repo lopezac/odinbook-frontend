@@ -2,15 +2,21 @@ import { ReactElement, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import type { PostType, UserData } from "shared/api";
 import { formatDate } from "shared/lib/date";
-import { AvatarImg, LargeImg, Para, DropdownMenu } from "shared/ui";
+import {
+  AvatarImg,
+  LargeImg,
+  Para,
+  DropdownMenu,
+  BoldPara,
+  SmallGrayPara,
+  Link,
+} from "shared/ui";
 import {
   RowActions,
   PostHeader,
   AvatarHeader,
   PostImage,
   RowInfo,
-  BoldPara,
-  SmallGrayPara,
 } from "./styles";
 
 type CardProps = {
@@ -28,14 +34,20 @@ export const PostCard = ({ post, user, actions, after, before }: CardProps) => {
     <div>
       <PostHeader>
         <AvatarHeader>
-          <AvatarImg photoUrl={user.picture} size="small" />
+          <Link to={`/users/${user._id}`}>
+            <AvatarImg photoUrl={user.picture} size="small" />
+          </Link>
+
           <div>
             <BoldPara>
-              {user.firstName} {user.lastName}
+              <Link to={`/users/${user._id}`}>
+                {user.firstName} {user.lastName}
+              </Link>
             </BoldPara>
             <SmallGrayPara>{formatDate(post.created_at)}</SmallGrayPara>
           </div>
         </AvatarHeader>
+
         <div style={{ position: "relative" }}>
           {actions && <BsThreeDots onClick={() => setOpen(!open)} />}
           {actions && open && (

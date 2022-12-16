@@ -1,7 +1,14 @@
-import { Button, H1, Link } from "shared/ui";
+import { BsPencilFill } from "react-icons/bs";
+import { GrayRow, H1, Link, LargePara, BigRectangleIcon } from "shared/ui";
 import { useViewerModel, ViewerAvatar } from "entities/viewer";
 import { ChangeAvatar } from "features/viewer";
-import { FlexRowDiv, FlexRowUl } from "./styles.module";
+import {
+  FlexRowDiv,
+  ActionsRow,
+  HeaderDiv,
+  CenterRow,
+  AvatarDiv,
+} from "./styles";
 
 export const ViewerProfileHeader = () => {
   const viewerModel = useViewerModel();
@@ -9,40 +16,45 @@ export const ViewerProfileHeader = () => {
 
   if (!viewer) return <div>loading</div>;
   return (
-    <div>
+    <HeaderDiv>
       <FlexRowDiv>
         <FlexRowDiv>
-          <div>
+          <AvatarDiv>
             <ViewerAvatar size="large" />
             <ChangeAvatar />
-          </div>
+          </AvatarDiv>
+        </FlexRowDiv>
+
+        <CenterRow>
           <H1>
             {viewer.firstName} {viewer.lastName}
           </H1>
-        </FlexRowDiv>
-        <div>
+
           <Link to="/settings">
-            <Button>Edit profile</Button>
+            <GrayRow>
+              <BsPencilFill />
+              <LargePara>Edit post</LargePara>
+            </GrayRow>
           </Link>
-        </div>
+        </CenterRow>
       </FlexRowDiv>
 
       <div>
-        <FlexRowUl>
-          <li>
+        <ActionsRow>
+          <BigRectangleIcon>
             <Link to={`/me`}>Posts</Link>
-          </li>
-          <li>
+          </BigRectangleIcon>
+          <BigRectangleIcon>
             <Link to={`/me/about`}>About</Link>
-          </li>
-          <li>
+          </BigRectangleIcon>
+          <BigRectangleIcon>
             <Link to={`/me/friends`}>Friends</Link>
-          </li>
-          <li>
+          </BigRectangleIcon>
+          <BigRectangleIcon>
             <Link to={`/me/photos`}>Photos</Link>
-          </li>
-        </FlexRowUl>
+          </BigRectangleIcon>
+        </ActionsRow>
       </div>
-    </div>
+    </HeaderDiv>
   );
 };

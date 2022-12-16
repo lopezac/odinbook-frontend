@@ -5,6 +5,7 @@ import {
   StyledContent,
   StyledFooter,
   ContentWrapper,
+  ContentHeaderDiv,
 } from "./styles";
 
 export const Main = ({ children }: { children: ReactNode }) => {
@@ -13,6 +14,10 @@ export const Main = ({ children }: { children: ReactNode }) => {
 
 export const Header = ({ children }: { children: ReactNode }) => {
   return <StyledHeader>{children}</StyledHeader>;
+};
+
+export const ContentHeader = ({ children }: { children: ReactNode }) => {
+  return <ContentHeaderDiv>{children}</ContentHeaderDiv>;
 };
 
 export const Content = ({ children }: { children: ReactNode }) => {

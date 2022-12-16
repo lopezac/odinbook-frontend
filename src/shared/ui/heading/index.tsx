@@ -1,8 +1,13 @@
-export {
-  StyledH1 as H1,
-  StyledH2 as H2,
-  StyledH3 as H3,
-  StyledH4 as H4,
-  StyledH5 as H5,
-  StyledH6 as H6,
-} from "./styles.module";
+import styled from "styled-components";
+
+export const H1 = styled.h1``;
+
+export const H2 = styled.h2``;
+
+export const H3 = styled.h3``;
+
+export const H4 = styled.h4``;
+
+export const H5 = styled.h5``;
+
+export const H6 = styled.h6``;

@@ -3,6 +3,10 @@ import { getFormData } from "shared/lib/form-data";
 import { Button, Form, FormRow, Input, TextArea } from "shared/ui";
 import { useViewerModel, ViewerAvatar } from "entities/viewer";
 import { PostModel } from "entities/post";
+// this is totally against feature-sliced design but
+// to think how to abstract this into reusable modules, shared
+import { StyledPostItem } from "widgets/post-item/ui/styles";
+import { WriteCommentRow } from "widgets/post-item/ui/comment-section/styles";
 
 export const WritePost = () => {
   const postModel = PostModel();
@@ -29,11 +33,9 @@ export const WritePost = () => {
   };
 
   return (
-    <div>
-      <div>
-        <ViewerAvatar size="medium" />
-      </div>
-      <div>
+    <StyledPostItem>
+      <WriteCommentRow>
+        <ViewerAvatar size="small" />
         <Form onSubmit={handleSubmit}>
           <FormRow>
             <TextArea
@@ -54,7 +56,7 @@ export const WritePost = () => {
             <Button type="submit">Create</Button>
           </div>
         </Form>
-      </div>
-    </div>
+      </WriteCommentRow>
+    </StyledPostItem>
   );
 };

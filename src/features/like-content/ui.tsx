@@ -1,8 +1,8 @@
-import { MouseEvent, useEffect, useState } from "react";
-import { BiLike, BiDislike } from "react-icons/bi";
-import { IconAction, Para } from "shared/ui";
+import { useEffect, useState } from "react";
+import { HiThumbUp, HiThumbDown } from "react-icons/hi";
 import { useViewerModel } from "entities/viewer";
 import { LikeModel } from "entities/like";
+import { IconSpan, BlueIconSpan } from "shared/ui";
 
 export const LikeContent = ({ receiver }: { receiver: string }) => {
   const likeModel = LikeModel();
@@ -25,12 +25,12 @@ export const LikeContent = ({ receiver }: { receiver: string }) => {
   };
 
   return liked ? (
-    <span onClick={removeLike}>
-      <BiDislike /> Dislike
-    </span>
+    <BlueIconSpan onClick={removeLike}>
+      <HiThumbDown /> Dislike
+    </BlueIconSpan>
   ) : (
-    <span onClick={createLike}>
-      <BiLike /> Like
-    </span>
+    <IconSpan onClick={createLike}>
+      <HiThumbUp /> Like
+    </IconSpan>
   );
 };

@@ -1,29 +1,30 @@
-import { CommentType, PostType, UserData } from "shared/api";
-import { AvatarImg } from "shared/ui";
+import { CommentType, PostType } from "shared/api";
+import { AvatarImg, DropdownRow, Para } from "shared/ui";
 import { CommentCard } from "entities/comment";
 import { LikeQuantityCard } from "entities/like";
+import { useViewerModel } from "entities/viewer";
 import { LikeContent } from "features/like-content";
 import { WriteComment, DeleteComment } from "features/comment";
-import { StyledCommentSection, WriteCommentRow } from "./styles";
+import { SectionDiv, WriteCommentRow } from "./styles";
 
 type CommentSectionProps = {
-  user: UserData;
   post: PostType;
   comments: CommentType[];
   isViewerComment: boolean;
 };
 
 export const CommentSection = ({
-  user,
   post,
   comments,
   isViewerComment,
 }: CommentSectionProps) => {
+  const viewer = useViewerModel().useViewer();
+
   return (
-    <StyledCommentSection>
+    <SectionDiv>
       <WriteCommentRow>
-        <AvatarImg photoUrl={user.picture} size="small" />
-        <WriteComment userId={user._id} postId={post._id} />
+        <AvatarImg photoUrl={viewer!.picture} size="small" />
+        <WriteComment postId={post._id} />
       </WriteCommentRow>
 
       {comments.map((comment) => {
@@ -31,19 +32,22 @@ export const CommentSection = ({
           <CommentCard
             key={comment._id}
             comment={comment}
-            user={user}
-            after={[
-              <LikeContent receiver={comment._id} />,
-              <LikeQuantityCard receiverId={comment._id} />,
-            ]}
+            userId={comment.user}
+            before={[<LikeContent receiver={comment._id} />]}
+            after={[<LikeQuantityCard receiverId={comment._id} />]}
             actions={
               isViewerComment
-                ? [<DeleteComment commentId={comment._id} />]
+                ? [
+                    <DropdownRow>
+                      <DeleteComment commentId={comment._id} />
+                      <Para>Delete comment</Para>
+                    </DropdownRow>,
+                  ]
                 : undefined
             }
           />
         );
       })}
-    </StyledCommentSection>
+    </SectionDiv>
   );
 };

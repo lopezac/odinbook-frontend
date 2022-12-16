@@ -19,10 +19,19 @@ export const DropdownRow = styled.div`
   width: 100%;
   padding: 0 10px;
   border-radius: 5px;
-  
-  :hover, 
-  :focus {
-    background-color: ${props => props.theme.color.darkerWhite};
-  }
 
+  :hover,
+  :focus {
+    background-color: ${(props) => props.theme.color.darkerWhite};
+  }
+`;
+
+export const GrayRow = styled(DropdownRow)`
+  background-color: ${(props) => props.theme.color.darkWhite};
+  font-weight: bold;
+  gap: 7px;
+
+  svg {
+    font-size: 1.2rem;
+  }
 `;

@@ -47,7 +47,6 @@ export const PostItem = ({ post, user }: PostItemProps) => {
       />
       {comments && open && (
         <CommentSection
-          user={userData}
           post={post}
           comments={comments}
           isViewerComment={viewer._id === userData._id}

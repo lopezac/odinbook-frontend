@@ -4,7 +4,7 @@ type AvatarProps = { photoUrl: string; size: string };
 type ImgProps = { photoUrl: string };
 
 const sizes: { [key: string]: string } = {
-  large: "150px",
+  large: "168px",
   medium: "75px",
   small: "40px",
 };
@@ -15,7 +15,7 @@ export const AvatarImg = styled.img.attrs<AvatarProps>((props) => ({
   ${(props) => `
     width: ${sizes[props.size]};
     height: ${sizes[props.size]};
-    border-radius: 25px;
+    border-radius: 100%;
     border: 1px solid ${props.theme.color.darkGray};
     cursor: pointer;
 

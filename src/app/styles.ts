@@ -9,8 +9,13 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
     flex-direction: column;
   }
 
+  html {
+    scroll-padding-top: 56px;
+  }
+
   body {
     font-family: ${({ theme }) => theme.font.family};
+    margin-top: 56px;
   }
 
   ul {

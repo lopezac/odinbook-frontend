@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import { BiComment } from "react-icons/bi";
 import { BsPencil } from "react-icons/bs";
 import { PostType, UserData } from "shared/api";
-import { DropdownRow, IconAction, Link, Para } from "shared/ui";
+import { DropdownRow, IconAction, Link, Para, IconSpan } from "shared/ui";
 import { PostCard } from "entities/post";
 import { LikeQuantityCard } from "entities/like";
 import { LikeContent } from "features/like-content";
@@ -29,12 +29,13 @@ export const PostSection = ({
       user={user}
       before={[<LikeQuantityCard receiverId={post._id} />]}
       after={[
-        <IconAction> 
+        <IconAction>
           <LikeContent receiver={post._id} />
         </IconAction>,
         <IconAction onClick={() => setOpen(!open)}>
-          <BiComment />
-          <Para>Comment</Para>
+          <IconSpan>
+            <BiComment /> Comment
+          </IconSpan>
         </IconAction>,
       ]}
       actions={
@@ -49,7 +50,7 @@ export const PostSection = ({
               <DropdownRow>
                 <DeletePost postId={post._id} />
                 <Para>Delete post</Para>
-              </DropdownRow>
+              </DropdownRow>,
             ]
           : undefined
       }

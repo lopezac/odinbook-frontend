@@ -1,6 +1,8 @@
 import { ChangeEvent } from "react";
+import { FaCamera } from "react-icons/fa";
 import { useViewerModel } from "entities/viewer";
 import { IconDiv } from "./styles.module";
+import { CircleIcon } from "shared/ui";
 
 export const ChangeAvatar = () => {
   const viewerModel = useViewerModel();
@@ -21,8 +23,11 @@ export const ChangeAvatar = () => {
 
   return (
     <IconDiv>
-      <button>change</button>
+      <CircleIcon>
+        <FaCamera />
+      </CircleIcon>
       <input
+        style={{ cursor: "pointer" }}
         type="file"
         onChange={handleChange}
         accept="image/png, image/jpeg"

@@ -9,4 +9,8 @@ export const StyledLikeCard = styled.div`
   svg {
     color: ${(props) => props.theme.color.blue};
   }
+
+  p {
+    margin: 0;
+  }
 `;

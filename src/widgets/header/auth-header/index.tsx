@@ -17,7 +17,7 @@ import { useViewerModel } from "entities/viewer";
 import { AuthLogout } from "features/auth/logout";
 import { SmallHeader, MenuIconRow } from "./styled";
 
-export const Header = () => {
+export const AuthHeader = () => {
   const logout = AuthLogout();
   const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer();
@@ -62,7 +62,7 @@ export const Header = () => {
           />
           {showMenu && (
             <DropdownMenu>
-              <Link to="me">
+              <Link to="/me">
                 <MenuIconRow>
                   <AvatarImg photoUrl={viewer.picture} size="small" />
                   <Para>

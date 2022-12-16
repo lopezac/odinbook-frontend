@@ -20,8 +20,13 @@ export const StyledHeader = styled.div`
   height: 56px;
 `;
 
+export const ContentHeaderDiv = styled.div`
+  background-color: ${(props) => props.theme.color.white};
+  display: flex;
+  justify-content: center;
+`;
+
 export const StyledContent = styled.div`
-  // background-color: ${(props) => props.theme.color.white};
   max-width: 500px;
   flex: 1;
 `;

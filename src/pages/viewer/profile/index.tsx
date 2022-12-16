@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { H2, Layout } from "shared/ui";
+import { ContentHeader, H2, Layout } from "shared/ui";
 import { PostType } from "shared/api";
 import { useViewerModel } from "entities/viewer";
 import { PostModel } from "entities/post";
@@ -28,10 +28,12 @@ export const ViewerProfilePage = () => {
   return (
     <Layout.Main>
       <AuthHeader />
-      <Layout.Content>
+      <ContentHeader>
         <ViewerProfileHeader />
+      </ContentHeader>
+      <Layout.Content>
         <ContentDiv>
-          <div>ViewerProfileSidebar</div>
+          {/* <div>ViewerProfileSidebar</div> */}
           <div>
             <WritePost />
             <H2>Posts</H2>

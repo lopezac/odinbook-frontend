@@ -4,6 +4,7 @@ const IconDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export const CircleIcon = styled(IconDiv)`
@@ -31,10 +32,10 @@ export const BigRectangleIcon = styled(IconDiv)`
 
   :hover,
   :focus {
-    border-bottom: 4px solid ${(props) => props.theme.color.blue};
+    border-bottom: 3px solid ${(props) => props.theme.color.blue};
+    margin-bottom: -3px;
     background-color: ${(props) => props.theme.color.darkerWhite};
-
-    svg {
+    * {
       color: ${(props) => props.theme.color.blue};
     }
   }
@@ -46,12 +47,10 @@ export const BigRectangleIcon = styled(IconDiv)`
 
 export const IconAction = styled(IconDiv)`
   cursor: pointer;
-  display: flex;
-  gap: 5px;
   flex: 1;
-  width: 100%;
   color: ${(props) => props.theme.color.darkGray};
   font-weight: bold;
+  padding: 8px 0;
 
   :hover {
     background-color: ${(props) => props.theme.color.darkWhite};
