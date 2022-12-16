@@ -18,6 +18,8 @@ export const StyledHeader = styled.div`
   justify-content: space-between;
   padding: 0 20px;
   height: 56px;
+  z-index: 10;
+  box-shadow: 0 2px 3px 0 ${(props) => props.theme.color.darkerWhite};
 `;
 
 export const ContentHeaderDiv = styled.div`
@@ -27,6 +29,7 @@ export const ContentHeaderDiv = styled.div`
 `;
 
 export const StyledContent = styled.div`
+  padding-top: 24px;
   max-width: 500px;
   flex: 1;
 `;

@@ -7,6 +7,7 @@ export const StyledInput = styled.input<{ error?: boolean }>`
   border: none;
   font-size: 0.95rem;
   flex: 1;
+  cursor: pointer;
   
   :focus {
     outline: none;

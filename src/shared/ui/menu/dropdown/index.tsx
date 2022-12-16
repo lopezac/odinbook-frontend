@@ -5,7 +5,7 @@ export const DropdownMenu = styled.div`
   position: absolute;
   left: -255px;
   background-color: ${(props) => props.theme.color.white};
-  box-shadow: 0px 0px 3px 1px #71717a;
+  box-shadow: 0 0 3px 3px ${(props) => props.theme.color.darkerWhite};
   display: flex;
   flex-direction: column;
   padding: 15px 10px;

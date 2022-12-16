@@ -8,19 +8,19 @@ import {
   ContentHeaderDiv,
 } from "./styles";
 
-export const Main = ({ children }: { children: ReactNode }) => {
+const Main = ({ children }: { children: ReactNode }) => {
   return <StyledMain>{children}</StyledMain>;
 };
 
-export const Header = ({ children }: { children: ReactNode }) => {
+const Header = ({ children }: { children: ReactNode }) => {
   return <StyledHeader>{children}</StyledHeader>;
 };
 
-export const ContentHeader = ({ children }: { children: ReactNode }) => {
+const ContentHeader = ({ children }: { children: ReactNode }) => {
   return <ContentHeaderDiv>{children}</ContentHeaderDiv>;
 };
 
-export const Content = ({ children }: { children: ReactNode }) => {
+const Content = ({ children }: { children: ReactNode }) => {
   return (
     <ContentWrapper>
       <StyledContent>{children}</StyledContent>
@@ -28,13 +28,14 @@ export const Content = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const Footer = ({ children }: { children: ReactNode }) => {
+const Footer = ({ children }: { children: ReactNode }) => {
   return <StyledFooter>{children}</StyledFooter>;
 };
 
 export const Layout = {
   Main,
   Content,
+  ContentHeader,
   Header,
   Footer,
 };

@@ -10,3 +10,10 @@ export const IconSpan = styled.span`
 export const BlueIconSpan = styled(IconSpan)`
   color: ${(props) => props.theme.color.blue};
 `;
+
+export const GreenIconSpan = styled(IconSpan)`
+  color: ${props => props.theme.color.darkerGray};
+  svg {
+    color: ${(props) => props.theme.color.green};
+  }
+`;

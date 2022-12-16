@@ -12,6 +12,7 @@ const theme = {
     darkerGray: "#3f3f46",
     blue: "#1b74e4",
     lightBlue: "#e6f2fe",
+    green: "#45bd62",
   },
   font: {
     size: {

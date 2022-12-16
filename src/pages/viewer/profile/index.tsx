@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import { ContentHeader, H2, Layout } from "shared/ui";
+import { H2, Layout } from "shared/ui";
 import { PostType } from "shared/api";
-import { useViewerModel } from "entities/viewer";
+import { useViewerModel, useRedirect, ViewerAvatar } from "entities/viewer";
 import { PostModel } from "entities/post";
 import { WritePost } from "features/post";
 import { PostItem } from "widgets/post-item";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 import { ViewerProfileHeader } from "widgets/viewer";
-import { useRedirect } from "entities/viewer/hooks";
-import { ContentDiv } from "./styles.module";
+import { ContentDiv, WritePostCard } from "./styles.module";
 
 export const ViewerProfilePage = () => {
   useRedirect("unauthorized");
@@ -28,24 +27,30 @@ export const ViewerProfilePage = () => {
   return (
     <Layout.Main>
       <AuthHeader />
-      <ContentHeader>
+
+      <Layout.ContentHeader>
         <ViewerProfileHeader />
-      </ContentHeader>
+      </Layout.ContentHeader>
+
       <Layout.Content>
         <ContentDiv>
           {/* <div>ViewerProfileSidebar</div> */}
-          <div>
+          <WritePostCard>
+            <ViewerAvatar size="small" />
             <WritePost />
-            <H2>Posts</H2>
-            <div>
-              {posts &&
-                posts.map((post) => {
-                  return <PostItem key={post._id} post={post} user={viewer!} />;
-                })}
-            </div>
+          </WritePostCard>
+
+          <H2>Posts</H2>
+
+          <div>
+            {posts &&
+              posts.map((post) => {
+                return <PostItem key={post._id} post={post} user={viewer!} />;
+              })}
           </div>
         </ContentDiv>
       </Layout.Content>
+
       <Footer />
     </Layout.Main>
   );

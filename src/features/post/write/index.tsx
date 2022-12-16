@@ -1,12 +1,17 @@
 import { FormEvent } from "react";
+import { MdAddAPhoto } from "react-icons/md";
 import { getFormData } from "shared/lib/form-data";
-import { Button, Form, FormRow, Input, TextArea } from "shared/ui";
-import { useViewerModel, ViewerAvatar } from "entities/viewer";
+import { 
+  Button,
+  Form,
+  FormRow, 
+  Input, 
+  TextArea, 
+  GreenIconSpan 
+} from "shared/ui";
+import { useViewerModel } from "entities/viewer";
 import { PostModel } from "entities/post";
-// this is totally against feature-sliced design but
-// to think how to abstract this into reusable modules, shared
-import { StyledPostItem } from "widgets/post-item/ui/styles";
-import { WriteCommentRow } from "widgets/post-item/ui/comment-section/styles";
+import { AddPhotoDiv } from "./styles";
 
 export const WritePost = () => {
   const postModel = PostModel();
@@ -33,30 +38,27 @@ export const WritePost = () => {
   };
 
   return (
-    <StyledPostItem>
-      <WriteCommentRow>
-        <ViewerAvatar size="small" />
-        <Form onSubmit={handleSubmit}>
-          <FormRow>
-            <TextArea
-              id="text"
-              name="text"
-              placeholder="What's on your mind?"
-              required
-            ></TextArea>
-          </FormRow>
-          <div>
-            <Button type="button">Photo</Button>
-            <Input
-              type="file"
-              name="image"
-              id="image"
-              accept="image/png, image/jpeg"
-            />
-            <Button type="submit">Create</Button>
-          </div>
-        </Form>
-      </WriteCommentRow>
-    </StyledPostItem>
+    <Form onSubmit={handleSubmit}>
+      <FormRow>
+        <TextArea
+          id="text"
+          name="text"
+          placeholder="What's on your mind?"
+          required
+        ></TextArea>
+      </FormRow>
+
+      <AddPhotoDiv>
+        <GreenIconSpan>
+          <MdAddAPhoto /> Photo
+        </GreenIconSpan>
+        <Input
+          type="file"
+          name="image"
+          id="image"
+          accept="image/png, image/jpeg"
+        />
+      </AddPhotoDiv>
+    </Form>
   );
 };
