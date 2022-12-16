@@ -4,6 +4,7 @@ import {
   Layout, 
   H2,
   Para, 
+  LargePara,
   DarkerWhiteCard, 
   SmallGrayPara,
   IconInfoRow,
@@ -13,6 +14,7 @@ import { useRedirect, useViewerModel } from "entities/viewer";
 import { AuthHeader } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { ViewerProfileHeader } from "widgets/viewer";
+import { VerticalList } from "./styles";
 
 export const ViewerAboutPage = () => {
   useRedirect("unauthorized");
@@ -33,17 +35,47 @@ export const ViewerAboutPage = () => {
         <DarkerWhiteCard>
           <H2>About</H2>
 
-          <IconInfoRow>
-            <HiIdentification />
-            <div>
-              <Para>{viewer.firstName}</Para>
-              <SmallGrayPara>First name</SmallGrayPara>
-            </div>
-          </IconInfoRow>
-          <Para>Last name: {viewer.lastName}</Para>
-          <Para>Email: {viewer.email}</Para>
-          <Para>Birthday: {formatDate(viewer.birthday)}</Para>
-          <Para>Gender: {viewer.gender}</Para>
+          <div>
+            <IconInfoRow>
+              <HiIdentification />
+              <div>
+                <LargePara>{viewer.firstName}</LargePara>
+                <SmallGrayPara>First name</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+
+            <IconInfoRow>
+              <HiIdentification />
+              <div>
+                <LargePara>{viewer.lastName}</LargePara>
+                <SmallGrayPara>Last name</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+
+            <IconInfoRow>
+              <MdEmail />
+              <div>
+                <LargePara>{viewer.email}</LargePara>
+                <SmallGrayPara>Email</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+
+            <IconInfoRow>
+              <MdCake />
+              <div>
+                <LargePara>{formatDate(viewer.birthday, "short")}</LargePara>
+                <SmallGrayPara>Birthday</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+
+            <IconInfoRow>
+              <MdPerson />
+              <div>
+                <LargePara>{viewer.gender}</LargePara>
+                <SmallGrayPara>Gender</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+          </div>
         </DarkerWhiteCard>
       </Layout.Content>
 
