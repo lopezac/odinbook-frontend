@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { H2, Layout } from "shared/ui";
+import { DarkerWhiteCard, H2, Layout, VerticalList } from "shared/ui";
 import { UserData } from "shared/api";
 import { useRedirect, useViewerModel } from "entities/viewer";
 import { UserRow, UserModel } from "entities/user";
+import { RemoveFriend } from "features/remove-friend";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 import { ViewerProfileHeader } from "widgets/viewer";
-import { ContentDiv } from "./styles.module";
 
 export const ViewerFriendsPage = () => {
   useRedirect("unauthorized");
@@ -29,20 +29,25 @@ export const ViewerFriendsPage = () => {
   return (
     <Layout.Main>
       <AuthHeader />
-      <Layout.Content>
+
+      <Layout.ContentHeader>
         <ViewerProfileHeader />
-        <ContentDiv>
-          <div>
-            <H2>Friends</H2>
-            <div>
-              {friends &&
-                friends.map((friend) => (
-                  <UserRow key={friend._id} data={friend} />
-                )
-                )}
-            </div>
-          </div>
-        </ContentDiv>
+      </Layout.ContentHeader>
+
+      <Layout.Content>
+        <DarkerWhiteCard>
+          <H2>Friends</H2>
+          <VerticalList>
+            {friends &&
+              friends.map((friend) => (
+                <UserRow
+                  key={friend._id}
+                  data={friend}
+                  actions={[<RemoveFriend userId={friend._id} />]}
+                />
+              ))}
+          </VerticalList>
+        </DarkerWhiteCard>
       </Layout.Content>
       <Footer />
     </Layout.Main>

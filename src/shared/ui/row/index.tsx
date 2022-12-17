@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const IconInfoRow = styled.div`
-  display: flex;  
+  display: flex;
   align-items: center;
   gap: 10px;
 

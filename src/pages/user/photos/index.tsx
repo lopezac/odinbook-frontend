@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { H2, LargeImg, Layout } from "shared/ui";
+import { DarkerWhiteCard, H2, PhotoImg, Layout, PhotoGrid } from "shared/ui";
 import { UserData, PostType } from "shared/api";
 import { useRedirect, useRedirectViewer } from "entities/viewer";
 import { UserModel } from "entities/user";
@@ -38,24 +38,26 @@ export const UserPhotosPage = () => {
   return (
     <Layout.Main>
       <AuthHeader />
-      <Layout.Content>
+
+      <Layout.ContentHeader>
         <UserProfileHeader user={user} />
-        <div style={{ display: "flex" }}>
-          <div>
-            <H2>Photos</H2>
-            <div>
-              {posts &&
-                posts.map((post) => {
-                  return post.photos.map((photo, idx) => (
-                    <LargeImg key={idx} photoUrl={photo} />)
-                  )
-                }
-                )}
-            </div>
-          </div>
-        </div>
+      </Layout.ContentHeader>
+
+      <Layout.Content>
+        <DarkerWhiteCard>
+          <H2>Photos</H2>
+          <PhotoGrid>
+            {posts &&
+              posts.map((post) => {
+                return post.photos.map((photo, idx) => (
+                  <PhotoImg key={idx} photoUrl={photo} />
+                ));
+              })}
+          </PhotoGrid>
+        </DarkerWhiteCard>
       </Layout.Content>
+
       <Footer />
     </Layout.Main>
   );
-}
+};

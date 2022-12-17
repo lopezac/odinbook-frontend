@@ -1,11 +1,11 @@
 import { HiIdentification } from "react-icons/hi";
 import { MdEmail, MdCake, MdPerson } from "react-icons/md";
-import { 
-  Layout, 
+import {
+  Layout,
   H2,
-  Para, 
+  VerticalList,
   LargePara,
-  DarkerWhiteCard, 
+  DarkerWhiteCard,
   SmallGrayPara,
   IconInfoRow,
 } from "shared/ui";
@@ -14,7 +14,6 @@ import { useRedirect, useViewerModel } from "entities/viewer";
 import { AuthHeader } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { ViewerProfileHeader } from "widgets/viewer";
-import { VerticalList } from "./styles";
 
 export const ViewerAboutPage = () => {
   useRedirect("unauthorized");
@@ -35,7 +34,7 @@ export const ViewerAboutPage = () => {
         <DarkerWhiteCard>
           <H2>About</H2>
 
-          <div>
+          <VerticalList>
             <IconInfoRow>
               <HiIdentification />
               <div>
@@ -75,7 +74,7 @@ export const ViewerAboutPage = () => {
                 <SmallGrayPara>Gender</SmallGrayPara>
               </div>
             </IconInfoRow>
-          </div>
+          </VerticalList>
         </DarkerWhiteCard>
       </Layout.Content>
 

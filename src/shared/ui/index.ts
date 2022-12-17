@@ -13,3 +13,4 @@ export * from "./menu";
 export * from "./icon";
 export * from "./span";
 export * from "./row";
+export * from "./list";

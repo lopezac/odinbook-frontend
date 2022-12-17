@@ -1,6 +1,16 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Layout, H1, Para } from "shared/ui";
+import { HiIdentification } from "react-icons/hi";
+import { MdCake, MdEmail, MdPerson } from "react-icons/md";
+import {
+  Layout,
+  H2,
+  DarkerWhiteCard,
+  VerticalList,
+  IconInfoRow,
+  LargePara,
+  SmallGrayPara,
+} from "shared/ui";
 import { UserData } from "shared/api";
 import { formatDate } from "shared/lib/date";
 import { useRedirect, useRedirectViewer } from "entities/viewer";
@@ -29,17 +39,59 @@ export const UserAboutPage = () => {
   return (
     <Layout.Main>
       <AuthHeader />
-      <Layout.Content>
+
+      <Layout.ContentHeader>
         <UserProfileHeader user={user} />
-        <div>
-          <H1>About</H1>
-          <Para>First Name: {user.firstName}</Para>
-          <Para>Last Name: {user.lastName}</Para>
-          <Para>Email: {user.email}</Para>
-          <Para>Birthday: {formatDate(user.birthday)}</Para>
-          <Para>Gender: {user.gender}</Para>
-        </div>
+      </Layout.ContentHeader>
+
+      <Layout.Content>
+        <DarkerWhiteCard>
+          <H2>About</H2>
+
+          <VerticalList>
+            <IconInfoRow>
+              <HiIdentification />
+              <div>
+                <LargePara>{user.firstName}</LargePara>
+                <SmallGrayPara>First name</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+
+            <IconInfoRow>
+              <HiIdentification />
+              <div>
+                <LargePara>{user.lastName}</LargePara>
+                <SmallGrayPara>Last name</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+
+            <IconInfoRow>
+              <MdEmail />
+              <div>
+                <LargePara>{user.email}</LargePara>
+                <SmallGrayPara>Email</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+
+            <IconInfoRow>
+              <MdCake />
+              <div>
+                <LargePara>{formatDate(user.birthday, "short")}</LargePara>
+                <SmallGrayPara>Birthday</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+
+            <IconInfoRow>
+              <MdPerson />
+              <div>
+                <LargePara>{user.gender}</LargePara>
+                <SmallGrayPara>Gender</SmallGrayPara>
+              </div>
+            </IconInfoRow>
+          </VerticalList>
+        </DarkerWhiteCard>
       </Layout.Content>
+
       <Footer />
     </Layout.Main>
   );

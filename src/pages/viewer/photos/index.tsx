@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { H2, LargeImg, Layout } from "shared/ui";
+import { H2, PhotoImg, Layout, DarkerWhiteCard, PhotoGrid } from "shared/ui";
 import { PostType } from "shared/api";
 import { useRedirect, useViewerModel } from "entities/viewer";
 import { UserModel } from "entities/user";
@@ -28,24 +28,25 @@ export const ViewerPhotosPage = () => {
   return (
     <Layout.Main>
       <AuthHeader />
-      <Layout.Content>
+
+      <Layout.ContentHeader>
         <ViewerProfileHeader />
-        <div style={{ display: "flex" }}>
-          <div>
-            <H2>Photos</H2>
-            <div>
-              {posts &&
-                posts.map((post) => {
-                  return post.photos.map((photo, idx) => (
-                    <LargeImg key={idx} photoUrl={photo} />)
-                  )
-                }
-                )}
-            </div>
-          </div>
-        </div>
+      </Layout.ContentHeader>
+
+      <Layout.Content>
+        <DarkerWhiteCard>
+          <H2>Photos</H2>
+          <PhotoGrid>
+            {posts &&
+              posts.map((post) => {
+                return post.photos.map((photo, idx) => (
+                  <PhotoImg key={idx} photoUrl={photo} />
+                ));
+              })}
+          </PhotoGrid>
+        </DarkerWhiteCard>
       </Layout.Content>
       <Footer />
     </Layout.Main>
   );
-}
+};

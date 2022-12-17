@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Layout } from "shared/ui";
+import { Layout, WritePostCard } from "shared/ui";
 import { PostType } from "shared/api";
-import { useRedirect } from "entities/viewer";
+import { useRedirect, ViewerAvatar } from "entities/viewer";
 import { PostModel } from "entities/post";
+import { WritePost } from "features/post";
 import { AuthHeader } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { PostItem } from "widgets/post-item";
@@ -25,6 +26,11 @@ export const FeedPage = () => {
     <Layout.Main>
       <AuthHeader />
       <Layout.Content>
+        <WritePostCard>
+          <ViewerAvatar size="small" />
+          <WritePost />
+        </WritePostCard>
+
         <PostListDiv>
           {posts &&
             posts.map((post) => {

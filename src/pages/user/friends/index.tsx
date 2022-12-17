@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { H2, Layout } from "shared/ui";
+import { DarkerWhiteCard, H2, Layout, VerticalList } from "shared/ui";
 import { UserData } from "shared/api";
 import { useRedirect, useRedirectViewer } from "entities/viewer";
 import { UserModel, UserRow } from "entities/user";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 import { UserProfileHeader } from "widgets/user";
-import { ContentDiv } from "./styles.module";
+import { SendFriendRequest } from "features/friend-request";
 
 export const UserFriendsPage = () => {
   useRedirect("unauthorized");
@@ -39,21 +39,31 @@ export const UserFriendsPage = () => {
   return (
     <Layout.Main>
       <AuthHeader />
-      <Layout.Content>
+
+      <Layout.ContentHeader>
         <UserProfileHeader user={user} />
-        <ContentDiv>
-          <div>
-            <H2>Friends</H2>
-            <div>
-              {friends &&
-                friends.map((friend) => (
-                  <UserRow key={friend._id} data={friend} />
-                )
-                )}
-            </div>
-          </div>
-        </ContentDiv>
+      </Layout.ContentHeader>
+
+      <Layout.Content>
+        <DarkerWhiteCard>
+          <H2>Friends</H2>
+
+          <VerticalList>
+            {friends && friends.length ? (
+              friends.map((friend) => (
+                <UserRow
+                  key={friend._id}
+                  data={friend}
+                  actions={[<SendFriendRequest user={friend} />]}
+                />
+              ))
+            ) : (
+              <p>There are no friends here!</p>
+            )}
+          </VerticalList>
+        </DarkerWhiteCard>
       </Layout.Content>
+
       <Footer />
     </Layout.Main>
   );

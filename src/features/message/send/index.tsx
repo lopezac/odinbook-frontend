@@ -1,9 +1,10 @@
 import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "shared/api";
-import { Button } from "shared/ui";
+import { GrayRow, LargePara } from "shared/ui";
 import { ChatModel } from "entities/chat";
 import { useViewerModel } from "entities/viewer";
+import { BsMessenger } from "react-icons/bs";
 
 export const SendMessage = ({ user }: { user: UserData }) => {
   const navigate = useNavigate();
@@ -11,20 +12,22 @@ export const SendMessage = ({ user }: { user: UserData }) => {
   const viewerModel = useViewerModel();
   const viewer = viewerModel.useViewer();
 
-  const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async () => {
     if (!viewer) return;
-
     const chatFound = await chatModel.findChat([user._id, viewer._id]);
-    console.log("chatFound", chatFound);
 
     if (!chatFound) {
       const chat = await chatModel.createChat([user._id, viewer._id]);
-      console.log("chat", chat);
       return navigate(`/chats/${chat._id}`);
     }
 
     return navigate(`/chats/${chatFound._id}`);
   };
 
-  return <Button onClick={handleClick}>Message</Button>;
+  return (
+    <GrayRow onClick={handleClick}>
+      <BsMessenger />
+      <LargePara>Message</LargePara>
+    </GrayRow>
+  );
 };

@@ -30,8 +30,20 @@ export const GrayRow = styled(DropdownRow)`
   background-color: ${(props) => props.theme.color.darkWhite};
   font-weight: bold;
   gap: 7px;
+  width: auto;
 
   svg {
     font-size: 1.2rem;
+  }
+`;
+
+export const BlueRow = styled(GrayRow)`
+  background-color: ${(props) => props.theme.color.blue};
+  color: ${(props) => props.theme.color.white};
+
+  :hover,
+  :focus {
+    background-color: ${(props) => props.theme.color.blue};
+    filter: brightness(0.9);
   }
 `;

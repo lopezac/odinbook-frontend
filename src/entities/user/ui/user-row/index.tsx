@@ -1,14 +1,27 @@
+import { ReactElement } from "react";
 import { UserData } from "shared/api";
-import { AvatarImg, Link } from "shared/ui";
-import { StyledUserRow } from "./styled";
+import { SquareAvatarImg, Link } from "shared/ui";
+import { StyledUserRow, LargeBoldPara } from "./styled";
 
-export const UserRow = ({ data }: { data: UserData }) => {
+type UserRowProps = { data: UserData; actions?: ReactElement[] };
+
+export const UserRow = ({ data, actions }: UserRowProps) => {
   return (
     <StyledUserRow>
       <Link to={`/users/${data._id}`}>
-        <AvatarImg photoUrl={data.picture} size="medium" />
-        <p>{data.firstName} {data.lastName}</p>
+        <SquareAvatarImg photoUrl={data.picture} size="medium" />
+        <LargeBoldPara>
+          {data.firstName} {data.lastName}
+        </LargeBoldPara>
       </Link>
+
+      {actions && (
+        <div>
+          {actions.map((action, idx) => (
+            <li key={idx}>{action}</li>
+          ))}
+        </div>
+      )}
     </StyledUserRow>
   );
 };

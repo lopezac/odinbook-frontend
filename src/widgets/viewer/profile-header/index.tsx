@@ -39,22 +39,20 @@ export const ViewerProfileHeader = () => {
         </CenterRow>
       </FlexRowDiv>
 
-      <div>
-        <ActionsRow>
-          <BigRectangleIcon>
-            <Link to={`/me`}>Posts</Link>
-          </BigRectangleIcon>
-          <BigRectangleIcon>
-            <Link to={`/me/about`}>About</Link>
-          </BigRectangleIcon>
-          <BigRectangleIcon>
-            <Link to={`/me/friends`}>Friends</Link>
-          </BigRectangleIcon>
-          <BigRectangleIcon>
-            <Link to={`/me/photos`}>Photos</Link>
-          </BigRectangleIcon>
-        </ActionsRow>
-      </div>
+      <ActionsRow>
+        <Link to={`/me`}>
+          <BigRectangleIcon>Posts</BigRectangleIcon>
+        </Link>
+        <Link to={`/me/about`}>
+          <BigRectangleIcon>About</BigRectangleIcon>
+        </Link>
+        <Link to={`/me/friends`}>
+          <BigRectangleIcon>Friends</BigRectangleIcon>
+        </Link>
+        <Link to={`/me/photos`}>
+          <BigRectangleIcon>Photos</BigRectangleIcon>
+        </Link>
+      </ActionsRow>
     </HeaderDiv>
   );
 };

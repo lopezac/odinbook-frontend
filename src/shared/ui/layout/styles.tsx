@@ -32,6 +32,9 @@ export const StyledContent = styled.div`
   padding-top: 24px;
   max-width: 500px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 export const ContentWrapper = styled.div`

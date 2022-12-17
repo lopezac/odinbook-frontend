@@ -9,9 +9,11 @@ import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 import { UserProfileHeader } from "widgets/user";
 import { useRedirect, useRedirectViewer } from "entities/viewer/hooks";
-import { ContentDiv } from "./styles.module";
 
 export const UserProfilePage = () => {
+  useRedirect("unauthorized");
+  useRedirectViewer();
+
   const { userId } = useParams();
   const [posts, setPosts] = useState<PostType[] | null>(null);
   const [user, setUser] = useState<UserData | null>(null);
@@ -35,30 +37,29 @@ export const UserProfilePage = () => {
     fetchPostsData();
   }, [user]);
 
-  useRedirect("unauthorized");
-  useRedirectViewer();
   if (!user) return <p>User is loading</p>;
   return (
     <Layout.Main>
       <AuthHeader />
-      <Layout.Content>
+
+      <Layout.ContentHeader>
         <UserProfileHeader user={user} />
-        <ContentDiv>
-          <div>UserProfileSidebar</div>
-          <div>
-            <H2>Posts</H2>
-            <div>
-              {!posts ? (
-                <p>It seems there are no posts!</p>
-              ) : (
-                posts.map((post) => {
-                  return <PostItem key={post._id} post={post} user={user} />;
-                })
-              )}
-            </div>
-          </div>
-        </ContentDiv>
+      </Layout.ContentHeader>
+
+      <Layout.Content>
+        <H2>Posts</H2>
+
+        <div>
+          {posts ? (
+            posts.map((post) => {
+              return <PostItem key={post._id} post={post} user={user} />;
+            })
+          ) : (
+            <p>It seems there are no posts!</p>
+          )}
+        </div>
       </Layout.Content>
+
       <Footer />
     </Layout.Main>
   );

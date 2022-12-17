@@ -14,5 +14,15 @@ export const FriendshipModel = () => {
     return null;
   };
 
-  return { createFriendship };
+  const getFriendship = async (userIds: string[]) => {
+    const res = await friendshipApi.getFriendship(userIds);
+    if ("friendship" in res) return res.friendship;
+    return null;
+  };
+
+  const deleteFriendship = async (userIds: string[]) => {
+    return await friendshipApi.deleteFriendship(userIds, accessToken);
+  };
+
+  return { createFriendship, getFriendship, deleteFriendship };
 };
