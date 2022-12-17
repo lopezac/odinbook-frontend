@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
+import { Notification } from "shared/api";
+import { VerticalList } from "shared/ui";
 import { NotificationModel } from "entities/notification";
 import { NotificationRow } from "entities/notification/ui";
 import { useViewerModel } from "entities/viewer";
 import { AcceptFriendReq } from "features/friend-request/accept";
 import { DeclineFriendReq } from "features/friend-request/decline";
-import { useEffect, useState } from "react";
-import { Notification } from "shared/api";
 
 export const NotificationList = () => {
   const notificationModel = NotificationModel();
@@ -22,15 +23,11 @@ export const NotificationList = () => {
     fetchNotifications();
   }, [viewer]);
 
-  useEffect(() => {
-    console.log("notifications", notifications);
-  }, [notifications]);
-
   if (!notifications || !notifications.length) {
     return <p>There are no notifications yet!</p>;
   }
   return (
-    <div>
+    <VerticalList>
       {notifications.map((notification) => {
         return (
           notification.type === "friend-request" && (
@@ -51,6 +48,6 @@ export const NotificationList = () => {
           )
         );
       })}
-    </div>
+    </VerticalList>
   );
 };

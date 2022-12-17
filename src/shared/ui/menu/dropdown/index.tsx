@@ -30,7 +30,7 @@ export const GrayRow = styled(DropdownRow)`
   background-color: ${(props) => props.theme.color.darkWhite};
   font-weight: bold;
   gap: 7px;
-  width: auto;
+  width: max-content;
 
   svg {
     font-size: 1.2rem;
@@ -45,5 +45,17 @@ export const BlueRow = styled(GrayRow)`
   :focus {
     background-color: ${(props) => props.theme.color.blue};
     filter: brightness(0.9);
+  }
+`;
+
+export const SmallBlueRow = styled(BlueRow)`
+  padding: 0 5px;
+
+  svg {
+    font-size: 1rem;
+  }
+
+  p {
+    margin: 8px 0;
   }
 `;

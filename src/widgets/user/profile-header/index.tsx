@@ -1,30 +1,12 @@
-import { useEffect, useState } from "react";
+import { ReactElement } from "react";
 import { UserData } from "shared/api";
 import { AvatarImg, BigRectangleIcon, H1, Link } from "shared/ui";
-import { FriendshipModel } from "entities/friendship";
-import { useViewerModel } from "entities/viewer";
-import { SendFriendRequest } from "features/friend-request";
 import { SendMessage } from "features/message";
-import { RemoveFriend } from "features/remove-friend";
 import { ActionsRow, CenterRow, FlexRowDiv, HeaderDiv } from "./styles";
 
-type ProfileHeaderProps = { user: UserData };
+type ProfileHeaderProps = { user: UserData, actions?: ReactElement[] };
 
-export const UserProfileHeader = ({ user }: ProfileHeaderProps) => {
-  const friendshipModel = FriendshipModel();
-  const viewer = useViewerModel().useViewer();
-  const [friendship, setFriendship] = useState<boolean | null>(false);
-
-  useEffect(() => {
-    const checkIfFriendship = async () => {
-      const friendshipData = await friendshipModel.getFriendship([
-        viewer!._id,
-        user._id,
-      ]);
-      setFriendship(friendshipData);
-    };
-    checkIfFriendship();
-  }, [user, viewer]);
+export const UserProfileHeader = ({ user, actions }: ProfileHeaderProps) => {
 
   return (
     <HeaderDiv>
@@ -39,12 +21,10 @@ export const UserProfileHeader = ({ user }: ProfileHeaderProps) => {
           </H1>
 
           <FlexRowDiv>
-            {friendship ? (
-              <RemoveFriend userId={user._id} />
-            ) : (
-              <SendFriendRequest user={user} />
-            )}
             <SendMessage user={user} />
+            {actions && actions.map((action, idx) => (
+              <li key={idx}>{action}</li>)
+            )}
           </FlexRowDiv>
         </CenterRow>
       </FlexRowDiv>

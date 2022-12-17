@@ -8,7 +8,7 @@ export const FlexColumn = styled.div`
 export const VerticalList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 `;
 
 export const PhotoGrid = styled.div`

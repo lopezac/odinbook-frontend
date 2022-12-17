@@ -4,11 +4,12 @@ import { H2, Layout } from "shared/ui";
 import { PostType, UserData } from "shared/api";
 import { PostModel } from "entities/post";
 import { UserModel } from "entities/user";
+import { useRedirect, useRedirectViewer } from "entities/viewer";
 import { PostItem } from "widgets/post-item";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 import { UserProfileHeader } from "widgets/user";
-import { useRedirect, useRedirectViewer } from "entities/viewer/hooks";
+import { FriendshipManager } from "widgets/friendship-manager";
 
 export const UserProfilePage = () => {
   useRedirect("unauthorized");
@@ -43,7 +44,10 @@ export const UserProfilePage = () => {
       <AuthHeader />
 
       <Layout.ContentHeader>
-        <UserProfileHeader user={user} />
+        <UserProfileHeader 
+          user={user} 
+          actions={[<FriendshipManager user={user} />]}
+        />
       </Layout.ContentHeader>
 
       <Layout.Content>

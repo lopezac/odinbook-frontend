@@ -14,4 +14,5 @@ export const DarkerWhiteCard = styled.div`
 export const WritePostCard = styled(DarkerWhiteCard)`
   display: flex;
   gap: 10px;
+  margin-bottom: 20px;
 `;

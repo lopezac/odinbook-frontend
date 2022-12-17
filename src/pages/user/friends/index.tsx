@@ -7,7 +7,7 @@ import { UserModel, UserRow } from "entities/user";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 import { UserProfileHeader } from "widgets/user";
-import { SendFriendRequest } from "features/friend-request";
+import { FriendshipManager } from "widgets/friendship-manager";
 
 export const UserFriendsPage = () => {
   useRedirect("unauthorized");
@@ -41,7 +41,10 @@ export const UserFriendsPage = () => {
       <AuthHeader />
 
       <Layout.ContentHeader>
-        <UserProfileHeader user={user} />
+        <UserProfileHeader 
+          user={user} 
+          actions={[<FriendshipManager user={user} />]}
+        />
       </Layout.ContentHeader>
 
       <Layout.Content>
@@ -54,7 +57,7 @@ export const UserFriendsPage = () => {
                 <UserRow
                   key={friend._id}
                   data={friend}
-                  actions={[<SendFriendRequest user={friend} />]}
+                  actions={[<FriendshipManager user={friend} />]}
                 />
               ))
             ) : (
