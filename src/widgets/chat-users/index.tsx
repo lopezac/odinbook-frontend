@@ -3,6 +3,7 @@ import { ChatType } from "shared/api";
 import { UserModel } from "entities/user";
 import { ChatRow } from "entities/chat";
 import { useViewerModel } from "entities/viewer";
+import { ChatsDiv, SidebarDiv, SmallTitle } from "./styles";
 
 export const ChatUsers = () => {
   const viewerModel = useViewerModel();
@@ -20,11 +21,14 @@ export const ChatUsers = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      {chats &&
-        chats.map((chat) => (
-          <ChatRow key={chat._id} data={chat.user} chatId={chat._id} />
-        ))}
-    </div>
+    <SidebarDiv>
+      <SmallTitle>Chats</SmallTitle>
+      <ChatsDiv>
+        {chats &&
+          chats.map((chat) => (
+            <ChatRow key={chat._id} data={chat.user} chatId={chat._id} />
+          ))}
+      </ChatsDiv>
+    </SidebarDiv>
   );
 };

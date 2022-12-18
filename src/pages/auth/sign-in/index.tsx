@@ -9,10 +9,13 @@ export const SignInPage = () => {
   return (
     <Layout.Main>
       <NoAuthHeader />
+
       <Layout.Content>
         <H1>Sign In</H1>
+
         <AuthByEmail />
       </Layout.Content>
+
       <Footer />
     </Layout.Main>
   );

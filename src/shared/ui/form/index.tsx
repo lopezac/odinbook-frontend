@@ -1,5 +1,5 @@
 import { FormHTMLAttributes, FC, ReactNode } from "react";
-import { StyledForm, StyledFormRow } from "./styles.module";
+import { StyledForm, StyledFormRow } from "./styles";
 
 interface FormProps extends FormHTMLAttributes<HTMLFormElement> {}
 

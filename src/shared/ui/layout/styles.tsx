@@ -42,6 +42,14 @@ export const ContentWrapper = styled.div`
   flex: 1;
 `;
 
+export const ChatWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: "sidebar main";
+  flex: 1;
+  background-color: ${(props) => props.theme.color.white};
+`;
+
 export const StyledFooter = styled.div`
   background-color: ${(props) => props.theme.color.darkWhite};
 `;

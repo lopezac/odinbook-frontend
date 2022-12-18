@@ -1,9 +1,10 @@
 import { FormEvent } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Form, FormRow, Input, Label } from "shared/ui";
+import { BlueButton, FormRow, Input } from "shared/ui";
+import { getFormData } from "shared/lib/form-data";
 import { useViewerModel } from "entities/viewer";
 import { MessageModel } from "entities/message";
-import { getFormData } from "shared/lib/form-data";
+import { MessageForm } from "./styles";
 
 export const WriteMessage = ({ receiver }: { receiver: string }) => {
   const { chatId } = useParams();
@@ -25,9 +26,8 @@ export const WriteMessage = ({ receiver }: { receiver: string }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <MessageForm onSubmit={handleSubmit}>
       <FormRow>
-        <Label>Message</Label>
         <Input
           type="text"
           name="text"
@@ -37,7 +37,7 @@ export const WriteMessage = ({ receiver }: { receiver: string }) => {
           required
         />
       </FormRow>
-      <Button type="submit">Send</Button>
-    </Form>
+      <BlueButton type="submit">Send</BlueButton>
+    </MessageForm>
   );
 };

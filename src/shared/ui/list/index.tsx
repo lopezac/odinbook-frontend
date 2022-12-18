@@ -16,3 +16,9 @@ export const PhotoGrid = styled.div`
   flex-wrap: wrap;
   gap: 20px;
 `;
+
+export const FlexRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;

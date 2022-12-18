@@ -17,3 +17,7 @@ export const BlueButton = styled.button`
     filter: brightness(0.9);
   }
 `;
+
+export const GreenButton = styled(BlueButton)`
+  background-color: ${(props) => props.theme.color.lightGreen};
+`;

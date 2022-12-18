@@ -1,4 +1,4 @@
-import { H1, Layout } from "shared/ui";
+import { H2, Layout } from "shared/ui";
 import { useRedirect } from "entities/viewer";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
@@ -10,13 +10,14 @@ export const ChatsHomePage = () => {
   return (
     <Layout.Main>
       <AuthHeader />
-      <Layout.Content>
-        <H1>Chats</H1>
-        <div style={{ display: "flex" }}>
-          <ChatUsers />
-          <div>When you send a message to someone you'll see the chat here</div>
-        </div>
-      </Layout.Content>
+
+      <Layout.ChatWrapper>
+        <ChatUsers />
+        <H2 style={{ paddingLeft: "15px" }}>
+          When you send a message to someone you'll see the chat here
+        </H2>
+      </Layout.ChatWrapper>
+
       <Footer />
     </Layout.Main>
   );

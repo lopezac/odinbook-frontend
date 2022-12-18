@@ -7,6 +7,7 @@ import {
   ContentWrapper,
   ContentHeaderDiv,
 } from "./styles";
+import { ChatWrapper } from "./styles";
 
 const Main = ({ children }: { children: ReactNode }) => {
   return <StyledMain>{children}</StyledMain>;
@@ -36,6 +37,7 @@ export const Layout = {
   Main,
   Content,
   ContentHeader,
+  ChatWrapper,
   Header,
   Footer,
 };

@@ -12,10 +12,11 @@ import {
   DropdownMenu,
   CircleIcon,
   BigRectangleIcon,
+  FlexRow,
 } from "shared/ui";
 import { useViewerModel } from "entities/viewer";
 import { AuthLogout } from "features/auth/logout";
-import { SmallHeader, MenuIconRow } from "./styled";
+import { MenuIconRow } from "./styled";
 
 export const AuthHeader = () => {
   const logout = AuthLogout();
@@ -30,7 +31,7 @@ export const AuthHeader = () => {
         <SmallImg photoUrl={require("assets/facebook.png")} />
       </Link>
 
-      <SmallHeader>
+      <FlexRow>
         <Link to="/">
           <BigRectangleIcon>
             <AiFillHome />
@@ -41,9 +42,9 @@ export const AuthHeader = () => {
             <FaUsers />
           </BigRectangleIcon>
         </Link>
-      </SmallHeader>
+      </FlexRow>
 
-      <SmallHeader>
+      <FlexRow>
         <Link to={`/chats`}>
           <CircleIcon>
             <BsMessenger />
@@ -91,7 +92,7 @@ export const AuthHeader = () => {
             </DropdownMenu>
           )}
         </div>
-      </SmallHeader>
+      </FlexRow>
     </Layout.Header>
   );
 };

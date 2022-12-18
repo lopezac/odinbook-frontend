@@ -9,4 +9,5 @@ export const StyledForm = styled.form`
 
 export const StyledFormRow = styled.div`
   display: flex;
+  flex-direction: column;
 `;
