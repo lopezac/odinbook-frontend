@@ -12,6 +12,7 @@ export type ViewerModelType = {
   signInViewer: (
     data: UserSignIn
   ) => Promise<SuccessRes | { [key: string]: any }>;
+  generateGuestData: () => any;
   signUpViewer: (data: UserSignUp) => Promise<{ message: string } | ErrorRes>;
   logoutViewer: () => void;
   updateViewer: (data: UserUpdate) => Promise<any>;

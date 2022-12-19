@@ -7,8 +7,8 @@ export const Model = () => {
     return null;
   };
 
-  const getUsers = async () => {
-    const data = await userApi.getUsers();
+  const getUsers = async ({ page }: { page: number }) => {
+    const data = await userApi.getUsers({ page });
     if ("users" in data) return data.users;
     return null;
   };

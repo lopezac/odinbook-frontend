@@ -1,4 +1,12 @@
-import { Layout, BlueButton, Link, SmallImg, FlexRow } from "shared/ui";
+import {
+  Layout,
+  BlueButton,
+  GreenButton,
+  Link,
+  SmallImg,
+  FlexRow,
+} from "shared/ui";
+import { AuthGuestSign } from "features/auth";
 
 export const NoAuthHeader = () => {
   return (
@@ -10,8 +18,9 @@ export const NoAuthHeader = () => {
           <BlueButton>Sign In</BlueButton>
         </Link>
         <Link to="/sign-up">
-          <BlueButton>Sign Up</BlueButton>
+          <GreenButton>Sign Up</GreenButton>
         </Link>
+        <AuthGuestSign />
       </FlexRow>
     </Layout.Header>
   );

@@ -21,3 +21,11 @@ export const BlueButton = styled.button`
 export const GreenButton = styled(BlueButton)`
   background-color: ${(props) => props.theme.color.lightGreen};
 `;
+
+export const RedButton = styled(BlueButton)`
+  background-color: ${(props) => props.theme.color.red};
+`;
+
+export const GrayButton = styled(BlueButton)`
+  background-color: ${(props) => props.theme.color.darkerGray};
+`;

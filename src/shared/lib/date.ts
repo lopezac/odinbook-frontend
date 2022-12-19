@@ -5,5 +5,8 @@ export const formatDate = (date: string | Date, type?: string) => {
   if (typeof date === "string") {
     date = new Date(date);
   }
-  return format(date, type === "short" ? "PP" : "PPpp");
+
+  if (type === "short") return format(date, "PP");
+  else if (type === "input") return format(date, "y-MM-dd");
+  else return format(date, "PPpp");
 };

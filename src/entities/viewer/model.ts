@@ -6,6 +6,7 @@ import type {
   UserUpdate,
 } from "shared/api/user";
 import { userApi } from "shared/api";
+import { getRandomNumber } from "shared/lib/number";
 
 export const Model = () => {
   const [viewer, setViewer] = useMemoryStore<UserData | null>("user");
@@ -29,6 +30,20 @@ export const Model = () => {
     }
 
     return user;
+  };
+
+  const generateGuestData = () => {
+    const randomNumber = getRandomNumber(10000);
+
+    return {
+      firstName: "Guest",
+      lastName: `${randomNumber}`,
+      email: `guest${randomNumber}@email.com`,
+      password: `Strongpassword.${randomNumber}`,
+      passwordConfirm: `Strongpassword.${randomNumber}`,
+      birthday: new Date("05/09/2000"),
+      gender: "male",
+    };
   };
 
   const signUpViewer = async (data: UserSignUp) => {
@@ -56,6 +71,7 @@ export const Model = () => {
   return {
     useViewer,
     signInViewer,
+    generateGuestData,
     signUpViewer,
     logoutViewer,
     updateViewer,

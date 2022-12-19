@@ -1,6 +1,6 @@
 import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "shared/ui";
+import { Form, RedButton } from "shared/ui";
 import { useViewerModel } from "entities/viewer";
 
 export const DeleteUser = () => {
@@ -15,8 +15,10 @@ export const DeleteUser = () => {
   };
 
   return (
-    <Button type="button" onClick={handleClick}>
-      Delete
-    </Button>
+    <Form>
+      <RedButton type="button" onClick={handleClick}>
+        Delete
+      </RedButton>
+    </Form>
   );
 };

@@ -2,36 +2,35 @@ import { FormEvent } from "react";
 import {
   Form,
   InputSquare,
-  GreenButton,
+  BlueButton,
   Label,
   FormRow,
   FlexRow,
   RadioCard,
 } from "shared/ui";
 import { getFormData } from "shared/lib/form-data";
-import { UserSignUp } from "shared/api";
+import { formatDate } from "shared/lib/date";
 import { useErrors } from "shared/hooks";
+import { UserUpdate } from "shared/api";
 import { useViewerModel } from "entities/viewer";
 
-export const AuthSignUp = () => {
+export const UpdateUser = () => {
   const viewerModel = useViewerModel();
+  const viewer = viewerModel.useViewer();
   const [errors, setErrors] = useErrors();
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data: UserSignUp = getFormData(e.target as HTMLFormElement);
+    const data: UserUpdate = getFormData(e.target as HTMLFormElement);
 
-    const res = await viewerModel.signUpViewer(data);
+    const res = await viewerModel.updateViewer(data);
+
     if ("errors" in res) return setErrors(res.errors);
-
-    await viewerModel.signInViewer({
-      email: data.email,
-      password: data.password,
-    });
-
+    setErrors({});
     window.location.reload();
   };
 
+  if (!viewer) return <p>Loading</p>;
   return (
     <Form onSubmit={handleFormSubmit}>
       <FlexRow>
@@ -43,6 +42,7 @@ export const AuthSignUp = () => {
             id="firstName"
             minLength={2}
             maxLength={120}
+            defaultValue={viewer.firstName}
             required
             error={!!errors.firstName}
           />
@@ -57,6 +57,7 @@ export const AuthSignUp = () => {
             id="lastName"
             minLength={2}
             maxLength={120}
+            defaultValue={viewer.lastName}
             required
             error={!!errors.lastName}
           />
@@ -70,8 +71,9 @@ export const AuthSignUp = () => {
           type="email"
           name="email"
           id="email"
-          error={!!errors.email}
+          defaultValue={viewer.email}
           required
+          error={!!errors.email}
         />
         {errors.email && <p>{errors.email}</p>}
       </FormRow>
@@ -82,22 +84,10 @@ export const AuthSignUp = () => {
           type="password"
           name="password"
           id="password"
-          error={!!errors.password}
           required
+          error={!!errors.password}
         />
         {errors.password && <p>{errors.password}</p>}
-      </FormRow>
-
-      <FormRow>
-        <Label htmlFor="passwordConfirm">Confirm password</Label>
-        <InputSquare
-          type="password"
-          name="passwordConfirm"
-          id="passwordConfirm"
-          error={!!errors.passwordConfirm}
-          required
-        />
-        {errors.passwordConfirm && <p>{errors.passwordConfirm}</p>}
       </FormRow>
 
       <FormRow>
@@ -106,8 +96,9 @@ export const AuthSignUp = () => {
           type="date"
           name="birthday"
           id="birthday"
-          error={!!errors.birthday}
+          defaultValue={formatDate(viewer.birthday, "input")}
           required
+          error={!!errors.birthday}
         />
         {errors.birthday && <p>{errors.birthday}</p>}
       </FormRow>
@@ -123,7 +114,7 @@ export const AuthSignUp = () => {
               name="gender"
               id="male"
               value="male"
-              defaultChecked
+              defaultChecked={viewer.gender === "male"}
             />
           </RadioCard>
 
@@ -134,17 +125,24 @@ export const AuthSignUp = () => {
               name="gender"
               id="female"
               value="female"
+              defaultChecked={viewer.gender === "female"}
             />
           </RadioCard>
 
           <RadioCard>
             <Label htmlFor="other">Other</Label>
-            <InputSquare type="radio" name="gender" id="other" value="other" />
+            <InputSquare
+              type="radio"
+              name="gender"
+              id="other"
+              value="other"
+              defaultChecked={viewer.gender === "other"}
+            />
           </RadioCard>
         </FlexRow>
       </FormRow>
 
-      <GreenButton type="submit">Sign Up</GreenButton>
+      <BlueButton type="submit">Update</BlueButton>
     </Form>
   );
 };

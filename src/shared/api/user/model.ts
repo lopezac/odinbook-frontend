@@ -104,9 +104,9 @@ export const getUser = async (userId: string) => {
   }
 };
 
-export const getUsers = async () => {
+export const getUsers = async ({ page }: { page: number }) => {
   try {
-    const url = `${REST_API_URL}/users`;
+    const url = `${REST_API_URL}/users?page=${page}`;
     const options: RequestInit = { method: "GET", headers };
 
     const res = await fetch(url, options);
