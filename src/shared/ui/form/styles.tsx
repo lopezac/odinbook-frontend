@@ -5,7 +5,7 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 15px 0;
+  padding-top: 15px;
 `;
 
 export const FormRow = styled.div`

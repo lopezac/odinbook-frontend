@@ -3,12 +3,14 @@ import { UserData } from "shared/api";
 import { H1, Layout, Para, VerticalList, DarkerWhiteCard } from "shared/ui";
 import { UserModel, UserRow } from "entities/user";
 import { useRedirect, useViewerModel } from "entities/viewer";
+import { PageSwitcher } from "features/page-switcher";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
 import { FriendshipManager } from "widgets/friendship-manager";
 
 export const UserListPage = () => {
   useRedirect("unauthorized");
+
   const userModel = UserModel();
   const viewer = useViewerModel().useViewer();
   const [users, setUsers] = useState<UserData[] | null>(null);
@@ -46,15 +48,7 @@ export const UserListPage = () => {
           </VerticalList>
         </DarkerWhiteCard>
 
-        <div>
-          {Array.from({ length: 11 }).map((value, idx) => {
-            return (
-              <li key={idx} onClick={() => setPage(idx + 1)}>
-                {idx + 1}
-              </li>
-            );
-          })}
-        </div>
+        <PageSwitcher page={page} setPage={setPage} />
       </Layout.Content>
 
       <Footer />

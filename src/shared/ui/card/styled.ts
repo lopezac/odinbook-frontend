@@ -28,7 +28,6 @@ export const MessageText = styled.div`
 `;
 
 export const AuthFormCard = styled(WhiteShadowCard)`
-  padding-bottom: 25px;
   display: flex;
   flex-direction: column;
 

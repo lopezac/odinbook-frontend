@@ -13,6 +13,12 @@ export const BlueButton = styled.button`
   cursor: pointer;
   font-weight: bold;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+
   :hover {
     filter: brightness(0.9);
   }

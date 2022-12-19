@@ -14,6 +14,7 @@ export type ViewerModelType = {
   ) => Promise<SuccessRes | { [key: string]: any }>;
   generateGuestData: () => any;
   signUpViewer: (data: UserSignUp) => Promise<{ message: string } | ErrorRes>;
+  facebookSignUp: () => any;
   logoutViewer: () => void;
   updateViewer: (data: UserUpdate) => Promise<any>;
   deleteViewer: () => Promise<any>;

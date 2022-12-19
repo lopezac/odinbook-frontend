@@ -50,6 +50,10 @@ export const Model = () => {
     return await userApi.signUpUser(data);
   };
 
+  const facebookSignUp = async () => {
+    return await userApi.facebookSignUp();
+  };
+
   const updateViewer = async (data: UserUpdate) => {
     const _id = viewer?._id;
 
@@ -72,6 +76,7 @@ export const Model = () => {
     useViewer,
     signInViewer,
     generateGuestData,
+    facebookSignUp,
     signUpViewer,
     logoutViewer,
     updateViewer,

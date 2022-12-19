@@ -32,6 +32,20 @@ export const signUpUser = async (userData: UserSignUp) => {
   }
 };
 
+export const facebookSignUp = async () => {
+  try {
+    const url = `${REST_API_URL}/auth/facebook`;
+    const options: RequestInit = { method: "GET", headers };
+
+    const res = await fetch(url, options);
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw Error(`Error using the facebook sign up, shared/api/user, ${err}`);
+  }
+};
+
 export const signInUser = async (userData: UserSignIn) => {
   const url = `${REST_API_URL}/sign-in`;
   const options: RequestInit = {
