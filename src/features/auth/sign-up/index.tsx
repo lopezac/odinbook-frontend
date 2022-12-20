@@ -29,6 +29,8 @@ export const AuthSignUp = () => {
       password: data.password,
     });
 
+    // const odinbookUser = await userModel.getUser()
+
     window.location.reload();
   };
 

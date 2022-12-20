@@ -35,14 +35,8 @@ export const NotificationList = () => {
               key={notification._id}
               data={notification}
               actions={[
-                <AcceptFriendReq
-                  emitter={notification.emitter}
-                  receiver={notification.receiver}
-                />,
-                <DeclineFriendReq
-                  emitter={notification.emitter}
-                  receiver={notification.receiver}
-                />,
+                <AcceptFriendReq data={notification} />,
+                <DeclineFriendReq data={notification} />,
               ]}
             />
           )
