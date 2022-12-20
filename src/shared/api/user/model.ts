@@ -10,6 +10,8 @@ import {
 const headers: HeadersInit = {
   Accept: "application/json",
   "Content-Type": "application/json;charset=UTF-8",
+  "Access-Control-Allow-Origin": "*",
+  "Allow-Origin": "*",
 };
 
 type ErrorResType = { message: string; err: unknown };
@@ -34,7 +36,7 @@ export const signUpUser = async (userData: UserSignUp) => {
 
 export const facebookSignUp = async () => {
   try {
-    const url = `${REST_API_URL}/auth/facebook`;
+    const url = `${REST_API_URL}/auth/facebook/`;
     const options: RequestInit = { method: "GET", headers };
 
     const res = await fetch(url, options);
