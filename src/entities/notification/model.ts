@@ -1,11 +1,15 @@
-import { type CreateNotification, notificationApi } from "shared/api";
+import { useContext } from "react";
+import { CreateNotification, notificationApi, SocketContext } from "shared/api";
 import { useMemoryStore } from "shared/hooks";
 
 export const Model = () => {
   const [accessToken, setAccessToken] = useMemoryStore<string>("access-token");
+  const socket = useContext(SocketContext);
 
   const createNoti = async (data: CreateNotification) => {
-    return await notificationApi.createNoti(data, accessToken);
+    const res = await notificationApi.createNoti(data, accessToken);
+    socket?.emit("notification:create", res);
+    return res;
   };
 
   const getReceiverNoti = async (receiverId: string) => {
@@ -15,7 +19,9 @@ export const Model = () => {
   };
 
   const deleteNoti = async (notificationId: string) => {
-    return await notificationApi.deleteNoti(notificationId, accessToken);
+    const res = await notificationApi.deleteNoti(notificationId, accessToken);
+    socket?.emit("notification:delete", notificationId);
+    return res;
   };
 
   return { createNoti, getReceiverNoti, deleteNoti };

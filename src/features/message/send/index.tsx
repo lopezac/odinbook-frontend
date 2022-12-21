@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "shared/api";
 import { GrayRow, LargePara } from "shared/ui";

@@ -6,14 +6,14 @@ export const AuthByFacebook = () => {
   const viewerModel = useViewerModel();
 
   const handleClick = async () => {
-    await viewerModel.facebookSignUp(); 
+    await viewerModel.facebookSignUp();
 
     // window.location.reload();
   };
 
   return (
     <BlueButton onClick={handleClick}>
-      <GrFacebook /> 
+      <GrFacebook />
       Continue with Facebook
     </BlueButton>
   );

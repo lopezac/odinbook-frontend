@@ -26,7 +26,6 @@ export const FriendReqModel = () => {
       { emitter, receiver },
       accessToken
     );
-    console.log("res at deleteFriendReq", res);
     if ("success" in res) return res.success;
     return null;
   };

@@ -52,9 +52,7 @@ export const Model = () => {
 
   const facebookSignUp = async () => {
     try {
-      const res = await userApi.facebookSignUp();
-      console.log("res", res);
-      return res;
+      return await userApi.facebookSignUp();
     } catch (err) {
       throw Error(`Error at facebookSignUp model entity ${err}`);
     }
