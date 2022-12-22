@@ -7,7 +7,8 @@ export const Model = () => {
   const socket = useContext(SocketContext);
 
   const createPost = async (postData: CreatePost) => {
-    return await postApi.createPost(postData, accessToken);
+    const res = await postApi.createPost(postData, accessToken);
+    socket?.emit("post:create", res);
   };
 
   const getPost = async (id: string) => {

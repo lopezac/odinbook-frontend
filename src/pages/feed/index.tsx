@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { Socket } from "socket.io-client";
 import { Layout, WritePostCard } from "shared/ui";
-import { PostType } from "shared/api";
+import { PostType, SocketContext } from "shared/api";
 import { useRedirect, ViewerAvatar } from "entities/viewer";
 import { PostModel } from "entities/post";
 import { WritePost } from "features/post";
@@ -11,6 +12,7 @@ import { PostListDiv } from "./styles";
 
 export const FeedPage = () => {
   useRedirect("unauthorized");
+  const socket = useContext(SocketContext) as Socket;
   const postModel = PostModel();
   const [posts, setPosts] = useState<PostType[] | null>(null);
 
@@ -21,6 +23,24 @@ export const FeedPage = () => {
     };
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    function eventCreatePost(data: PostType) {
+      setPosts((prevVal) => [...prevVal!, data]);
+    }
+
+    function eventDeletePost(id: string) {
+      setPosts((prevVal) => prevVal!.filter(val => val._id !== id));
+    }
+
+    socket.on("post:create", eventCreatePost);
+    socket.on("post:delete", eventDeletePost);
+
+    return () => {
+      socket.off("post:create", eventCreatePost);
+      socket.off("post:delete", eventDeletePost);
+    }
+  }, [socket]);
 
   return (
     <Layout.Main>

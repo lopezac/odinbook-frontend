@@ -8,7 +8,7 @@ export const Model = () => {
 
   const createLike = async (likeData: CreateLike) => {
     const res = await likeApi.createLike(likeData, accessToken);
-    socket?.emit("like:create", res);
+    if ("like" in res) socket?.emit("like:create", res.like);
     return res;
   };
 
@@ -25,7 +25,7 @@ export const Model = () => {
 
   const deleteLike = async (receiverId: string, userId: string) => {
     const res = await likeApi.deleteLike(receiverId, userId, accessToken);
-    socket?.emit("like:delete", { receiverId, userId });
+    if ("success" in res) socket?.emit("like:delete", receiverId);
     return res;
   };
 

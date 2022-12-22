@@ -38,10 +38,10 @@ export const CommentSection = ({
             actions={
               isViewerComment
                 ? [
-                    <DropdownRow>
-                      <DeleteComment commentId={comment._id} />
-                    </DropdownRow>,
-                  ]
+                  <DropdownRow>
+                    <DeleteComment commentId={comment._id} />
+                  </DropdownRow>,
+                ]
                 : undefined
             }
           />

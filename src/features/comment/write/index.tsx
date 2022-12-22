@@ -12,13 +12,15 @@ export const WriteComment = ({ postId }: { postId: string }) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = getFormData(e.currentTarget as HTMLFormElement);
+    const form = e.currentTarget as HTMLFormElement;
+    const data = getFormData(form);
     const createData = { ...data, user: viewer!._id, post: postId };
 
     const res = await commentModel.createComment(createData);
 
     if ("errors" in res) return setErrors(res.errors);
-    window.location.reload();
+    const input = form[0] as HTMLInputElement;
+    input.value = "";
   };
 
   return (

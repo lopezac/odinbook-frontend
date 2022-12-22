@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import type { PostType, CommentType, UserData } from "shared/api";
+import { useEffect, useState, useContext } from "react";
+import { Socket } from "socket.io-client";
+import { PostType, CommentType, UserData, SocketContext } from "shared/api";
 import { DarkerWhiteCard } from "shared/ui";
 import { CommentModel } from "entities/comment";
 import { useViewerModel } from "entities/viewer";
@@ -10,6 +11,7 @@ import { CommentSection } from "./comment-section";
 type PostItemProps = { post: PostType; user?: UserData };
 
 export const PostItem = ({ post, user }: PostItemProps) => {
+  const socket = useContext(SocketContext) as Socket;
   const commentModel = CommentModel();
   const userModel = UserModel();
   const viewerModel = useViewerModel();
@@ -34,6 +36,24 @@ export const PostItem = ({ post, user }: PostItemProps) => {
     };
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    function eventCreateComment(data: CommentType) {
+      setComments((prevVal) => [...prevVal!, data]);
+    }
+
+    function eventDeleteComment(id: string) {
+      setComments((prevVal) => prevVal!.filter(val => val._id !== id));
+    }
+
+    socket.on("comment:create", eventCreateComment);
+    socket.on("comment:delete", eventDeleteComment);
+
+    return () => {
+      socket.off("comment:create", eventCreateComment);
+      socket.off("comment:delete", eventDeleteComment);
+    }
+  });
 
   if (!userData || !viewer) return <></>;
   return (

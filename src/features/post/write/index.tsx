@@ -33,8 +33,6 @@ export const WritePost = () => {
     } else {
       await postModel.createPost(postData);
     }
-
-    window.location.reload();
   };
 
   return (
