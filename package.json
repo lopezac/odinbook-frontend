@@ -22,8 +22,13 @@
     "react-scripts": "5.0.1",
     "socket.io-client": "^4.5.4",
     "styled-components": "^5.3.6",
-    "typescript": "^4.9.3",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/compose-function": "^0.0.30",
+    "@types/styled-components": "^5.1.26",
+    "typescript": "^4.9.3",
+    "prettier": "^2.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,10 +54,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/compose-function": "^0.0.30",
-    "@types/styled-components": "^5.1.26",
-    "prettier": "^2.8.0"
   }
 }
