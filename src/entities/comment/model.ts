@@ -1,12 +1,17 @@
+import { useContext } from "react";
 import { useMemoryStore } from "shared/hooks";
-import { commentApi, type CreateCommentType } from "shared/api";
+import { commentApi, SocketContext, type CreateCommentType } from "shared/api";
 
 export const Model = () => {
   const [accessToken, setAccessToken] = useMemoryStore<string>("access-token");
+  const socket = useContext(SocketContext);
 
   const createComment = async (data: CreateCommentType) => {
     const res = await commentApi.createComment(data, accessToken);
-    if ("comment" in res) return res.comment;
+    if ("comment" in res) {
+      socket?.emit("comment:create", res.comment);
+      return res.comment;
+    }
     if ("errors" in res) return res;
   };
 
@@ -16,7 +21,8 @@ export const Model = () => {
   };
 
   const deleteComment = async (commentId: string) => {
-    return await commentApi.deleteComment(commentId, accessToken);
+    await commentApi.deleteComment(commentId, accessToken);
+    socket?.emit("comment:delete", commentId);
   };
 
   return { createComment, getPostComments, deleteComment };

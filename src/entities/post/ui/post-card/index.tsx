@@ -61,11 +61,11 @@ export const PostCard = ({ post, user, actions, after, before }: CardProps) => {
 
       <Para>{post.text}</Para>
 
-      {post.photos.length && (
+      {post.photos.length ? (
         <PostImage>
           <LargeImg photoUrl={post.photos[0]} />
         </PostImage>
-      )}
+      ) : null}
 
       <RowInfo>
         {before && before.map((action, idx) => <li key={idx}>{action}</li>)}

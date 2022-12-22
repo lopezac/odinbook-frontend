@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "startDev": "react-scripts start --watch",
+    "startDev": "NODE_ENV=development react-scripts start --watch",
     "build": "CI=false && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

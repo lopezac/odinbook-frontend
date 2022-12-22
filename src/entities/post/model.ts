@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { useMemoryStore } from "shared/hooks";
-import { postApi, type UpdatePostType, type CreatePost } from "shared/api";
+import { postApi, UpdatePostType, CreatePost, SocketContext } from "shared/api";
 
 export const Model = () => {
   const [accessToken, setAccessToken] = useMemoryStore<string>("access-token");
+  const socket = useContext(SocketContext);
 
   const createPost = async (postData: CreatePost) => {
     return await postApi.createPost(postData, accessToken);
@@ -28,14 +30,15 @@ export const Model = () => {
 
   const updatePost = async (id: string, postData: UpdatePostType) => {
     const data = await postApi.updatePost(id, postData, accessToken);
-    console.log("data at model updatePOst", data);
     if ("post" in data) return data.post;
     if ("errors" in data) return data;
     return null;
   };
 
   const deletePost = async (id: string) => {
-    return await postApi.deletePost(id, accessToken);
+    const res = await postApi.deletePost(id, accessToken);
+    socket?.emit("post:delete", id);
+    return res;
   };
 
   return {

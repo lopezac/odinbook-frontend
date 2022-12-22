@@ -1,10 +1,19 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Form, FormRow, Input, Button, TextArea } from "shared/ui";
+import {
+  Form,
+  FormRow,
+  InputSquare,
+  BlueButton,
+  TextArea,
+  GreenIconSpan,
+  AddPhotoDiv,
+} from "shared/ui";
 import { getFormData } from "shared/lib/form-data";
 import { useErrors } from "shared/hooks";
 import type { PostType } from "shared/api";
 import { formatDate } from "shared/lib/date";
 import { PostModel } from "entities/post";
+import { MdAddAPhoto } from "react-icons/md";
 
 export const UpdatePost = ({ postId }: { postId: string }) => {
   const postModel = PostModel();
@@ -24,7 +33,6 @@ export const UpdatePost = ({ postId }: { postId: string }) => {
     const data = getFormData(e.target as HTMLFormElement);
     const postData = { ...data };
     const res = await postModel.updatePost(postId, postData);
-    console.log("res at handleSubmit post/update/ui", res);
 
     if ("errors" in res) return setErrors(res.errors);
     setErrors({});
@@ -35,14 +43,15 @@ export const UpdatePost = ({ postId }: { postId: string }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <FormRow>
-        <Input
+        <InputSquare
           type="date"
           id="created_at"
           name="created_at"
-          defaultValue={formatDate(post.created_at)}
+          defaultValue={formatDate(post.created_at, "input")}
           required
         />
       </FormRow>
+
       <FormRow>
         <TextArea
           id="text"
@@ -52,16 +61,20 @@ export const UpdatePost = ({ postId }: { postId: string }) => {
         ></TextArea>
         {errors.text && <p>{errors.text}</p>}
       </FormRow>
-      <div>
-        <Button type="button">Photo</Button>
-        <Input
+
+      <AddPhotoDiv>
+        <GreenIconSpan>
+          <MdAddAPhoto /> Photo
+        </GreenIconSpan>
+        <InputSquare
           type="file"
           name="image"
           id="image"
           accept="image/png, image/jpeg"
         />
-      </div>
-      <Button type="submit">Update</Button>
+      </AddPhotoDiv>
+
+      <BlueButton type="submit">Update</BlueButton>
     </Form>
   );
 };

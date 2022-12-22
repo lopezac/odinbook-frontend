@@ -1,5 +1,5 @@
 import { CommentType, PostType } from "shared/api";
-import { AvatarImg, DropdownRow, Para } from "shared/ui";
+import { AvatarImg, DropdownRow } from "shared/ui";
 import { CommentCard } from "entities/comment";
 import { LikeQuantityCard } from "entities/like";
 import { useViewerModel } from "entities/viewer";
@@ -40,7 +40,6 @@ export const CommentSection = ({
                 ? [
                     <DropdownRow>
                       <DeleteComment commentId={comment._id} />
-                      <Para>Delete comment</Para>
                     </DropdownRow>,
                   ]
                 : undefined

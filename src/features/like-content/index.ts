@@ -1,1 +1,0 @@
-export { LikeContent } from "./ui";

@@ -2,17 +2,16 @@ import { FormEvent } from "react";
 import { MdAddAPhoto } from "react-icons/md";
 import { getFormData } from "shared/lib/form-data";
 import {
-  Button,
   Form,
   FormRow,
   Input,
   TextArea,
   GreenIconSpan,
   BlueButton,
+  AddPhotoDiv,
 } from "shared/ui";
 import { useViewerModel } from "entities/viewer";
 import { PostModel } from "entities/post";
-import { AddPhotoDiv } from "./styles";
 
 export const WritePost = () => {
   const postModel = PostModel();
@@ -60,6 +59,7 @@ export const WritePost = () => {
           accept="image/png, image/jpeg"
         />
       </AddPhotoDiv>
+
       <BlueButton type="submit">Write</BlueButton>
     </Form>
   );

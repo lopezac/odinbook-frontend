@@ -1,13 +1,18 @@
 import { BsTrash } from "react-icons/bs";
+import { Para } from "shared/ui";
 import { CommentModel } from "entities/comment";
 
 export const DeleteComment = ({ commentId }: { commentId: string }) => {
   const commentModel = CommentModel();
 
   const handleClick = async () => {
-    const res = await commentModel.deleteComment(commentId);
-    if ("commentId" in res) window.location.reload();
+    await commentModel.deleteComment(commentId);
   };
 
-  return <BsTrash onClick={handleClick} />;
+  return (
+    <>
+      <BsTrash onClick={handleClick} />
+      <Para onClick={handleClick}>Delete comment</Para>
+    </>
+  );
 };

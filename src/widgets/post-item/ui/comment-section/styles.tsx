@@ -12,4 +12,8 @@ export const WriteCommentRow = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+
+  form {
+    padding-top: 0;
+  }
 `;

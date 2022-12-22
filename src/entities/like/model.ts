@@ -1,11 +1,15 @@
+import { useContext } from "react";
 import { useMemoryStore } from "shared/hooks";
-import { likeApi, type CreateLike } from "shared/api";
+import { likeApi, SocketContext, type CreateLike } from "shared/api";
 
 export const Model = () => {
   const [accessToken, setAccessToken] = useMemoryStore<string>("access-token");
+  const socket = useContext(SocketContext);
 
   const createLike = async (likeData: CreateLike) => {
-    return await likeApi.createLike(likeData, accessToken);
+    const res = await likeApi.createLike(likeData, accessToken);
+    socket?.emit("like:create", res);
+    return res;
   };
 
   const likedByUser = async (userId: string, receiverId: string) => {
@@ -20,7 +24,9 @@ export const Model = () => {
   };
 
   const deleteLike = async (receiverId: string, userId: string) => {
-    return await likeApi.deleteLike(receiverId, userId, accessToken);
+    const res = await likeApi.deleteLike(receiverId, userId, accessToken);
+    socket?.emit("like:delete", { receiverId, userId });
+    return res;
   };
 
   return { createLike, getReceiverLikes, likedByUser, deleteLike };
