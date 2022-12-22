@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 import { io } from "socket.io-client";
 import { SocketContext } from "shared/api";
+import { REST_API_URL } from "shared/config";
 
 export const withSocket = (component: () => ReactNode) => () => {
-  // change this to getBackendUrl();
-  const socket = io("http://localhost:8000");
+  const socket = io(REST_API_URL!);
 
   return (
     <SocketContext.Provider value={socket}>
