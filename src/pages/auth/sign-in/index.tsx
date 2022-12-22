@@ -19,7 +19,7 @@ export const SignInPage = () => {
 
           <VerticalList>
             <AuthByEmail />
-            <AuthByFacebook />
+            {/* <AuthByFacebook /> */}
             <AuthGuestSign />
           </VerticalList>
         </AuthFormCard>

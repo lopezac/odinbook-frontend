@@ -12,5 +12,6 @@ export const AddPhotoDiv = styled.div`
     opacity: 0;
     top: -10px;
     left: -3px;
+    cursor: pointer;
   }
 `;

@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import type { Notification } from "shared/api";
 import { formatDate } from "shared/lib/date";
 import { AvatarImg, SmallGrayPara, SmallPara } from "shared/ui";
-import { NotificationDiv, MainTextDiv } from "./styles";
+import { NotificationDiv, MainTextDiv, ActionsDiv } from "./styles";
 
 type NotificationRowProps = {
   actions?: ReactElement[];
@@ -19,9 +19,9 @@ export const NotificationRow = ({ data, actions }: NotificationRowProps) => {
         <SmallGrayPara>{formatDate(data.created_at, "short")}</SmallGrayPara>
       </MainTextDiv>
 
-      <div>
+      <ActionsDiv>
         {actions && actions.map((action, idx) => <li key={idx}>{action}</li>)}
-      </div>
+      </ActionsDiv>
     </NotificationDiv>
   );
 };

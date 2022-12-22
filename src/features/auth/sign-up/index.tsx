@@ -79,6 +79,18 @@ export const AuthSignUp = () => {
       </FormRow>
 
       <FormRow>
+        <Label htmlFor="birthday">Birthday</Label>
+        <InputSquare
+          type="date"
+          name="birthday"
+          id="birthday"
+          error={!!errors.birthday}
+          required
+        />
+        {errors.birthday && <p>{errors.birthday}</p>}
+      </FormRow>
+
+      <FormRow>
         <Label htmlFor="password">Password</Label>
         <InputSquare
           type="password"
@@ -100,18 +112,6 @@ export const AuthSignUp = () => {
           required
         />
         {errors.passwordConfirm && <p>{errors.passwordConfirm}</p>}
-      </FormRow>
-
-      <FormRow>
-        <Label htmlFor="birthday">Birthday</Label>
-        <InputSquare
-          type="date"
-          name="birthday"
-          id="birthday"
-          error={!!errors.birthday}
-          required
-        />
-        {errors.birthday && <p>{errors.birthday}</p>}
       </FormRow>
 
       <FormRow>

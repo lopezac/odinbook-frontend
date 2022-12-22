@@ -31,7 +31,7 @@ export const WriteComment = ({ postId }: { postId: string }) => {
           required
           minLength={1}
           maxLength={1000}
-          placeholder="Write a comment..."
+          placeholder="Write a comment... (press enter to send)"
         />
         {errors.text && <p>{errors.text}</p>}
       </FormRow>

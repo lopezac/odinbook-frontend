@@ -79,18 +79,6 @@ export const UpdateUser = () => {
       </FormRow>
 
       <FormRow>
-        <Label htmlFor="password">Password</Label>
-        <InputSquare
-          type="password"
-          name="password"
-          id="password"
-          required
-          error={!!errors.password}
-        />
-        {errors.password && <p>{errors.password}</p>}
-      </FormRow>
-
-      <FormRow>
         <Label htmlFor="birthday">Birthday</Label>
         <InputSquare
           type="date"
@@ -101,6 +89,18 @@ export const UpdateUser = () => {
           error={!!errors.birthday}
         />
         {errors.birthday && <p>{errors.birthday}</p>}
+      </FormRow>
+
+      <FormRow>
+        <Label htmlFor="password">Password</Label>
+        <InputSquare
+          type="password"
+          name="password"
+          id="password"
+          required
+          error={!!errors.password}
+        />
+        {errors.password && <p>{errors.password}</p>}
       </FormRow>
 
       <FormRow>

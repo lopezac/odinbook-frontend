@@ -35,7 +35,7 @@ export const PostItem = ({ post, user }: PostItemProps) => {
     fetchUser();
   }, []);
 
-  if (!userData || !viewer) return <p>User is loading</p>;
+  if (!userData || !viewer) return <></>;
   return (
     <DarkerWhiteCard>
       <PostSection

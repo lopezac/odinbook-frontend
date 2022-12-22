@@ -15,6 +15,10 @@ export const WritePostCard = styled(DarkerWhiteCard)`
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+
+  > img {
+    margin-top: 15px;
+  }
 `;
 
 export const WhiteShadowCard = styled(DarkerWhiteCard)`
