@@ -1,4 +1,4 @@
-import { H2, Layout } from "shared/ui";
+import { H2, Layout, Para } from "shared/ui";
 import { useRedirect } from "entities/viewer";
 import { Footer } from "widgets/footer";
 import { AuthHeader } from "widgets/header";
@@ -13,9 +13,13 @@ export const ChatsHomePage = () => {
 
       <Layout.ChatWrapper>
         <ChatUsers />
-        <H2 style={{ paddingLeft: "15px" }}>
-          When you send a message to someone you'll see the chat here
-        </H2>
+        <div style={{ paddingLeft: "15px" }}>
+          <H2>When you send a message to someone you'll see the chat here.</H2>
+          <Para>
+            Go to a user profile, and click the message button to start
+            chatting!
+          </Para>
+        </div>
       </Layout.ChatWrapper>
 
       <Footer />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { userApi } from "shared/api";
 
-export const PhotosList = ({ userId }: { userId: string }) => {
+export const UserPhotosList = ({ userId }: { userId: string }) => {
   const [photos, setPhotos] = useState<null | string[]>(null);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export const PhotosList = ({ userId }: { userId: string }) => {
       {photos.map((photo) => {
         return (
           <li>
-            <img src={photo} alt="photo" />
+            <img src={photo} alt="user" />
           </li>
         );
       })}

@@ -43,7 +43,7 @@ export const PostItem = ({ post, user }: PostItemProps) => {
     }
 
     function eventDeleteComment(id: string) {
-      setComments((prevVal) => prevVal!.filter(val => val._id !== id));
+      setComments((prevVal) => prevVal!.filter((val) => val._id !== id));
     }
 
     socket.on("comment:create", eventCreateComment);
@@ -52,7 +52,7 @@ export const PostItem = ({ post, user }: PostItemProps) => {
     return () => {
       socket.off("comment:create", eventCreateComment);
       socket.off("comment:delete", eventDeleteComment);
-    }
+    };
   });
 
   if (!userData || !viewer) return <></>;

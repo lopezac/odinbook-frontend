@@ -24,7 +24,8 @@ export const MessageList = ({ chatId, receiver }: MessageListProps) => {
 
   useEffect(() => {
     const handleMessageCreate = (message: MessageType) => {
-      setMessages((messages) => [...messages!, message]);
+      if (message.chat !== chatId) return;
+      setMessages((prevMessages) => [...prevMessages!, message]);
     };
 
     socket.on("message:create", handleMessageCreate);

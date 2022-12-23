@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { H2, Layout, WritePostCard } from "shared/ui";
-import { PostType } from "shared/api";
+import { useState, useEffect, useContext } from "react";
+import { Socket } from "socket.io-client";
+import { H2, Layout, Para, PostListDiv, WritePostCard } from "shared/ui";
+import { PostType, SocketContext, usePostSockets } from "shared/api";
 import { useViewerModel, useRedirect, ViewerAvatar } from "entities/viewer";
 import { PostModel } from "entities/post";
 import { WritePost } from "features/post";
@@ -12,10 +13,11 @@ import { ViewerProfileHeader } from "widgets/viewer";
 export const ViewerProfilePage = () => {
   useRedirect("unauthorized");
 
-  const [posts, setPosts] = useState<PostType[] | null>(null);
+  const socket = useContext(SocketContext) as Socket;
   const postModel = PostModel();
-  const viewerModel = useViewerModel();
-  const viewer = viewerModel.useViewer();
+  const viewer = useViewerModel().useViewer();
+  const [posts, setPosts] = useState<PostType[] | null>(null);
+  usePostSockets(socket, setPosts);
 
   useEffect(() => {
     postModel.getUserPosts(viewer!._id).then((data) => {
@@ -39,12 +41,15 @@ export const ViewerProfilePage = () => {
 
         <H2>Posts</H2>
 
-        <div>
-          {posts &&
+        <PostListDiv>
+          {posts ? (
             posts.map((post) => {
               return <PostItem key={post._id} post={post} user={viewer!} />;
-            })}
-        </div>
+            })
+          ) : (
+            <Para>It seems there are no posts!</Para>
+          )}
+        </PostListDiv>
       </Layout.Content>
 
       <Footer />

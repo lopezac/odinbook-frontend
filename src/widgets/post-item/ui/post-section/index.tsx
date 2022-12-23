@@ -49,7 +49,6 @@ export const PostSection = ({
               </Link>,
               <DropdownRow>
                 <DeletePost postId={post._id} />
-                <Para>Delete post</Para>
               </DropdownRow>,
             ]
           : undefined

@@ -1,4 +1,5 @@
 import { BsTrash } from "react-icons/bs";
+import { Para } from "shared/ui";
 import { PostModel } from "entities/post";
 
 export const DeletePost = ({ postId }: { postId: string }) => {
@@ -8,5 +9,10 @@ export const DeletePost = ({ postId }: { postId: string }) => {
     await postModel.deletePost(postId);
   };
 
-  return <BsTrash onClick={handleClick} />;
+  return (
+    <>
+      <BsTrash onClick={handleClick} />
+      <Para onClick={handleClick}>Delete post</Para>
+    </>
+  );
 };

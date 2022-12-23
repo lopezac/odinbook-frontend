@@ -20,7 +20,9 @@ export const WritePost = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = getFormData(e.target as HTMLFormElement);
+
+    const form = e.target as HTMLFormElement;
+    const data = getFormData(form);
     const postData = { ...data, user: viewer!._id };
     const reader = new FileReader();
 
@@ -28,11 +30,14 @@ export const WritePost = () => {
       reader.readAsDataURL(data.image);
       reader.addEventListener("load", async () => {
         postData.photos = [reader.result as string];
+
         await postModel.createPost(postData);
       });
     } else {
       await postModel.createPost(postData);
     }
+    const input = form[0] as HTMLInputElement;
+    input.value = "";
   };
 
   return (

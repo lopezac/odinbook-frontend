@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { H2, Layout } from "shared/ui";
-import { PostType, UserData } from "shared/api";
+import { Socket } from "socket.io-client";
+import { H2, Layout, Para, PostListDiv } from "shared/ui";
+import { PostType, SocketContext, usePostSockets, UserData } from "shared/api";
 import { PostModel } from "entities/post";
 import { UserModel } from "entities/user";
 import { useRedirect, useRedirectViewer } from "entities/viewer";
@@ -16,10 +17,12 @@ export const UserProfilePage = () => {
   useRedirectViewer();
 
   const { userId } = useParams();
-  const [posts, setPosts] = useState<PostType[] | null>(null);
-  const [user, setUser] = useState<UserData | null>(null);
+  const socket = useContext(SocketContext) as Socket;
   const postModel = PostModel();
   const userModel = UserModel();
+  const [posts, setPosts] = useState<PostType[] | null>(null);
+  const [user, setUser] = useState<UserData | null>(null);
+  usePostSockets(socket, setPosts);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -44,8 +47,8 @@ export const UserProfilePage = () => {
       <AuthHeader />
 
       <Layout.ContentHeader>
-        <UserProfileHeader 
-          user={user} 
+        <UserProfileHeader
+          user={user}
           actions={[<FriendshipManager user={user} />]}
         />
       </Layout.ContentHeader>
@@ -53,15 +56,15 @@ export const UserProfilePage = () => {
       <Layout.Content>
         <H2>Posts</H2>
 
-        <div>
+        <PostListDiv>
           {posts ? (
             posts.map((post) => {
               return <PostItem key={post._id} post={post} user={user} />;
             })
           ) : (
-            <p>It seems there are no posts!</p>
+            <Para>It seems there are no posts!</Para>
           )}
-        </div>
+        </PostListDiv>
       </Layout.Content>
 
       <Footer />

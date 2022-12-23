@@ -30,7 +30,7 @@ export const ContentHeaderDiv = styled.div`
 
 export const StyledContent = styled.div`
   padding-top: 24px;
-  max-width: 500px;
+  max-width: calc(450px + 6vw);
   flex: 1;
   display: flex;
   flex-direction: column;

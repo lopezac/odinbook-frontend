@@ -6,8 +6,7 @@ import { useViewerModel } from "entities/viewer";
 import { ChatsDiv, SidebarDiv, SmallTitle } from "./styles";
 
 export const ChatUsers = () => {
-  const viewerModel = useViewerModel();
-  const viewer = viewerModel.useViewer();
+  const viewer = useViewerModel().useViewer();
   const userModel = UserModel();
   const [chats, setChats] = useState<ChatType[] | null>(null);
 

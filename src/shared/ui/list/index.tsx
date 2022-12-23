@@ -22,3 +22,9 @@ export const FlexRow = styled.div`
   align-items: center;
   gap: 5px;
 `;
+
+export const PostListDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
