@@ -33,7 +33,7 @@ export const ViewerProfileHeader = () => {
           <Link to="/settings">
             <GrayRow>
               <BsPencilFill />
-              <LargePara>Edit post</LargePara>
+              <LargePara>Edit profile</LargePara>
             </GrayRow>
           </Link>
         </CenterRow>
